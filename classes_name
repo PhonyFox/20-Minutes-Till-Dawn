@@ -1,0 +1,63 @@
+MODEL:
+User
+Repository
+UserKeys
+(p) Character
+    (c) Player
+    (c) (p) enemy
+        (c) [] different_enemies
+(p) AppearanceMode
+    (c) BlackWhiteMode
+    (c) ColorfulMode
+[] sound_effect & music
+GameState
+FactoryHero
+(p) Hero
+    [] (c) different_heroes
+SaveManager
+GameAssetManager
+World
+(p) Weapons
+    (c) [] different_weapons
+(p) Ability
+    (c) [] different_abilities
+FactoryAbility
+FactoryWeapon
+(p) Bullet
+    (c) different_bullet
+FactoryBullet
+(p) Language
+    (c) first_language
+    (c) second_language
+
+
+
+
+
+
+
+
+
+
+
+CONTROLLER:
+SignupMenuController
+LoginMenuController
+MainMenuController
+SettingMenuController
+ProfileMenuController
+PregameMenuController
+ScoreboardMenuController
+GameController
+
+
+
+VIEW:
+SignupMenuView
+LoginMenuView
+MainMenuView
+SettingMenuView
+ProfileMenuView
+PregameMenuView
+ScoreboardMenuView
+GameView
