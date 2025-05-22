@@ -1,0 +1,10 @@
+i = info
+w = move upward
+s = move downward
+a = move left
+d = move right
+shoot = left mb
+aim = mouse movement
+reload = r
+pause = esc
+level up selection = mouse, arrow keys
