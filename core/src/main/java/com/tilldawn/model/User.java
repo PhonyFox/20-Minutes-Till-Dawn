@@ -1,6 +1,7 @@
 package com.tilldawn.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.enums.SecurityQuestionType;
 
 public class User {

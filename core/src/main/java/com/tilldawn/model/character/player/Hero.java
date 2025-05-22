@@ -7,3 +7,4 @@ public class Hero {
     private Sprite heroSprite;
     private HeroType heroType;
 }
+
