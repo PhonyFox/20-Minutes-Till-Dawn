@@ -1,8 +1,12 @@
 package com.tilldawn.model.character.player;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tilldawn.model.User;
+import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
+import com.tilldawn.model.weapon.weapon.Weapon;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Character {
     private final User user;
@@ -11,8 +15,12 @@ public class Player extends Character {
     private int currentLevelNumber;
     private float currentLevelProgress;
     private int requiredExpToFinishLevel;
+    private Weapon weapon;
+    private final List<TimedAbility> timedAbilities;
 
     public Player(User user) {
         this.user = user;
+        timedAbilities = new ArrayList<TimedAbility>();
     }
+
 }

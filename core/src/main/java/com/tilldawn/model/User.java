@@ -15,4 +15,18 @@ public class User {
     private UserState userState;
     private UserSetting userSetting;
     private Player player;
+    private final String avatarPath;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public User(String username, String password, SecurityQuestionType securityQuestionType,
+                String securityQuestionAnswer, String avatar) {
+        this.username = username;
+        this.password = password;
+        this.securityQuestionType = securityQuestionType;
+        this.securityQuestionAnswer = securityQuestionAnswer;
+        this.avatarPath = avatar;
+    }
 }
