@@ -43,6 +43,7 @@ ProfileMenuController
 PregameMenuController
 ScoreboardMenuController
 GameController
+TalentMenuController
 
 
 
@@ -55,3 +56,4 @@ ProfileMenuView
 PregameMenuView
 ScoreboardMenuView
 GameView
+TalentMenuView
