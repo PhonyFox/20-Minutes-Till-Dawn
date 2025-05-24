@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.tilldawn.Main;
+import com.tilldawn.controller.LoginMenuController;
 import com.tilldawn.controller.SignupMenuController;
 import com.tilldawn.model.User;
 
@@ -67,7 +69,7 @@ public class SignupMenuView extends ScreenAdapter {
 
                 if (message.toLowerCase().contains("success")) {
                     messageLabel.setText("Registered Successfully");
-                    //@ go to main menu
+                    Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(controller.getRepo())));
                 } else {
                     messageLabel.setText(message);
                 }
