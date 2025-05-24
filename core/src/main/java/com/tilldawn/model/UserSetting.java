@@ -5,6 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 
 public class UserSetting {
+    private float musicVolume = 1.0f;
+    private boolean sfxEnable = true;
+    private boolean autoReload = true;
+    private boolean grayscale = false;
+    private String currentMusic = "default";
+
 
     private final Preferences preferences;
 
@@ -76,7 +82,7 @@ public class UserSetting {
             case "levelUpDown": levelUpKeyDown = keyCode; break;
             case "levelUpLeft": levelUpKeyLeft = keyCode; break;
             case "levelUpRight": levelUpKeyRight = keyCode; break;
-            default: System.out.println("Unknown action: " + action); return;
+            default: return;
         }
         saveSettings();
     }
@@ -116,6 +122,46 @@ public class UserSetting {
             case "levelUpRight": return Gdx.input.isKeyPressed(levelUpKeyRight);
             default: return false;
         }
+    }
+
+    public void setMusicVolume(float musicVolume) {
+        this.musicVolume = musicVolume;
+    }
+
+    public float getMusicVolume() {
+        return musicVolume;
+    }
+
+    public void toggleSFX() {
+        sfxEnable = !sfxEnable;
+    }
+
+    public boolean isSfxEnable() {
+        return sfxEnable;
+    }
+
+    public void setCurrentMusic(String currentMusic) {
+        this.currentMusic = currentMusic;
+    }
+
+    public String getCurrentMusic() {
+        return currentMusic;
+    }
+
+    public void toggleAutoReload() {
+        autoReload = !autoReload;
+    }
+
+    public boolean isAutoReload() {
+        return autoReload;
+    }
+
+    public void toggleGrayscale() {
+        grayscale = !grayscale;
+    }
+
+    public boolean isGrayscale() {
+        return grayscale;
     }
 
     public boolean isShootPressed() {

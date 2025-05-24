@@ -22,6 +22,7 @@ public class User {
     private final String avatarPath;
     private boolean hasSavedGame = false;
 
+
     public String getUsername() {
         return username;
     }
@@ -67,5 +68,9 @@ public class User {
 
     public boolean hasSavedGame() {
         return hasSavedGame;
+    }
+
+    public UserSetting getUserSetting() {
+        return userSetting;
     }
 }
