@@ -13,4 +13,19 @@ public class Repository {
     public void addUser(User user) {
         users.add(user);
     }
+
+    public boolean isPasswordCorrect(String username, String password) {
+        User user = users.stream()
+            .filter(u -> u.getUsername().equalsIgnoreCase(username))
+            .findFirst()
+            .orElse(null);
+        return user.getPassword().equalsIgnoreCase(password);
+    }
+
+    public User getUser(String username) {
+        return users.stream()
+            .filter(u -> u.getUsername().equalsIgnoreCase(username))
+            .findFirst()
+            .orElse(null);
+    }
 }

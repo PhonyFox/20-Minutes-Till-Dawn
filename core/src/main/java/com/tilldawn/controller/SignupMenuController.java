@@ -54,4 +54,8 @@ public class SignupMenuController {
     public User guestLogin() {
         return new User("Guest", "", null, "", "guest_avatar.png");
     }
+
+    public Repository getRepo() {
+        return repo;
+    }
 }

@@ -9,7 +9,7 @@ public class User {
     private String username;
     private boolean isGuest;
     private SecurityQuestionType securityQuestionType;
-    private String securityQuestionAnswer;
+    private String securityAnswer;
     private Texture playerTexture;
     private GameSave gameSave;
     private UserState userState;
@@ -22,11 +22,23 @@ public class User {
     }
 
     public User(String username, String password, SecurityQuestionType securityQuestionType,
-                String securityQuestionAnswer, String avatar) {
+                String securityAnswer, String avatar) {
         this.username = username;
         this.password = password;
         this.securityQuestionType = securityQuestionType;
-        this.securityQuestionAnswer = securityQuestionAnswer;
+        this.securityAnswer = securityAnswer;
         this.avatarPath = avatar;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
     }
 }
