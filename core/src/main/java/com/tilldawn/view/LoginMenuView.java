@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.LoginMenuController;
+import com.tilldawn.controller.MainMenuController;
 import com.tilldawn.model.Repository;
 
 public class LoginMenuView extends ScreenAdapter {
@@ -54,7 +55,8 @@ public class LoginMenuView extends ScreenAdapter {
 
                 if (result.contains("successfully")) {
                     messageLabel.setText("Login Successful");
-                    //@ go to next menu
+                    controller.getRepo().setCurrentUser(controller.getUser(usernameField.getText()));
+                    Main.getMain().setScreen(new MainMenuView(new MainMenuController(controller.getRepo())));
                 } else {
                     messageLabel.setText(result);
                 }

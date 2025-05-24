@@ -47,7 +47,7 @@ public class SignupMenuController {
     }
 
     private String assignRandomAvatar() {
-        String[] avatars = {"a1.png", "a2.png", "a3.png"};
+        String[] avatars = {"avatars/a1.png", "avatars/a2.png", "avatars/a3.png"};
         return avatars[new Random().nextInt(avatars.length)];
     }
 

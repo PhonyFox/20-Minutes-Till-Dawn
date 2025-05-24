@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Repository {
     private List<User> users = new ArrayList<User>();
+    private User currentUser;
 
     public boolean isUsernameTaken(String username) {
         return users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
@@ -27,5 +28,13 @@ public class Repository {
             .filter(u -> u.getUsername().equalsIgnoreCase(username))
             .findFirst()
             .orElse(null);
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }

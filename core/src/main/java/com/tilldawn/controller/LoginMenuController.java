@@ -19,7 +19,7 @@ public class LoginMenuController {
             return "Incorrect password!";
         }
 
-        return "Login successful!";
+        return "Login successfully!";
     }
 
     public User getUser(String username) {
@@ -39,5 +39,9 @@ public class LoginMenuController {
 
         user.setPassword(newPassword);
         return "Password reset successful!";
+    }
+
+    public Repository getRepo() {
+        return repo;
     }
 }
