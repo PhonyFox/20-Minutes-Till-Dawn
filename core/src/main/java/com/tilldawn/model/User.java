@@ -94,4 +94,12 @@ public class User {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    public int getKills() {
+        return userState.getKills();
+    }
+
+    public int getSurvivalTime() {
+        return userState.getSurvivalTime();
+    }
 }

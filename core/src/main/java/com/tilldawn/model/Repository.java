@@ -42,4 +42,8 @@ public class Repository {
         users.remove(currentUser);
         currentUser = null;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
 }
