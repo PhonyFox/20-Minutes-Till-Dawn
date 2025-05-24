@@ -19,7 +19,7 @@ public class User {
     private UserState userState = new UserState();
     private UserSetting userSetting;
     private Player player;
-    private final String avatarPath;
+    private String avatarPath;
     private boolean hasSavedGame = false;
 
 
@@ -72,5 +72,13 @@ public class User {
 
     public UserSetting getUserSetting() {
         return userSetting;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 }

@@ -37,4 +37,9 @@ public class Repository {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
+    public void deleteUser(String username) {
+        users.remove(currentUser);
+        currentUser = null;
+    }
 }
