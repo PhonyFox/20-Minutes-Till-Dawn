@@ -6,5 +6,11 @@ import com.tilldawn.model.enums.HeroType;
 public class Hero {
     private Sprite heroSprite;
     private HeroType heroType;
+
+    public Hero(HeroType heroType) {
+        this.heroType = heroType;
+    }
+
+
 }
 

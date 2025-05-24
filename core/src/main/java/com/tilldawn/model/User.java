@@ -21,6 +21,7 @@ public class User {
     private Player player;
     private String avatarPath;
     private boolean hasSavedGame = false;
+    private int duration;
 
 
     public String getUsername() {
@@ -80,5 +81,17 @@ public class User {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

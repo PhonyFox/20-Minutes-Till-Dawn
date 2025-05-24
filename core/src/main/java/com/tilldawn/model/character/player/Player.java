@@ -23,4 +23,51 @@ public class Player extends Character {
         timedAbilities = new ArrayList<TimedAbility>();
     }
 
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public float getAimAngle() {
+        return aimAngle;
+    }
+
+    public void setAimAngle(float aimAngle) {
+        this.aimAngle = aimAngle;
+    }
+
+    public int getCurrentLevelNumber() {
+        return currentLevelNumber;
+    }
+
+    public void setCurrentLevelNumber(int currentLevelNumber) {
+        this.currentLevelNumber = currentLevelNumber;
+    }
+
+    public float getCurrentLevelProgress() {
+        return currentLevelProgress;
+    }
+
+    public void setCurrentLevelProgress(float currentLevelProgress) {
+        this.currentLevelProgress = currentLevelProgress;
+    }
+
+    public int getRequiredExpToFinishLevel() {
+        return requiredExpToFinishLevel;
+    }
+
+    public void setRequiredExpToFinishLevel(int requiredExpToFinishLevel) {
+        this.requiredExpToFinishLevel = requiredExpToFinishLevel;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
 }
