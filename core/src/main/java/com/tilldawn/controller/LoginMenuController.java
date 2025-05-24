@@ -26,6 +26,7 @@ public class LoginMenuController {
         return repo.getUser(username);
     }
 
+
     public String resetPassword(String username, String answer, String newPassword) {
         if (!repo.isUsernameTaken(username)) {
             return "Username does not exist!";
