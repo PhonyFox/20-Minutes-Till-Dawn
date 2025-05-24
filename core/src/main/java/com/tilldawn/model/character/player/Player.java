@@ -17,6 +17,7 @@ public class Player extends Character {
     private int requiredExpToFinishLevel;
     private Weapon weapon;
     private final List<TimedAbility> timedAbilities;
+    private final List<String> acquiredAbilities = new ArrayList<String>();
 
     public Player(User user) {
         this.user = user;
@@ -69,5 +70,9 @@ public class Player extends Character {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public List<String> getAcquiredAbilities() {
+        return acquiredAbilities;
     }
 }
