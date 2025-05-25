@@ -1,4 +1,234 @@
 package com.tilldawn.model;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+
 public class AssetManager {
+    private static AssetManager assetManager;
+    private final String ch0_idle0 = "idle/0/0.png";
+    private final String ch0_idle1 = "idle/0/1.png";
+    private final String ch0_idle2 = "idle/0/2.png";
+    private final String ch0_idle3 = "idle/0/3.png";
+    private final String ch0_idle4 = "idle/0/4.png";
+    private final String ch0_idle5 = "idle/0/5.png";
+
+
+    private final String ch0_walk0 = "walk/0/0.png";
+    private final String ch0_walk1 = "walk/0/1.png";
+    private final String ch0_walk2 = "walk/0/2.png";
+    private final String ch0_walk3 = "walk/0/3.png";
+    private final String ch0_walk4 = "walk/0/4.png";
+    private final String ch0_walk5 = "walk/0/5.png";
+    private final String ch0_walk6 = "walk/0/6.png";
+
+    private final String ch1_idle0 = "idle/1/0.png";
+    private final String ch1_idle1 = "idle/1/1.png";
+    private final String ch1_idle2 = "idle/1/2.png";
+    private final String ch1_idle3 = "idle/1/3.png";
+    private final String ch1_idle4 = "idle/1/4.png";
+    private final String ch1_idle5 = "idle/1/5.png";
+
+
+    private final String ch1_walk0 = "walk/1/0.png";
+    private final String ch1_walk1 = "walk/1/1.png";
+    private final String ch1_walk2 = "walk/1/2.png";
+    private final String ch1_walk3 = "walk/1/3.png";
+    private final String ch1_walk4 = "walk/1/4.png";
+    private final String ch1_walk5 = "walk/1/5.png";
+
+
+    private final String ch2_idle0 = "idle/2/0.png";
+    private final String ch2_idle1 = "idle/2/1.png";
+    private final String ch2_idle2 = "idle/2/2.png";
+    private final String ch2_idle3 = "idle/2/3.png";
+    private final String ch2_idle4 = "idle/2/4.png";
+    private final String ch2_idle5 = "idle/2/5.png";
+
+
+    private final String ch2_walk0 = "walk/2/0.png";
+    private final String ch2_walk1 = "walk/2/1.png";
+    private final String ch2_walk2 = "walk/2/2.png";
+    private final String ch2_walk3 = "walk/2/3.png";
+    private final String ch2_walk4 = "walk/2/4.png";
+    private final String ch2_walk5 = "walk/2/5.png";
+
+
+    private final String ch3_idle0 = "idle/3/0.png";
+    private final String ch3_idle1 = "idle/3/1.png";
+    private final String ch3_idle2 = "idle/3/2.png";
+    private final String ch3_idle3 = "idle/3/3.png";
+    private final String ch3_idle4 = "idle/3/4.png";
+    private final String ch3_idle5 = "idle/3/5.png";
+
+
+    private final String ch3_walk0 = "walk/3/0.png";
+    private final String ch3_walk1 = "walk/3/1.png";
+    private final String ch3_walk2 = "walk/3/2.png";
+    private final String ch3_walk3 = "walk/3/3.png";
+    private final String ch3_walk4 = "walk/3/4.png";
+    private final String ch3_walk5 = "walk/3/5.png";
+
+
+    private final String ch4_idle0 = "idle/4/0.png";
+    private final String ch4_idle1 = "idle/4/1.png";
+    private final String ch4_idle2 = "idle/4/2.png";
+    private final String ch4_idle3 = "idle/4/3.png";
+    private final String ch4_idle4 = "idle/4/4.png";
+    private final String ch4_idle5 = "idle/4/5.png";
+
+
+    private final String ch4_walk0 = "walk/4/0.png";
+    private final String ch4_walk1 = "walk/4/1.png";
+    private final String ch4_walk2 = "walk/4/2.png";
+    private final String ch4_walk3 = "walk/4/3.png";
+    private final String ch4_walk4 = "walk/4/4.png";
+    private final String ch4_walk5 = "walk/4/5.png";
+
+
+    private final Texture ch0_idle0_tex = new Texture(ch0_idle0);
+    private final Texture ch0_idle1_tex = new Texture(ch0_idle1);
+    private final Texture ch0_idle2_tex = new Texture(ch0_idle2);
+    private final Texture ch0_idle3_tex = new Texture(ch0_idle3);
+    private final Texture ch0_idle4_tex = new Texture(ch0_idle4);
+    private final Texture ch0_idle5_tex = new Texture(ch0_idle5);
+
+
+    private final Texture ch0_walk0_tex = new Texture(ch0_walk0);
+    private final Texture ch0_walk1_tex = new Texture(ch0_walk1);
+    private final Texture ch0_walk2_tex = new Texture(ch0_walk2);
+    private final Texture ch0_walk3_tex = new Texture(ch0_walk3);
+    private final Texture ch0_walk4_tex = new Texture(ch0_walk4);
+    private final Texture ch0_walk5_tex = new Texture(ch0_walk5);
+    private final Texture ch0_walk6_tex = new Texture(ch0_walk6);
+
+    private final Texture ch1_idle0_tex = new Texture(ch1_idle0);
+    private final Texture ch1_idle1_tex = new Texture(ch1_idle1);
+    private final Texture ch1_idle2_tex = new Texture(ch1_idle2);
+    private final Texture ch1_idle3_tex = new Texture(ch1_idle3);
+    private final Texture ch1_idle4_tex = new Texture(ch1_idle4);
+    private final Texture ch1_idle5_tex = new Texture(ch1_idle5);
+
+
+    private final Texture ch1_walk0_tex = new Texture(ch1_walk0);
+    private final Texture ch1_walk1_tex = new Texture(ch1_walk1);
+    private final Texture ch1_walk2_tex = new Texture(ch1_walk2);
+    private final Texture ch1_walk3_tex = new Texture(ch1_walk3);
+    private final Texture ch1_walk4_tex = new Texture(ch1_walk4);
+    private final Texture ch1_walk5_tex = new Texture(ch1_walk5);
+
+
+    private final Texture ch2_idle0_tex = new Texture(ch2_idle0);
+    private final Texture ch2_idle1_tex = new Texture(ch2_idle1);
+    private final Texture ch2_idle2_tex = new Texture(ch2_idle2);
+    private final Texture ch2_idle3_tex = new Texture(ch2_idle3);
+    private final Texture ch2_idle4_tex = new Texture(ch2_idle4);
+    private final Texture ch2_idle5_tex = new Texture(ch2_idle5);
+
+
+    private final Texture ch2_walk0_tex = new Texture(ch2_walk0);
+    private final Texture ch2_walk1_tex = new Texture(ch2_walk1);
+    private final Texture ch2_walk2_tex = new Texture(ch2_walk2);
+    private final Texture ch2_walk3_tex = new Texture(ch2_walk3);
+    private final Texture ch2_walk4_tex = new Texture(ch2_walk4);
+    private final Texture ch2_walk5_tex = new Texture(ch2_walk5);
+
+
+    private final Texture ch3_idle0_tex = new Texture(ch3_idle0);
+    private final Texture ch3_idle1_tex = new Texture(ch3_idle1);
+    private final Texture ch3_idle2_tex = new Texture(ch3_idle2);
+    private final Texture ch3_idle3_tex = new Texture(ch3_idle3);
+    private final Texture ch3_idle4_tex = new Texture(ch3_idle4);
+    private final Texture ch3_idle5_tex = new Texture(ch3_idle5);
+
+
+    private final Texture ch3_walk0_tex = new Texture(ch3_walk0);
+    private final Texture ch3_walk1_tex = new Texture(ch3_walk1);
+    private final Texture ch3_walk2_tex = new Texture(ch3_walk2);
+    private final Texture ch3_walk3_tex = new Texture(ch3_walk3);
+    private final Texture ch3_walk4_tex = new Texture(ch3_walk4);
+    private final Texture ch3_walk5_tex = new Texture(ch3_walk5);
+
+
+    private final Texture ch4_idle0_tex = new Texture(ch4_idle0);
+    private final Texture ch4_idle1_tex = new Texture(ch4_idle1);
+    private final Texture ch4_idle2_tex = new Texture(ch4_idle2);
+    private final Texture ch4_idle3_tex = new Texture(ch4_idle3);
+    private final Texture ch4_idle4_tex = new Texture(ch4_idle4);
+    private final Texture ch4_idle5_tex = new Texture(ch4_idle5);
+
+
+    private final Texture ch4_walk0_tex = new Texture(ch4_walk0);
+    private final Texture ch4_walk1_tex = new Texture(ch4_walk1);
+    private final Texture ch4_walk2_tex = new Texture(ch4_walk2);
+    private final Texture ch4_walk3_tex = new Texture(ch4_walk3);
+    private final Texture ch4_walk4_tex = new Texture(ch4_walk4);
+    private final Texture ch4_walk5_tex = new Texture(ch4_walk5);
+
+    // ch0 idle
+    private final Animation<Texture> ch0_idle_frames = new Animation<>(0.1f,
+        ch0_idle0_tex, ch0_idle1_tex, ch0_idle2_tex, ch0_idle3_tex, ch0_idle4_tex, ch0_idle5_tex);
+    // ch0 walk
+    private final Animation<Texture> ch0_walk_frames = new Animation<>(0.1f,
+        ch0_walk0_tex, ch0_walk1_tex, ch0_walk2_tex, ch0_walk3_tex, ch0_walk4_tex, ch0_walk5_tex, ch0_walk6_tex);
+
+    // ch1 idle
+    private final Animation<Texture> ch1_idle_frames = new Animation<>(0.1f,
+        ch1_idle0_tex, ch1_idle1_tex, ch1_idle2_tex, ch1_idle3_tex, ch1_idle4_tex, ch1_idle5_tex);
+    // ch1 walk
+    private final Animation<Texture> ch1_walk_frames = new Animation<>(0.1f,
+        ch1_walk0_tex, ch1_walk1_tex, ch1_walk2_tex, ch1_walk3_tex, ch1_walk4_tex, ch1_walk5_tex);
+
+    // ch2 idle
+    private final Animation<Texture> ch2_idle_frames = new Animation<>(0.1f,
+        ch2_idle0_tex, ch2_idle1_tex, ch2_idle2_tex, ch2_idle3_tex, ch2_idle4_tex, ch2_idle5_tex);
+    // ch2 walk
+    private final Animation<Texture> ch2_walk_frames = new Animation<>(0.1f,
+        ch2_walk0_tex, ch2_walk1_tex, ch2_walk2_tex, ch2_walk3_tex, ch2_walk4_tex, ch2_walk5_tex);
+
+    // ch3 idle
+    private final Animation<Texture> ch3_idle_frames = new Animation<>(0.1f,
+        ch3_idle0_tex, ch3_idle1_tex, ch3_idle2_tex, ch3_idle3_tex, ch3_idle4_tex, ch3_idle5_tex);
+    // ch3 walk
+    private final Animation<Texture> ch3_walk_frames = new Animation<>(0.1f,
+        ch3_walk0_tex, ch3_walk1_tex, ch3_walk2_tex, ch3_walk3_tex, ch3_walk4_tex, ch3_walk5_tex);
+
+    // ch4 idle
+    private final Animation<Texture> ch4_idle_frames = new Animation<>(0.1f,
+        ch4_idle0_tex, ch4_idle1_tex, ch4_idle2_tex, ch4_idle3_tex, ch4_idle4_tex, ch4_idle5_tex);
+    // ch4 walk
+    private final Animation<Texture> ch4_walk_frames = new Animation<>(0.1f,
+        ch4_walk0_tex, ch4_walk1_tex, ch4_walk2_tex, ch4_walk3_tex, ch4_walk4_tex, ch4_walk5_tex);
+
+
+    private AssetManager() {
+
+    }
+
+
+    public static AssetManager getAssetManager() {
+        if (assetManager == null) {
+            assetManager = new AssetManager();
+        }
+        return assetManager;
+    }
+
+    public Animation<Texture> getIdleFrames(String name) {
+        switch (name.toLowerCase().trim()) {
+            case "diamond": return ch1_idle_frames;
+            case "scarlet": return ch2_idle_frames;
+            case "lilith": return ch3_idle_frames;
+            case "dasher": return ch4_idle_frames;
+            default: return ch0_idle_frames;
+        }
+    }
+
+    public Animation<Texture> getWalkFrames(String name) {
+        switch (name.toLowerCase().trim()) {
+            case "diamond": return ch1_walk_frames;
+            case "scarlet": return ch2_walk_frames;
+            case "lilith": return ch3_walk_frames;
+            case "dasher": return ch4_walk_frames;
+            default: return ch0_idle_frames;
+        }
+    }
 }
