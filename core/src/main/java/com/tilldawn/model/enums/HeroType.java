@@ -30,4 +30,8 @@ public enum HeroType {
     public Texture getHeroTexture() {
         return heroTexture;
     }
+
+    public String getHeroName() {
+        return this.name().toLowerCase();
+    }
 }
