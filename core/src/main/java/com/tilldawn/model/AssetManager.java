@@ -2,6 +2,7 @@ package com.tilldawn.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetManager {
     private static AssetManager assetManager;
@@ -85,118 +86,118 @@ public class AssetManager {
     private final String ch4_walk5 = "walk/4/5.png";
 
 
-    private final Texture ch0_idle0_tex = new Texture(ch0_idle0);
-    private final Texture ch0_idle1_tex = new Texture(ch0_idle1);
-    private final Texture ch0_idle2_tex = new Texture(ch0_idle2);
-    private final Texture ch0_idle3_tex = new Texture(ch0_idle3);
-    private final Texture ch0_idle4_tex = new Texture(ch0_idle4);
-    private final Texture ch0_idle5_tex = new Texture(ch0_idle5);
+    private final TextureRegion ch0_idle0_tex = new TextureRegion(new Texture(ch0_idle0));
+    private final TextureRegion ch0_idle1_tex = new TextureRegion(new Texture(ch0_idle1));
+    private final TextureRegion ch0_idle2_tex = new TextureRegion(new Texture(ch0_idle2));
+    private final TextureRegion ch0_idle3_tex = new TextureRegion(new Texture(ch0_idle3));
+    private final TextureRegion ch0_idle4_tex = new TextureRegion(new Texture(ch0_idle4));
+    private final TextureRegion ch0_idle5_tex = new TextureRegion(new Texture(ch0_idle5));
 
 
-    private final Texture ch0_walk0_tex = new Texture(ch0_walk0);
-    private final Texture ch0_walk1_tex = new Texture(ch0_walk1);
-    private final Texture ch0_walk2_tex = new Texture(ch0_walk2);
-    private final Texture ch0_walk3_tex = new Texture(ch0_walk3);
-    private final Texture ch0_walk4_tex = new Texture(ch0_walk4);
-    private final Texture ch0_walk5_tex = new Texture(ch0_walk5);
-    private final Texture ch0_walk6_tex = new Texture(ch0_walk6);
+    private final TextureRegion ch0_walk1_tex = new TextureRegion(new Texture(ch0_walk1));
+    private final TextureRegion ch0_walk0_tex = new TextureRegion(new Texture(ch0_walk0));
+    private final TextureRegion ch0_walk2_tex = new TextureRegion(new Texture(ch0_walk2));
+    private final TextureRegion ch0_walk3_tex = new TextureRegion(new Texture(ch0_walk3));
+    private final TextureRegion ch0_walk4_tex = new TextureRegion(new Texture(ch0_walk4));
+    private final TextureRegion ch0_walk5_tex = new TextureRegion(new Texture(ch0_walk5));
+    private final TextureRegion ch0_walk6_tex = new TextureRegion(new Texture(ch0_walk6));
 
-    private final Texture ch1_idle0_tex = new Texture(ch1_idle0);
-    private final Texture ch1_idle1_tex = new Texture(ch1_idle1);
-    private final Texture ch1_idle2_tex = new Texture(ch1_idle2);
-    private final Texture ch1_idle3_tex = new Texture(ch1_idle3);
-    private final Texture ch1_idle4_tex = new Texture(ch1_idle4);
-    private final Texture ch1_idle5_tex = new Texture(ch1_idle5);
-
-
-    private final Texture ch1_walk0_tex = new Texture(ch1_walk0);
-    private final Texture ch1_walk1_tex = new Texture(ch1_walk1);
-    private final Texture ch1_walk2_tex = new Texture(ch1_walk2);
-    private final Texture ch1_walk3_tex = new Texture(ch1_walk3);
-    private final Texture ch1_walk4_tex = new Texture(ch1_walk4);
-    private final Texture ch1_walk5_tex = new Texture(ch1_walk5);
+    private final TextureRegion ch1_idle0_tex = new TextureRegion(new Texture(ch1_idle0));
+    private final TextureRegion ch1_idle1_tex = new TextureRegion(new Texture(ch1_idle1));
+    private final TextureRegion ch1_idle2_tex = new TextureRegion(new Texture(ch1_idle2));
+    private final TextureRegion ch1_idle3_tex = new TextureRegion(new Texture(ch1_idle3));
+    private final TextureRegion ch1_idle4_tex = new TextureRegion(new Texture(ch1_idle4));
+    private final TextureRegion ch1_idle5_tex = new TextureRegion(new Texture(ch1_idle5));
 
 
-    private final Texture ch2_idle0_tex = new Texture(ch2_idle0);
-    private final Texture ch2_idle1_tex = new Texture(ch2_idle1);
-    private final Texture ch2_idle2_tex = new Texture(ch2_idle2);
-    private final Texture ch2_idle3_tex = new Texture(ch2_idle3);
-    private final Texture ch2_idle4_tex = new Texture(ch2_idle4);
-    private final Texture ch2_idle5_tex = new Texture(ch2_idle5);
+    private final TextureRegion ch1_walk0_tex = new TextureRegion(new Texture(ch1_walk0));
+    private final TextureRegion ch1_walk1_tex = new TextureRegion(new Texture(ch1_walk1));
+    private final TextureRegion ch1_walk2_tex = new TextureRegion(new Texture(ch1_walk2));
+    private final TextureRegion ch1_walk3_tex = new TextureRegion(new Texture(ch1_walk3));
+    private final TextureRegion ch1_walk4_tex = new TextureRegion(new Texture(ch1_walk4));
+    private final TextureRegion ch1_walk5_tex = new TextureRegion(new Texture(ch1_walk5));
 
 
-    private final Texture ch2_walk0_tex = new Texture(ch2_walk0);
-    private final Texture ch2_walk1_tex = new Texture(ch2_walk1);
-    private final Texture ch2_walk2_tex = new Texture(ch2_walk2);
-    private final Texture ch2_walk3_tex = new Texture(ch2_walk3);
-    private final Texture ch2_walk4_tex = new Texture(ch2_walk4);
-    private final Texture ch2_walk5_tex = new Texture(ch2_walk5);
+    private final TextureRegion ch2_idle0_tex = new TextureRegion(new Texture(ch2_idle0));
+    private final TextureRegion ch2_idle1_tex = new TextureRegion(new Texture(ch2_idle1));
+    private final TextureRegion ch2_idle2_tex = new TextureRegion(new Texture(ch2_idle2));
+    private final TextureRegion ch2_idle3_tex = new TextureRegion(new Texture(ch2_idle3));
+    private final TextureRegion ch2_idle4_tex = new TextureRegion(new Texture(ch2_idle4));
+    private final TextureRegion ch2_idle5_tex = new TextureRegion(new Texture(ch2_idle5));
 
 
-    private final Texture ch3_idle0_tex = new Texture(ch3_idle0);
-    private final Texture ch3_idle1_tex = new Texture(ch3_idle1);
-    private final Texture ch3_idle2_tex = new Texture(ch3_idle2);
-    private final Texture ch3_idle3_tex = new Texture(ch3_idle3);
-    private final Texture ch3_idle4_tex = new Texture(ch3_idle4);
-    private final Texture ch3_idle5_tex = new Texture(ch3_idle5);
+    private final TextureRegion ch2_walk0_tex = new TextureRegion(new Texture(ch2_walk0));
+    private final TextureRegion ch2_walk1_tex = new TextureRegion(new Texture(ch2_walk1));
+    private final TextureRegion ch2_walk2_tex = new TextureRegion(new Texture(ch2_walk2));
+    private final TextureRegion ch2_walk3_tex = new TextureRegion(new Texture(ch2_walk3));
+    private final TextureRegion ch2_walk4_tex = new TextureRegion(new Texture(ch2_walk4));
+    private final TextureRegion ch2_walk5_tex = new TextureRegion(new Texture(ch2_walk5));
 
 
-    private final Texture ch3_walk0_tex = new Texture(ch3_walk0);
-    private final Texture ch3_walk1_tex = new Texture(ch3_walk1);
-    private final Texture ch3_walk2_tex = new Texture(ch3_walk2);
-    private final Texture ch3_walk3_tex = new Texture(ch3_walk3);
-    private final Texture ch3_walk4_tex = new Texture(ch3_walk4);
-    private final Texture ch3_walk5_tex = new Texture(ch3_walk5);
+    private final TextureRegion ch3_idle0_tex = new TextureRegion(new Texture(ch3_idle0));
+    private final TextureRegion ch3_idle1_tex = new TextureRegion(new Texture(ch3_idle1));
+    private final TextureRegion ch3_idle2_tex = new TextureRegion(new Texture(ch3_idle2));
+    private final TextureRegion ch3_idle3_tex = new TextureRegion(new Texture(ch3_idle3));
+    private final TextureRegion ch3_idle4_tex = new TextureRegion(new Texture(ch3_idle4));
+    private final TextureRegion ch3_idle5_tex = new TextureRegion(new Texture(ch3_idle5));
 
 
-    private final Texture ch4_idle0_tex = new Texture(ch4_idle0);
-    private final Texture ch4_idle1_tex = new Texture(ch4_idle1);
-    private final Texture ch4_idle2_tex = new Texture(ch4_idle2);
-    private final Texture ch4_idle3_tex = new Texture(ch4_idle3);
-    private final Texture ch4_idle4_tex = new Texture(ch4_idle4);
-    private final Texture ch4_idle5_tex = new Texture(ch4_idle5);
+    private final TextureRegion ch3_walk0_tex = new TextureRegion(new Texture(ch3_walk0));
+    private final TextureRegion ch3_walk1_tex = new TextureRegion(new Texture(ch3_walk1));
+    private final TextureRegion ch3_walk2_tex = new TextureRegion(new Texture(ch3_walk2));
+    private final TextureRegion ch3_walk3_tex = new TextureRegion(new Texture(ch3_walk3));
+    private final TextureRegion ch3_walk4_tex = new TextureRegion(new Texture(ch3_walk4));
+    private final TextureRegion ch3_walk5_tex = new TextureRegion(new Texture(ch3_walk5));
 
 
-    private final Texture ch4_walk0_tex = new Texture(ch4_walk0);
-    private final Texture ch4_walk1_tex = new Texture(ch4_walk1);
-    private final Texture ch4_walk2_tex = new Texture(ch4_walk2);
-    private final Texture ch4_walk3_tex = new Texture(ch4_walk3);
-    private final Texture ch4_walk4_tex = new Texture(ch4_walk4);
-    private final Texture ch4_walk5_tex = new Texture(ch4_walk5);
+    private final TextureRegion ch4_idle0_tex = new TextureRegion(new Texture(ch4_idle0));
+    private final TextureRegion ch4_idle1_tex = new TextureRegion(new Texture(ch4_idle1));
+    private final TextureRegion ch4_idle2_tex = new TextureRegion(new Texture(ch4_idle2));
+    private final TextureRegion ch4_idle3_tex = new TextureRegion(new Texture(ch4_idle3));
+    private final TextureRegion ch4_idle4_tex = new TextureRegion(new Texture(ch4_idle4));
+    private final TextureRegion ch4_idle5_tex = new TextureRegion(new Texture(ch4_idle5));
+
+
+    private final TextureRegion ch4_walk0_tex = new TextureRegion(new Texture(ch4_walk0));
+    private final TextureRegion ch4_walk1_tex = new TextureRegion(new Texture(ch4_walk1));
+    private final TextureRegion ch4_walk2_tex = new TextureRegion(new Texture(ch4_walk2));
+    private final TextureRegion ch4_walk3_tex = new TextureRegion(new Texture(ch4_walk3));
+    private final TextureRegion ch4_walk4_tex = new TextureRegion(new Texture(ch4_walk4));
+    private final TextureRegion ch4_walk5_tex = new TextureRegion(new Texture(ch4_walk5));
 
     // ch0 idle
-    private final Animation<Texture> ch0_idle_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch0_idle_frames = new Animation<>(0.1f,
         ch0_idle0_tex, ch0_idle1_tex, ch0_idle2_tex, ch0_idle3_tex, ch0_idle4_tex, ch0_idle5_tex);
     // ch0 walk
-    private final Animation<Texture> ch0_walk_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch0_walk_frames = new Animation<>(0.1f,
         ch0_walk0_tex, ch0_walk1_tex, ch0_walk2_tex, ch0_walk3_tex, ch0_walk4_tex, ch0_walk5_tex, ch0_walk6_tex);
 
     // ch1 idle
-    private final Animation<Texture> ch1_idle_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch1_idle_frames = new Animation<>(0.1f,
         ch1_idle0_tex, ch1_idle1_tex, ch1_idle2_tex, ch1_idle3_tex, ch1_idle4_tex, ch1_idle5_tex);
     // ch1 walk
-    private final Animation<Texture> ch1_walk_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch1_walk_frames = new Animation<>(0.1f,
         ch1_walk0_tex, ch1_walk1_tex, ch1_walk2_tex, ch1_walk3_tex, ch1_walk4_tex, ch1_walk5_tex);
 
     // ch2 idle
-    private final Animation<Texture> ch2_idle_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch2_idle_frames = new Animation<>(0.1f,
         ch2_idle0_tex, ch2_idle1_tex, ch2_idle2_tex, ch2_idle3_tex, ch2_idle4_tex, ch2_idle5_tex);
     // ch2 walk
-    private final Animation<Texture> ch2_walk_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch2_walk_frames = new Animation<>(0.1f,
         ch2_walk0_tex, ch2_walk1_tex, ch2_walk2_tex, ch2_walk3_tex, ch2_walk4_tex, ch2_walk5_tex);
 
     // ch3 idle
-    private final Animation<Texture> ch3_idle_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch3_idle_frames = new Animation<>(0.1f,
         ch3_idle0_tex, ch3_idle1_tex, ch3_idle2_tex, ch3_idle3_tex, ch3_idle4_tex, ch3_idle5_tex);
     // ch3 walk
-    private final Animation<Texture> ch3_walk_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch3_walk_frames = new Animation<>(0.1f,
         ch3_walk0_tex, ch3_walk1_tex, ch3_walk2_tex, ch3_walk3_tex, ch3_walk4_tex, ch3_walk5_tex);
 
     // ch4 idle
-    private final Animation<Texture> ch4_idle_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch4_idle_frames = new Animation<>(0.1f,
         ch4_idle0_tex, ch4_idle1_tex, ch4_idle2_tex, ch4_idle3_tex, ch4_idle4_tex, ch4_idle5_tex);
     // ch4 walk
-    private final Animation<Texture> ch4_walk_frames = new Animation<>(0.1f,
+    private final Animation<TextureRegion> ch4_walk_frames = new Animation<>(0.1f,
         ch4_walk0_tex, ch4_walk1_tex, ch4_walk2_tex, ch4_walk3_tex, ch4_walk4_tex, ch4_walk5_tex);
 
 
@@ -212,7 +213,7 @@ public class AssetManager {
         return assetManager;
     }
 
-    public Animation<Texture> getIdleFrames(String name) {
+    public Animation<TextureRegion> getIdleFrames(String name) {
         switch (name.toLowerCase().trim()) {
             case "diamond": return ch1_idle_frames;
             case "scarlet": return ch2_idle_frames;
@@ -222,7 +223,7 @@ public class AssetManager {
         }
     }
 
-    public Animation<Texture> getWalkFrames(String name) {
+    public Animation<TextureRegion> getWalkFrames(String name) {
         switch (name.toLowerCase().trim()) {
             case "diamond": return ch1_walk_frames;
             case "scarlet": return ch2_walk_frames;

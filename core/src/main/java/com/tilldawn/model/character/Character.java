@@ -10,5 +10,9 @@ public class Character {
     protected int health;
     protected CollisionRect collisionRect;
     protected boolean isIdle;
-    protected boolean isRunning;
+
+
+    public CollisionRect getCollisionRect() {
+        return collisionRect;
+    }
 }

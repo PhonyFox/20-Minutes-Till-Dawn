@@ -2,6 +2,8 @@ package com.tilldawn.model.character.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.User;
 import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
@@ -15,14 +17,16 @@ public class Player extends Character {
     private float x, y;
     private Hero hero;
     private float aimAngle = 0f;
-    private Animation<Texture> walkingAnimation;
-    private Animation<Texture> idleAnimation;
+    private Animation<TextureRegion> walkingAnimation;
+    private Animation<TextureRegion> idleAnimation;
     private int currentLevelNumber;
     private float currentLevelProgress;
     private int requiredExpToFinishLevel;
     private Weapon weapon;
     private final List<TimedAbility> timedAbilities;
     private final List<String> acquiredAbilities = new ArrayList<String>();
+    private float stateTime = 0f;
+    private boolean walking = false;
 
     public Player(User user) {
         this.user = user;
@@ -35,6 +39,8 @@ public class Player extends Character {
 
     public void setHero(Hero hero) {
         this.hero = hero;
+        walkingAnimation = AssetManager.getAssetManager().getWalkFrames(hero.getHeroType().getHeroName());
+        idleAnimation = AssetManager.getAssetManager().getIdleFrames(hero.getHeroType().getHeroName());
     }
 
     public float getAimAngle() {
@@ -80,4 +86,19 @@ public class Player extends Character {
     public List<String> getAcquiredAbilities() {
         return acquiredAbilities;
     }
+
+    public TextureRegion getCurrentFrame() {
+        return walking ? walkingAnimation.getKeyFrame(stateTime, true) :
+            idleAnimation.getKeyFrame(stateTime, true);
+    }
+
+    public void setPosition(float x, float y) { this.x = x; this.y = y; }
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public boolean isFacingRight() { return facingRight; }
+    public void setFacingRight(boolean f) { facingRight = f; }
+    public void setWalking(boolean w) { walking = w; }
+    public boolean isWalking() { return walking; }
+    public void updateTime(float delta) { stateTime += delta; }
+    public float getStateTime() { return stateTime; }
 }

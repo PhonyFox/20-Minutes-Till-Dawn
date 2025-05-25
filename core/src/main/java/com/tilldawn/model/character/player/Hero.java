@@ -11,6 +11,10 @@ public class Hero {
         this.heroType = heroType;
     }
 
+    public HeroType getHeroType() {
+        return heroType;
+    }
+
 
 }
 
