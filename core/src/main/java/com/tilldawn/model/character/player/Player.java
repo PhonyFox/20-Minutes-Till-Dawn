@@ -1,5 +1,7 @@
 package com.tilldawn.model.character.player;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.tilldawn.model.User;
 import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
@@ -10,8 +12,11 @@ import java.util.List;
 
 public class Player extends Character {
     private final User user;
+    private float x, y;
     private Hero hero;
-    private float aimAngle;
+    private float aimAngle = 0f;
+    private Animation<Texture> walkingAnimation;
+    private Animation<Texture> idleAnimation;
     private int currentLevelNumber;
     private float currentLevelProgress;
     private int requiredExpToFinishLevel;
