@@ -1,6 +1,7 @@
 package com.tilldawn.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -12,7 +13,7 @@ import com.tilldawn.model.User;
 
 import java.util.List;
 
-public class ScoreboardMenuView {
+public class ScoreboardMenuView extends ScreenAdapter {
     private final Stage stage;
     private final Skin skin;
     private final Table rootTable;
@@ -88,7 +89,7 @@ public class ScoreboardMenuView {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                controller.goToMainMenu();
             }
         });
         rootTable.add(backButton).colspan(4).padBottom(20);

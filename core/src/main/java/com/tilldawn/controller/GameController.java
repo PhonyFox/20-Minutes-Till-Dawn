@@ -7,11 +7,14 @@ import com.tilldawn.view.GameView;
 public class GameController {
     private GameView view;
     private PlayerController playerController;
+    private WeaponController weaponController;
     private final Repository repo;
 
 
     public GameController(Repository repo) {
         this.repo = repo;
+        this.weaponController = new WeaponController(repo.getCurrentUser().getPlayer().getWeapon());
+        this.playerController = new PlayerController(repo.getCurrentUser().getPlayer(), weaponController);
     }
 
     public void setView(GameView view) {
@@ -28,5 +31,9 @@ public class GameController {
 
     public Repository getRepo() {
         return repo;
+    }
+
+    public WeaponController getWeaponController() {
+        return weaponController;
     }
 }

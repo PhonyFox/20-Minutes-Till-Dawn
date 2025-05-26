@@ -8,7 +8,7 @@ import com.tilldawn.model.character.enemy.BulletType;
 public class Shotgun extends Weapon {
     private final BulletType bulletType = BulletType.SLUG;
 
-    private final TextureRegion texture = null;
+    private final TextureRegion texture = new TextureRegion(new Texture("shotgun/still.png"));
     private final Sprite sprite = null;
     //@
     private int magazineCapacity;
@@ -28,6 +28,6 @@ public class Shotgun extends Weapon {
 
     @Override
     public BulletType getBulletType() {
-        return null;
+        return BulletType.SLUG;
     }
 }

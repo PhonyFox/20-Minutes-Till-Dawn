@@ -1,7 +1,10 @@
 package com.tilldawn.controller;
 
+import com.tilldawn.Main;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
+import com.tilldawn.view.GameView;
+import com.tilldawn.view.MainMenuView;
 
 public class SettingsMenuController {
     private final Repository repo;
@@ -54,5 +57,9 @@ public class SettingsMenuController {
 
     public void changeKeyBinding(String action, int newKey) {
         repo.getCurrentUser().getUserSetting().setKey(action, newKey);
+    }
+
+    public void goToMainMenu() {
+        Main.getMain().setScreen(new GameView(new GameController(repo)));
     }
 }

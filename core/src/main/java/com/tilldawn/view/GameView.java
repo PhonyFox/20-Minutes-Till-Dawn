@@ -20,9 +20,10 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     private GameController controller;
     private final OrthographicCamera camera;
     private Player player;
+    private final Texture mapTexture = new Texture(Gdx.files.internal("background.png"));
 
 
-    public GameView(GameController controller, Skin skin) {
+    public GameView(GameController controller) {
         this.controller = controller;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -38,7 +39,6 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.15f, 0.15f, 0.15f, 1);
-        Texture mapTexture = new Texture(Gdx.files.internal("background.png"));
         camera.position.set(player.getX() + player.getCollisionRect().getX()/2f,
             player.getY() + player.getCollisionRect().getY()/2f, 0);
         camera.update();
@@ -80,6 +80,8 @@ public class GameView extends ScreenAdapter implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        //System.out.println(screenX + " " + screenY);
+        controller.getWeaponController().handleWeaponShoot(player);
 //        controller.getWeaponController().handleWeaponShoot(screenX, screenY);
         return false;
     }
@@ -101,7 +103,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-//        controller.getWeaponController().handleWeaponRotation(screenX, screenY);
+        //controller.getWeaponController().handleWeaponRotation(screenX, screenY);
         return false;
     }
 

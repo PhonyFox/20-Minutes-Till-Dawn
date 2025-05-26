@@ -7,7 +7,7 @@ import com.tilldawn.model.character.enemy.BulletType;
 
 public class SMGsDual extends Weapon {
     private final BulletType bulletType = BulletType.MM9;
-    private final TextureRegion texture = null;
+    private final TextureRegion texture = new TextureRegion(new Texture("smg/still.png"));
     private final Sprite sprite = null;
     //@
     private int magazineCapacity;
@@ -25,6 +25,6 @@ public class SMGsDual extends Weapon {
 
     @Override
     public BulletType getBulletType() {
-        return null;
+        return BulletType.MM9;
     }
 }

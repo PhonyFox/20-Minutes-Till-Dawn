@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.CollisionRect;
 import com.tilldawn.model.User;
 import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
@@ -31,6 +32,9 @@ public class Player extends Character {
     public Player(User user) {
         this.user = user;
         timedAbilities = new ArrayList<TimedAbility>();
+        this.x = 0;
+        this.y = 0;
+        collisionRect = new CollisionRect(x, y, 20, 20);
     }
 
     public Hero getHero() {
@@ -88,6 +92,7 @@ public class Player extends Character {
     }
 
     public TextureRegion getCurrentFrame() {
+        //System.out.println(walking);
         return walking ? walkingAnimation.getKeyFrame(stateTime, true) :
             idleAnimation.getKeyFrame(stateTime, true);
     }

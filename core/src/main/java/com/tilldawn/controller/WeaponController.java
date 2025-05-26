@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
+import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.weapon.Bullet;
 import com.tilldawn.model.weapon.weapon.Weapon;
 
@@ -18,50 +19,63 @@ public class WeaponController {
     private final Weapon weapon;
     private List<Bullet> bullets = new LinkedList<>();
 
-    private float bulletSpeed = 500;
-    private float lastShootTime = 0f;
+    private float bulletSpeed = 5;
     private float shootCooldown = 0.3f;
 
-    public WeaponController(Weapon weapon, float x, float y) {
+    public WeaponController(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public void update(float delta, float x, float y, float angle) {
-        weapon.setAimAngle(angle);
-        weapon.setPosition(x, y);
-        updateWeaponPositionAndRotation();
+    public void update(float delta, Player player) {
+        float mouseX = Gdx.input.getX();
+        float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
+        float dx = mouseX - (weapon.getX() + player.getCurrentFrame().getRegionWidth()*2f);
+        float dy = mouseY - (player.getY() + player.getCurrentFrame().getRegionHeight()*2f);
+
+        float angle = (float)Math.atan2(dy, dx);
+        //weapon.setAimAngle(angle);
+        weapon.setPosition(player.getX() + player.getCurrentFrame().getRegionWidth()/2f, player.getY() + player.getCurrentFrame().getRegionHeight()/2f);
+        updateWeaponPositionAndRotation(player);
         updateBullets(delta);
 
     }
 
-    private void updateWeaponPositionAndRotation() {
+    private void updateWeaponPositionAndRotation(Player player) {
         SpriteBatch batch = Main.getBatch();
-        batch.begin();
-
         TextureRegion weaponRegion = weapon.getWeaponTexture();
 
-        float x = weapon.getX();
-        float y = weapon.getY();
+        float playerCenterX = player.getX() + player.getCurrentFrame().getRegionWidth() / 2f;
+        float playerCenterY = player.getY() + player.getCurrentFrame().getRegionHeight() / 2f;
 
-        float originX = weaponRegion.getRegionWidth() / 2f;
-        float originY = weaponRegion.getRegionHeight() / 2f;
+        float weaponWidth = weaponRegion.getRegionWidth();
+        float weaponHeight = weaponRegion.getRegionHeight();
+
+        float originX = weaponWidth / 2f;
+        float originY = weaponHeight / 2f;
+
+        float drawX = playerCenterX - originX;
+        float drawY = playerCenterY - originY;
 
         float rotationDegrees = weapon.getAimAngle() * MathUtils.radiansToDegrees;
+//        weapon.setAimAngle(player.getAimAngle());
+//        System.out.println("rotation: " + player.getAimAngle());
+//        System.out.println("weapon angel: " + weapon.getAimAngle());
+//        System.out.println("drawX: " + drawX);
+//        System.out.println("drawY: " + drawY);
 
+        System.out.println(drawX - weapon.getX());
         batch.draw(
             weaponRegion,
-            x, y,
+            drawX, drawY,
             originX, originY,
-            weaponRegion.getRegionWidth(),
-            weaponRegion.getRegionHeight(),
-            1f, 1f,
-            rotationDegrees
+            weaponWidth, weaponHeight,
+            4f, 4f,
+            player.getAimAngle() * MathUtils.radiansToDegrees
         );
-
-        batch.end();
     }
 
-    public void handleWeaponRotation(int x, int y) {
+
+    public void handleWeaponRotation(float x, float y) {
         float weaponCenterX = weapon.getX() + weapon.getWeaponTexture().getRegionWidth() / 2f;
         float weaponCenterY = weapon.getY() + weapon.getWeaponTexture().getRegionHeight() / 2f;
 
@@ -69,50 +83,77 @@ public class WeaponController {
         weapon.setAimAngle(angle);
     }
 
-    public void handleWeaponShoot(int x, int y) {
-        if (!weapon.canShoot(Gdx.graphics.getDeltaTime())) {
+    public void handleWeaponShoot(Player player) {
+        if (!weapon.canShoot()) {
             return;
         }
 
-        float currentTime = Gdx.graphics.getDeltaTime() + lastShootTime;
-        if (currentTime < lastShootTime + shootCooldown) {
-            return;
-        }
+//        float startX = weapon.getX() + weapon.getWeaponTexture().getRegionWidth() / 2f;
+//        float startY = weapon.getY() + weapon.getWeaponTexture().getRegionHeight() / 2f;
 
-        lastShootTime = currentTime;
+        float startX = player.getX() + player.getCurrentFrame().getRegionWidth() / 2f;
+        float startY = player.getY() + player.getCurrentFrame().getRegionWidth() / 2f;
 
-        float startX = weapon.getX() + weapon.getWeaponTexture().getRegionWidth() / 2f;
-        float startY = weapon.getY() + weapon.getWeaponTexture().getRegionHeight() / 2f;
+        float angleRadians = player.getAimAngle();
 
-        Vector2 direction = new Vector2(x - startX, y - startY).nor();
+        Vector2 direction = new Vector2(
+            (float) Math.cos(angleRadians),
+            (float) Math.sin(angleRadians)
+        ).nor();
+
 
         Bullet bullet = new Bullet(startX, startY, weapon.getBulletType());
         bullet.setDirection(direction);
         bullet.setSpeed(bulletSpeed);
 
+        bullet.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
+//        bullet.getSprite().setPosition(startX, startY);
+        bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
+
         bullets.add(bullet);
 
+        weapon.setLastShootTime();
         weapon.setAmmo(weapon.getAmmo() - 1);
     }
 
     private void updateBullets(float delta) {
         SpriteBatch batch = Main.getBatch();
-        batch.begin();
-
         Iterator<Bullet> iterator = bullets.iterator();
+
         while (iterator.hasNext()) {
             Bullet bullet = iterator.next();
-            Vector2 pos = new Vector2(bullet.getSprite().getX(), bullet.getSprite().getY());
-            Vector2 velocity = new Vector2(bullet.getDirection()).scl(bullet.getSpeed() * delta);
-            pos.add(velocity);
 
-            bullet.getSprite().setPosition(pos.x, pos.y);
+
+            Vector2 movement = new Vector2(bullet.getDirection())
+                .scl(bullet.getSpeed() * delta);
+
+            System.out.println("Bullet movement: (" + movement.x + ", " + movement.y + ")");
+            bullet.getSprite().setPosition(
+                bullet.getSprite().getX() + movement.x,
+                bullet.getSprite().getY() + movement.y
+            );
+
+
+            System.out.println(bullet.getSprite().getX() - weapon.getX());
+
+            bullet.getSprite().setOriginCenter();
+            bullet.getSprite().setScale(0.1f);
             bullet.getSprite().draw(batch);
 
-            if (pos.x < 0 || pos.x > Gdx.graphics.getWidth() || pos.y < 0 || pos.y > Gdx.graphics.getHeight()) {
-                iterator.remove();
+
+            if (isBulletOutOfScreen(bullet)) {
+                //iterator.remove();
             }
         }
-        batch.end();
+    }
+
+    private boolean isBulletOutOfScreen(Bullet bullet) {
+        float x = bullet.getSprite().getX();
+        float y = bullet.getSprite().getY();
+        float width = bullet.getSprite().getWidth() * bullet.getSprite().getScaleX();
+        float height = bullet.getSprite().getHeight() * bullet.getSprite().getScaleY();
+
+        return x + width < 0 || x > Gdx.graphics.getWidth() ||
+            y + height < 0 || y > Gdx.graphics.getHeight();
     }
 }

@@ -9,8 +9,7 @@ public class Revolver extends Weapon {
 
 
     private final BulletType bulletType = BulletType.MAGNUM;
-    //@
-    private final TextureRegion texture = null;
+    private final TextureRegion texture = new TextureRegion(new Texture("revolver/still.png"));
     private final Sprite sprite = null;
     private int magazineCapacity;
     private int damage;
@@ -27,6 +26,6 @@ public class Revolver extends Weapon {
 
     @Override
     public BulletType getBulletType() {
-        return null;
+        return BulletType.MAGNUM;
     }
 }

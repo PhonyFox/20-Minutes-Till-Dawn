@@ -95,7 +95,7 @@ public class ProfileMenuView extends ScreenAdapter {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                //@
+                controller.goToMainMenu();
             }
         });
 

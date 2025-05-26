@@ -102,4 +102,8 @@ public class User {
     public int getSurvivalTime() {
         return userState.getSurvivalTime();
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

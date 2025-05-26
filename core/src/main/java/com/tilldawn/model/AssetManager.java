@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetManager {
     private static AssetManager assetManager;
+
+    public static final float SCALE = 4f;
+
     private final String ch0_idle0 = "idle/0/0.png";
     private final String ch0_idle1 = "idle/0/1.png";
     private final String ch0_idle2 = "idle/0/2.png";

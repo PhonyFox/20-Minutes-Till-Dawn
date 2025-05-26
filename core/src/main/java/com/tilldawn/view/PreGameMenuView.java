@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.tilldawn.Main;
+import com.tilldawn.controller.GameController;
+import com.tilldawn.controller.MainMenuController;
 import com.tilldawn.controller.PreGameMenuController;
 
 
@@ -70,6 +73,7 @@ public class PreGameMenuView extends ScreenAdapter {
                     + ", weapon: " + weaponSelect.getSelected()
                     + ", duration: " + durationSelect.getSelected()
                     );
+                    controller.startGame();
                 } else {
                     statusLabel.setText("Please select all options");
                 }
@@ -80,7 +84,7 @@ public class PreGameMenuView extends ScreenAdapter {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                controller.goToMainMenu();
             }
         });
 

@@ -1,22 +1,22 @@
 package com.tilldawn.model.weapon.weapon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import com.tilldawn.model.character.enemy.BulletType;
 
 public abstract class Weapon {
-    protected int ammo;
+    protected int ammo = 100;
     protected float x;
     protected float y;
     protected float aimAngle;
     protected TextureRegion weaponTexture;
     protected float reloadingTime;
     protected float shootingCooldown;
-    protected float lastShootTime;
+    protected long lastShootTime = System.currentTimeMillis();
     protected int magazineCapacity;
     protected BulletType bulletType;
 
     public Weapon(int magazineCapacity, float shootingCooldown, float reloadingTime) {
-        this.lastShootTime = 0f;
         this.x = 0;
         this.y = 0;
         this.aimAngle = 0;
@@ -58,9 +58,15 @@ public abstract class Weapon {
         this.ammo = ammo;
     }
 
-    public boolean canShoot(float currentTime) {
-        return ammo > 0 && (currentTime - lastShootTime) >= shootingCooldown;
+    public boolean canShoot() {
+        long now = System.currentTimeMillis();
+        return ammo > 0 && (now - lastShootTime) >= shootingCooldown * 1000;
     }
 
     public abstract BulletType getBulletType();
+
+    public void setLastShootTime() {
+        lastShootTime = System.currentTimeMillis();
+
+    }
 }

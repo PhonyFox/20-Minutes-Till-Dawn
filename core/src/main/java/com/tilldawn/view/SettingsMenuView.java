@@ -83,7 +83,7 @@ public class SettingsMenuView extends ScreenAdapter {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                controller.goToMainMenu();
             }
         });
 
@@ -108,4 +108,5 @@ public class SettingsMenuView extends ScreenAdapter {
         stage.dispose();
         skin.dispose();
     }
+
 }

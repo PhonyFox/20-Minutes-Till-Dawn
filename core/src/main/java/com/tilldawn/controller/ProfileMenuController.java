@@ -1,7 +1,9 @@
 package com.tilldawn.controller;
 
+import com.tilldawn.Main;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
+import com.tilldawn.view.MainMenuView;
 
 public class ProfileMenuController {
     private final User currentUser;
@@ -43,5 +45,9 @@ public class ProfileMenuController {
 
     public Repository getRepo() {
         return repo;
+    }
+
+    public void goToMainMenu() {
+        Main.getMain().setScreen(new MainMenuView(new MainMenuController(repo)));
     }
 }
