@@ -15,8 +15,10 @@ public class Shotgun extends Weapon {
     private int damage;
     private int projectile;
 
-    public Shotgun(int magazineCapacity, long shootingCooldown, float reloadingTime) {
+    public Shotgun(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
+        this.projectile = 4;
+        ammo = magazineCapacity;
     }
 
 
@@ -29,5 +31,13 @@ public class Shotgun extends Weapon {
     @Override
     public BulletType getBulletType() {
         return BulletType.SLUG;
+    }
+
+    public void setProjectile(int projectile) {
+        this.projectile = projectile;
+    }
+
+    private int getProjectile() {
+        return projectile;
     }
 }

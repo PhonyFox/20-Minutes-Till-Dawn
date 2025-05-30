@@ -24,15 +24,17 @@ public class Player extends Character {
     private float currentLevelProgress;
     private int requiredExpToFinishLevel;
     private Weapon weapon;
-    private final List<TimedAbility> timedAbilities;
     private final List<String> acquiredAbilities = new ArrayList<String>();
     private float stateTime = 0f;
     private boolean walking = false;
     private boolean hasAutoAim = true;
+    private boolean hasSpeedy = false;
+    private boolean hasDamager = false;
+    private long speedyStartTime;
+    private long damagerStartTime;
 
     public Player(User user) {
         this.user = user;
-        timedAbilities = new ArrayList<TimedAbility>();
         this.x = 0;
         this.y = 0;
         collisionRect = new CollisionRect(x, y, 20, 20);
@@ -107,4 +109,12 @@ public class Player extends Character {
     public void updateTime(float delta) { stateTime += delta; }
     public float getStateTime() { return stateTime; }
     public boolean hasAutoAim() { return hasAutoAim; }
+    public boolean hasSpeedy() { return hasSpeedy; }
+    public boolean hasDamager() { return hasDamager; }
+    public void setSpeedy(boolean s) { hasSpeedy = s; }
+    public void setDamager(boolean s) { hasDamager = s; }
+    public long getSpeedyStartTime() { return speedyStartTime; }
+    public void setSpeedyStartTime(long s) { speedyStartTime = s; }
+    public long getDamagerStartTime() { return damagerStartTime; }
+    public void setDamagerStartTime(long s) { damagerStartTime = s; }
 }

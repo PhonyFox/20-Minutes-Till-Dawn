@@ -30,6 +30,10 @@ public class WeaponController {
     }
 
     public void update(float delta, Player player) {
+        if (System.currentTimeMillis() - weapon.getReloadingStartTime() > weapon.getReloadingTime()) {
+            weapon.setAmmo(weapon.getMagazineCapacity());
+        }
+
         float mouseX = Gdx.input.getX();
         float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
         float dx = mouseX - (weapon.getX() + player.getCurrentFrame().getRegionWidth()*2f);

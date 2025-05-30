@@ -24,6 +24,14 @@ public class PlayerController implements InputProcessor {
     }
 
     public void update(float delta, List<Enemy> enemies) {
+        if (System.currentTimeMillis() - player.getDamagerStartTime() > 10000) {
+            player.setDamager(false);
+        }
+
+        if (System.currentTimeMillis() - player.getSpeedyStartTime() > 10000) {
+            player.setSpeedy(false);
+        }
+
         handleMovement(delta);
         handleAim();
         player.updateTime(delta);
@@ -36,23 +44,24 @@ public class PlayerController implements InputProcessor {
 
     private void handleMovement(float delta) {
         boolean moving = false;
+        float currentSpeed = player.hasSpeedy() ? speed * 2 : speed;
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            player.setPosition(player.getX() - speed * delta, player.getY());
+            player.setPosition(player.getX() - currentSpeed * delta, player.getY());
             player.setFacingRight(false);
             moving = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            player.setPosition(player.getX() + speed * delta, player.getY());
+            player.setPosition(player.getX() + currentSpeed * delta, player.getY());
             player.setFacingRight(true);
             moving = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            player.setPosition(player.getX(), player.getY() + speed * delta);
+            player.setPosition(player.getX(), player.getY() + currentSpeed * delta);
             moving = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            player.setPosition(player.getX(), player.getY() - speed * delta);
+            player.setPosition(player.getX(), player.getY() - currentSpeed * delta);
             moving = true;
         }
 

@@ -15,8 +15,9 @@ public class Revolver extends Weapon {
     private int damage;
     private int projectile;
 
-    public Revolver(int magazineCapacity, long shootingCooldown, float reloadingTime) {
+    public Revolver(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
+        ammo = magazineCapacity;
     }
 
     @Override
@@ -27,5 +28,13 @@ public class Revolver extends Weapon {
     @Override
     public BulletType getBulletType() {
         return BulletType.MAGNUM;
+    }
+
+    public void setProjectile(int projectile) {
+        this.projectile = projectile;
+    }
+
+    private int getProjectile() {
+        return projectile;
     }
 }
