@@ -16,6 +16,23 @@ public class AssetManager {
     private final String tentacle_2 = "enemies/tentacle/2.png";
     private final String tentacle_3 = "enemies/tentacle/3.png";
 
+    private final String eyebat_0 = "enemies/eyebat/0.png";
+    private final String eyebat_1 = "enemies/eyebat/1.png";
+    private final String eyebat_2 = "enemies/eyebat/2.png";
+
+    private final String elder_walking_0 = "enemies/elder/walking/0.png";
+    private final String elder_walking_1 = "enemies/elder/walking/1.png";
+    private final String elder_walking_2 = "enemies/elder/walking/2.png";
+
+    private final String elder_dashing_0 = "enemies/elder/dashing/0.png";
+    private final String elder_dashing_1 = "enemies/elder/dashing/1.png";
+    private final String elder_dashing_2 = "enemies/elder/dashing/2.png";
+    private final String elder_dashing_3 = "enemies/elder/dashing/3.png";
+    private final String elder_dashing_4 = "enemies/elder/dashing/4.png";
+    private final String elder_dashing_5 = "enemies/elder/dashing/5.png";
+    private final String elder_dashing_6 = "enemies/elder/dashing/6.png";
+    private final String elder_dashing_7 = "enemies/elder/dashing/7.png";
+
     private final String ch0_idle0 = "idle/0/0.png";
     private final String ch0_idle1 = "idle/0/1.png";
     private final String ch0_idle2 = "idle/0/2.png";
@@ -102,6 +119,22 @@ public class AssetManager {
     private final TextureRegion tentacle_2_tex = new TextureRegion(new Texture(tentacle_2));
     private final TextureRegion tentacle_3_tex = new TextureRegion(new Texture(tentacle_3));
 
+    private final TextureRegion eyebat_0_tex = new TextureRegion(new Texture(eyebat_0));
+    private final TextureRegion eyebat_1_tex = new TextureRegion(new Texture(eyebat_1));
+    private final TextureRegion eyebat_2_tex = new TextureRegion(new Texture(eyebat_2));
+
+    private final TextureRegion elder_walking_0_tex = new TextureRegion(new Texture(elder_walking_0));
+    private final TextureRegion elder_walking_1_tex = new TextureRegion(new Texture(elder_walking_1));
+    private final TextureRegion elder_walking_2_tex = new TextureRegion(new Texture(elder_walking_2));
+
+    private final TextureRegion elder_dashing_0_tex = new TextureRegion(new Texture(elder_dashing_0));
+    private final TextureRegion elder_dashing_1_tex = new TextureRegion(new Texture(elder_dashing_1));
+    private final TextureRegion elder_dashing_2_tex = new TextureRegion(new Texture(elder_dashing_2));
+    private final TextureRegion elder_dashing_3_tex = new TextureRegion(new Texture(elder_dashing_3));
+    private final TextureRegion elder_dashing_4_tex = new TextureRegion(new Texture(elder_dashing_4));
+    private final TextureRegion elder_dashing_5_tex = new TextureRegion(new Texture(elder_dashing_5));
+    private final TextureRegion elder_dashing_6_tex = new TextureRegion(new Texture(elder_dashing_6));
+    private final TextureRegion elder_dashing_7_tex = new TextureRegion(new Texture(elder_dashing_7));
 
     private final TextureRegion ch0_idle0_tex = new TextureRegion(new Texture(ch0_idle0));
     private final TextureRegion ch0_idle1_tex = new TextureRegion(new Texture(ch0_idle1));
@@ -185,6 +218,49 @@ public class AssetManager {
     private final Animation<TextureRegion> tentacleAnimation = new Animation<>(0.1f,
         tentacle_0_tex, tentacle_1_tex, tentacle_2_tex, tentacle_3_tex);
 
+    private final Animation<TextureRegion> eyebatAnimation = new Animation<>(0.1f,
+        eyebat_0_tex, eyebat_1_tex, eyebat_2_tex);
+
+    private final Animation<TextureRegion> elderWalkingAnimation = new Animation<>(0.1f,
+        elder_walking_0_tex, elder_walking_1_tex, elder_walking_2_tex);
+
+    private final Animation<TextureRegion> elderDashingAnimation = new Animation<>(0.1f,
+        elder_dashing_0_tex,
+        elder_dashing_0_tex,
+        elder_dashing_0_tex,
+        elder_dashing_0_tex,
+        elder_dashing_0_tex,
+        elder_dashing_0_tex,
+
+        //elder_dashing_1_tex,
+        elder_dashing_1_tex,
+        elder_dashing_1_tex,
+
+        //elder_dashing_2_tex,
+        elder_dashing_2_tex,
+        elder_dashing_2_tex,
+
+        //elder_dashing_3_tex,
+        elder_dashing_3_tex,
+        elder_dashing_3_tex,
+
+        //elder_dashing_4_tex,
+        elder_dashing_4_tex,
+        elder_dashing_4_tex,
+
+        elder_dashing_5_tex,
+        elder_dashing_5_tex,
+        elder_dashing_5_tex,
+
+        elder_dashing_6_tex,
+        elder_dashing_6_tex,
+        elder_dashing_6_tex,
+
+        elder_dashing_7_tex,
+        elder_dashing_7_tex,
+        elder_dashing_7_tex
+    );
+
     // ch0 idle
     private final Animation<TextureRegion> ch0_idle_frames = new Animation<>(0.1f,
         ch0_idle0_tex, ch0_idle1_tex, ch0_idle2_tex, ch0_idle3_tex, ch0_idle4_tex, ch0_idle5_tex);
@@ -260,4 +336,12 @@ public class AssetManager {
     public Animation<TextureRegion> getTentacleAnimation() {
         return tentacleAnimation;
     }
+
+    public Animation<TextureRegion> getEyebatAnimation() {
+        return eyebatAnimation;
+    }
+
+    public Animation<TextureRegion> getElderWalkingAnimation() {return elderWalkingAnimation;}
+
+    public Animation<TextureRegion> getElderDashingAnimation() {return elderDashingAnimation;}
 }

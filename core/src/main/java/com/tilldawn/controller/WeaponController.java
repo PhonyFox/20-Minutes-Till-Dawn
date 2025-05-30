@@ -19,7 +19,7 @@ public class WeaponController {
     private final Weapon weapon;
     private List<Bullet> bullets = new LinkedList<>();
 
-    private float bulletSpeed = 5;
+    private float bulletSpeed = 350;
     private float shootCooldown = 0.3f;
 
     public WeaponController(Weapon weapon) {
@@ -137,7 +137,7 @@ public class WeaponController {
             //System.out.println(bullet.getSprite().getX() - weapon.getX());
 
             bullet.getSprite().setOriginCenter();
-            bullet.getSprite().setScale(0.1f);
+            bullet.getSprite().setScale(0.03f);
             bullet.getSprite().draw(batch);
 
 

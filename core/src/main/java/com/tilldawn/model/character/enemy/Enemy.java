@@ -39,20 +39,22 @@ public abstract class Enemy extends Character {
         this.y = y;
     }
 
-    public static int spawnX() {
-        int x;
+    public int spawnX() {
+        int randomX;
         if (System.currentTimeMillis() % 2 == 1) {
-            x = Random.rand(-100, -10);
-        } else x = Random.rand(3700, 3800);
-        return x;
+            randomX = Random.rand(-100, -10);
+        } else randomX = Random.rand(3700, 3800);
+        this.x = randomX;
+        return randomX;
     }
 
-    public static int spawnY() {
-        int y;
+    public int spawnY() {
+        int randomY;
         if (System.currentTimeMillis() % 2 == 1) {
-            y = Random.rand(-100, -10);
-        } else y = Random.rand(2700, 2800);
-        return y;
+            randomY = Random.rand(-100, -10);
+        } else randomY = Random.rand(2700, 2800);
+        this.y = randomY;
+        return randomY;
     }
 
     public void updateTime(float delta) { stateTime += delta; }

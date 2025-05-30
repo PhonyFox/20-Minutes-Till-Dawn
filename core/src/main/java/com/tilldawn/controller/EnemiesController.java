@@ -1,16 +1,13 @@
 package com.tilldawn.controller;
 
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Repository;
-import com.tilldawn.model.character.enemy.Enemy;
-import com.tilldawn.model.character.enemy.TentacleMonster;
-import com.tilldawn.model.character.enemy.Tree;
+import com.tilldawn.model.character.enemy.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,8 @@ public class EnemiesController implements InputProcessor {
     private final static int NUMBER_OF_TREES = 30;
     private final Repository repo;
     private long lastTentacleSpawnTime = 0;
+    private long lastEyebatSpawnTime = 0;
+    private boolean isElderSpawned = false;
 
     public EnemiesController(Repository repo) {
         initializeTrees();
@@ -28,12 +27,24 @@ public class EnemiesController implements InputProcessor {
 
     public void update(float delta) {
         if (System.currentTimeMillis() - lastTentacleSpawnTime > 3000) {
-            System.out.println("Tentacle spawn time: " + lastTentacleSpawnTime);
-            System.out.println("Number of tentacles: " + (System.currentTimeMillis() - repo.getStartingTime()) / 30000);
             for (int i = 0; i < (System.currentTimeMillis() - repo.getStartingTime()) / 30000; i++) {
                 makeTentacle();
+                lastTentacleSpawnTime = System.currentTimeMillis();
             }
-            lastTentacleSpawnTime = System.currentTimeMillis();
+        }
+
+        if ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 15000L) {
+            if ((System.currentTimeMillis() - lastEyebatSpawnTime) > 10000) {
+                for (int i = 0; i < (4*((System.currentTimeMillis() - repo.getStartingTime()) / 1000) - repo.getCurrentUser().getDuration() * 15L + 30) / 30; i++) {
+                    makeEyebat();
+                    lastEyebatSpawnTime = System.currentTimeMillis();
+                }
+            }
+        }
+
+        if (!isElderSpawned && ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 500L)) {
+            makeElder();
+            isElderSpawned = true;
         }
 
         for (Enemy enemy : enemies) {
@@ -81,6 +92,14 @@ public class EnemiesController implements InputProcessor {
 
     private void makeTentacle() {
         enemies.add(new TentacleMonster());
+    }
+
+    private void makeEyebat() {
+        enemies.add(new Eyebat());
+    }
+
+    private void makeElder() {
+        enemies.add(new Elder());
     }
 
     @Override
