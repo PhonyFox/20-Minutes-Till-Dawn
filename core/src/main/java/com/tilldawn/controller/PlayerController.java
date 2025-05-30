@@ -66,7 +66,6 @@ public class PlayerController implements InputProcessor {
 
     public void render(SpriteBatch batch) {
         TextureRegion frame = player.getCurrentFrame();
-        //System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
 
         if (!player.isFacingRight() && !frame.isFlipX()) {
             frame.flip(true, false);

@@ -63,7 +63,7 @@ public class WeaponController {
 //        System.out.println("drawX: " + drawX);
 //        System.out.println("drawY: " + drawY);
 
-        System.out.println(drawX - weapon.getX());
+        //System.out.println(drawX - weapon.getX());
         batch.draw(
             weaponRegion,
             drawX, drawY,
@@ -127,14 +127,14 @@ public class WeaponController {
             Vector2 movement = new Vector2(bullet.getDirection())
                 .scl(bullet.getSpeed() * delta);
 
-            System.out.println("Bullet movement: (" + movement.x + ", " + movement.y + ")");
+            //System.out.println("Bullet movement: (" + movement.x + ", " + movement.y + ")");
             bullet.getSprite().setPosition(
                 bullet.getSprite().getX() + movement.x,
                 bullet.getSprite().getY() + movement.y
             );
 
 
-            System.out.println(bullet.getSprite().getX() - weapon.getX());
+            //System.out.println(bullet.getSprite().getX() - weapon.getX());
 
             bullet.getSprite().setOriginCenter();
             bullet.getSprite().setScale(0.1f);

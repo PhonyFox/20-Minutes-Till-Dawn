@@ -92,7 +92,6 @@ public class Player extends Character {
     }
 
     public TextureRegion getCurrentFrame() {
-        //System.out.println(walking);
         return walking ? walkingAnimation.getKeyFrame(stateTime, true) :
             idleAnimation.getKeyFrame(stateTime, true);
     }

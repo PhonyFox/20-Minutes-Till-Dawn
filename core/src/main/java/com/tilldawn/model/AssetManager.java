@@ -9,6 +9,13 @@ public class AssetManager {
 
     public static final float SCALE = 4f;
 
+    private final String tree = "enemies/tree.png";
+
+    private final String tentacle_0 = "enemies/tentacle/0.png";
+    private final String tentacle_1 = "enemies/tentacle/1.png";
+    private final String tentacle_2 = "enemies/tentacle/2.png";
+    private final String tentacle_3 = "enemies/tentacle/3.png";
+
     private final String ch0_idle0 = "idle/0/0.png";
     private final String ch0_idle1 = "idle/0/1.png";
     private final String ch0_idle2 = "idle/0/2.png";
@@ -87,6 +94,13 @@ public class AssetManager {
     private final String ch4_walk3 = "walk/4/3.png";
     private final String ch4_walk4 = "walk/4/4.png";
     private final String ch4_walk5 = "walk/4/5.png";
+
+    private final TextureRegion tree_tex = new TextureRegion(new Texture(tree));
+
+    private final TextureRegion tentacle_0_tex = new TextureRegion(new Texture(tentacle_0));
+    private final TextureRegion tentacle_1_tex = new TextureRegion(new Texture(tentacle_1));
+    private final TextureRegion tentacle_2_tex = new TextureRegion(new Texture(tentacle_2));
+    private final TextureRegion tentacle_3_tex = new TextureRegion(new Texture(tentacle_3));
 
 
     private final TextureRegion ch0_idle0_tex = new TextureRegion(new Texture(ch0_idle0));
@@ -168,6 +182,9 @@ public class AssetManager {
     private final TextureRegion ch4_walk4_tex = new TextureRegion(new Texture(ch4_walk4));
     private final TextureRegion ch4_walk5_tex = new TextureRegion(new Texture(ch4_walk5));
 
+    private final Animation<TextureRegion> tentacleAnimation = new Animation<>(0.1f,
+        tentacle_0_tex, tentacle_1_tex, tentacle_2_tex, tentacle_3_tex);
+
     // ch0 idle
     private final Animation<TextureRegion> ch0_idle_frames = new Animation<>(0.1f,
         ch0_idle0_tex, ch0_idle1_tex, ch0_idle2_tex, ch0_idle3_tex, ch0_idle4_tex, ch0_idle5_tex);
@@ -234,5 +251,13 @@ public class AssetManager {
             case "dasher": return ch4_walk_frames;
             default: return ch0_idle_frames;
         }
+    }
+
+    public TextureRegion getTreeTexture() {
+        return tree_tex;
+    }
+
+    public Animation<TextureRegion> getTentacleAnimation() {
+        return tentacleAnimation;
     }
 }

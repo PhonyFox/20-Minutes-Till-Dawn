@@ -6,6 +6,7 @@ import java.util.List;
 public class Repository {
     private List<User> users = new ArrayList<User>();
     private User currentUser;
+    private long startingTime;
 
     public boolean isUsernameTaken(String username) {
         return users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
@@ -45,5 +46,13 @@ public class Repository {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void setStartingTime(long startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public long getStartingTime() {
+        return startingTime;
     }
 }

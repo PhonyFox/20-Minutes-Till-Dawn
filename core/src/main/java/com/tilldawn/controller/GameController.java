@@ -8,6 +8,7 @@ public class GameController {
     private GameView view;
     private PlayerController playerController;
     private WeaponController weaponController;
+    private EnemiesController enemiesController;
     private final Repository repo;
 
 
@@ -15,6 +16,7 @@ public class GameController {
         this.repo = repo;
         this.weaponController = new WeaponController(repo.getCurrentUser().getPlayer().getWeapon());
         this.playerController = new PlayerController(repo.getCurrentUser().getPlayer(), weaponController);
+        this.enemiesController = new EnemiesController(repo);
     }
 
     public void setView(GameView view) {
@@ -23,6 +25,7 @@ public class GameController {
 
     public void updateGame(float delta) {
         playerController.update(delta);
+        enemiesController.update(delta);
     }
 
     public PlayerController getPlayerController() {
