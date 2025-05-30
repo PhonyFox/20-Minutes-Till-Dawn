@@ -43,9 +43,9 @@ public class PreGameMenuController {
     public void selectWeapon(String weaponName) {
         Weapon weapon;
         switch (weaponName.toLowerCase().trim()) {
-            case "shotgun": weapon = new Shotgun(2, 0.1f, 0.5f); break;
-            case "smgs dual": weapon = new SMGsDual(2, 0.1f, 0.5f); break;
-            case "revolver": weapon = new Revolver(2, 0.1f, 0.5f); break;
+            case "shotgun": weapon = new Shotgun(2, 300, 0.5f); break;
+            case "smgs dual": weapon = new SMGsDual(2, 300, 0.5f); break;
+            case "revolver": weapon = new Revolver(2, 300, 0.5f); break;
             default: weapon = null; break;
         }
         repo.getCurrentUser().getPlayer().setWeapon(weapon);

@@ -14,7 +14,7 @@ public class SMGsDual extends Weapon {
     private int damage;
     private int projectile;
 
-    public SMGsDual(int magazineCapacity, float shootingCooldown, float reloadingTime) {
+    public SMGsDual(int magazineCapacity, long shootingCooldown, float reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
     }
 

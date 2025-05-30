@@ -28,6 +28,7 @@ public class Player extends Character {
     private final List<String> acquiredAbilities = new ArrayList<String>();
     private float stateTime = 0f;
     private boolean walking = false;
+    private boolean hasAutoAim = true;
 
     public Player(User user) {
         this.user = user;
@@ -105,4 +106,5 @@ public class Player extends Character {
     public boolean isWalking() { return walking; }
     public void updateTime(float delta) { stateTime += delta; }
     public float getStateTime() { return stateTime; }
+    public boolean hasAutoAim() { return hasAutoAim; }
 }

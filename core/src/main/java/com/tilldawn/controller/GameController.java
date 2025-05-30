@@ -24,7 +24,7 @@ public class GameController {
     }
 
     public void updateGame(float delta) {
-        playerController.update(delta);
+        playerController.update(delta, enemiesController.getEnemies());
         enemiesController.update(delta);
     }
 

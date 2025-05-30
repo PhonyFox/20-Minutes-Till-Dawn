@@ -6,11 +6,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
+import com.tilldawn.model.character.enemy.Enemy;
+import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.weapon.Bullet;
 import com.tilldawn.model.weapon.weapon.Weapon;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -108,6 +111,59 @@ public class WeaponController {
 
         bullet.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
 //        bullet.getSprite().setPosition(startX, startY);
+        bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
+
+        bullets.add(bullet);
+
+        weapon.setLastShootTime();
+        weapon.setAmmo(weapon.getAmmo() - 1);
+    }
+
+    public void handleAutoShoot(Player player, List<Enemy> enemies) {
+        if (enemies == null || enemies.isEmpty()) {
+            return;
+        }
+
+        List<Enemy> nonTreeEnemies = new ArrayList<>();
+        for (Enemy enemy : enemies) {
+            if (!(enemy instanceof Tree)) {
+                nonTreeEnemies.add(enemy);
+            }
+        }
+
+        if (nonTreeEnemies.isEmpty()) {
+            return;
+        }
+
+        Enemy closestEnemy = nonTreeEnemies.get(0);
+        double minDistance = Double.MAX_VALUE;
+
+        for (Enemy enemy : nonTreeEnemies) {
+            double dx = player.getX() - enemy.getX();
+            double dy = player.getY() - enemy.getY();
+            double distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        if (!weapon.canShoot()) {
+            return;
+        }
+
+        float startX = player.getX() + player.getCurrentFrame().getRegionWidth() / 2f;
+        float startY = player.getY() + player.getCurrentFrame().getRegionWidth() / 2f;
+
+        Vector2 direction = new Vector2(new Vector2(closestEnemy.getX(), closestEnemy.getY())).sub(new Vector2(startX, startY)).nor();
+
+
+        Bullet bullet = new Bullet(startX, startY, weapon.getBulletType());
+        bullet.setDirection(direction);
+        bullet.setSpeed(bulletSpeed);
+
+        bullet.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
         bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
 
         bullets.add(bullet);

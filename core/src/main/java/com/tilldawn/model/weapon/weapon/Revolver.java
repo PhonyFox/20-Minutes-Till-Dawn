@@ -15,7 +15,7 @@ public class Revolver extends Weapon {
     private int damage;
     private int projectile;
 
-    public Revolver(int magazineCapacity, float shootingCooldown, float reloadingTime) {
+    public Revolver(int magazineCapacity, long shootingCooldown, float reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
     }
 

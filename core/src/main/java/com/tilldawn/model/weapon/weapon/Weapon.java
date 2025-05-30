@@ -11,12 +11,12 @@ public abstract class Weapon {
     protected float aimAngle;
     protected TextureRegion weaponTexture;
     protected float reloadingTime;
-    protected float shootingCooldown;
+    protected long shootingCooldown;
     protected long lastShootTime = System.currentTimeMillis();
     protected int magazineCapacity;
     protected BulletType bulletType;
 
-    public Weapon(int magazineCapacity, float shootingCooldown, float reloadingTime) {
+    public Weapon(int magazineCapacity, long shootingCooldown, float reloadingTime) {
         this.x = 0;
         this.y = 0;
         this.aimAngle = 0;
@@ -60,7 +60,7 @@ public abstract class Weapon {
 
     public boolean canShoot() {
         long now = System.currentTimeMillis();
-        return ammo > 0 && (now - lastShootTime) >= shootingCooldown * 1000;
+        return ammo > 0 && (now - lastShootTime) >= shootingCooldown;
     }
 
     public abstract BulletType getBulletType();

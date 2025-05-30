@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.player.Player;
+
+import java.util.List;
 
 public class PlayerController implements InputProcessor {
     private final Player player;
@@ -20,12 +23,15 @@ public class PlayerController implements InputProcessor {
         this.controller = controller;
     }
 
-    public void update(float delta) {
+    public void update(float delta, List<Enemy> enemies) {
         handleMovement(delta);
         handleAim();
         player.updateTime(delta);
         render(Main.getBatch());
         controller.update(delta, player);
+        if (player.hasAutoAim()) {
+            controller.handleAutoShoot(player, enemies);
+        }
     }
 
     private void handleMovement(float delta) {

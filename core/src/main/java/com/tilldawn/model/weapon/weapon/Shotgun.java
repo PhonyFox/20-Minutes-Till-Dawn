@@ -15,7 +15,7 @@ public class Shotgun extends Weapon {
     private int damage;
     private int projectile;
 
-    public Shotgun(int magazineCapacity, float shootingCooldown, float reloadingTime) {
+    public Shotgun(int magazineCapacity, long shootingCooldown, float reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
     }
 

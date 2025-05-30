@@ -90,6 +90,10 @@ public class EnemiesController implements InputProcessor {
         }
     }
 
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
     private void makeTentacle() {
         enemies.add(new TentacleMonster());
     }
