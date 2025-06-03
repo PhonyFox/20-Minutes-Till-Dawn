@@ -62,7 +62,12 @@ public abstract class Weapon {
 
     public boolean canShoot() {
         long now = System.currentTimeMillis();
-        if (ammo <= 0) isWhileReloading = true;
+        System.out.println(ammo);
+        if (ammo <= 0 && !isWhileReloading) {
+            isWhileReloading = true;
+            setReloadingStartTime(System.currentTimeMillis());
+        }
+        if (isWhileReloading()) return false;
         return ammo > 0 && (now - lastShootTime) >= shootingCooldown;
     }
 
@@ -77,12 +82,28 @@ public abstract class Weapon {
         return ReloadingStartTime;
     }
 
+    public void setReloadingStartTime(long reloadingStartTime) {
+        ReloadingStartTime = reloadingStartTime;
+    }
+
     public long getReloadingTime() {
         return reloadingTime;
     }
 
+    public void setReloadingTime(long reloadingTime) {
+        this.reloadingTime = reloadingTime;
+    }
+
     public int getMagazineCapacity() {
         return magazineCapacity;
+    }
+
+    public boolean isWhileReloading() {
+        return isWhileReloading;
+    }
+
+    public void setWhileReloading(boolean isWhileReloading) {
+        this.isWhileReloading = isWhileReloading;
     }
 
 }

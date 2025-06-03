@@ -1,6 +1,8 @@
 package com.tilldawn.controller;
 
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
@@ -19,13 +21,22 @@ public class EnemiesController implements InputProcessor {
     private long lastTentacleSpawnTime = 0;
     private long lastEyebatSpawnTime = 0;
     private boolean isElderSpawned = false;
+    private boolean isElderDead = false;
+    private final ZoneController zoneController;
+    //private TextureRegion textureRegion;
+    //private Animation<TextureRegion> zoneAnimation;
 
-    public EnemiesController(Repository repo) {
+    public EnemiesController(Repository repo, ZoneController zoneController) {
         initializeTrees();
         this.repo = repo;
+        this.zoneController = zoneController;
+        //zoneAnimation = AssetManager.getAssetManager().getThunderAnimation();
     }
 
     public void update(float delta) {
+//        if (isElderSpawned && !isElderDead) {
+//            handleZone();
+//        }
         if (System.currentTimeMillis() - lastTentacleSpawnTime > 3000) {
             for (int i = 0; i < (System.currentTimeMillis() - repo.getStartingTime()) / 30000; i++) {
                 makeTentacle();
@@ -51,6 +62,10 @@ public class EnemiesController implements InputProcessor {
             handleMovement(delta, enemy);
             render(Main.getBatch(), enemy);
             enemy.updateTime(delta);
+        }
+
+        if (isElderSpawned && !isElderDead) {
+            zoneController.update(delta);
         }
     }
 
@@ -105,6 +120,11 @@ public class EnemiesController implements InputProcessor {
     private void makeElder() {
         enemies.add(new Elder());
     }
+
+
+//    private TextureRegion getCurrentZoneFrame() {
+//
+//    }
 
     @Override
     public boolean keyDown(int i) {

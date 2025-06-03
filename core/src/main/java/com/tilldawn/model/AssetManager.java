@@ -11,6 +11,14 @@ public class AssetManager {
 
     private final String tree = "enemies/tree.png";
 
+    private final String thunder_0 = "thunder/0.png";
+    private final String thunder_1 = "thunder/1.png";
+    private final String thunder_2 = "thunder/2.png";
+    private final String thunder_3 = "thunder/3.png";
+    private final String thunder_4 = "thunder/4.png";
+    private final String thunder_5 = "thunder/5.png";
+    private final String thunder_6 = "thunder/6.png";
+
     private final String tentacle_0 = "enemies/tentacle/0.png";
     private final String tentacle_1 = "enemies/tentacle/1.png";
     private final String tentacle_2 = "enemies/tentacle/2.png";
@@ -113,6 +121,14 @@ public class AssetManager {
     private final String ch4_walk5 = "walk/4/5.png";
 
     private final TextureRegion tree_tex = new TextureRegion(new Texture(tree));
+
+    private final TextureRegion thunder_0_tex = new TextureRegion(new Texture(thunder_0));
+    private final TextureRegion thunder_1_tex = new TextureRegion(new Texture(thunder_1));
+    private final TextureRegion thunder_2_tex = new TextureRegion(new Texture(thunder_2));
+    private final TextureRegion thunder_3_tex = new TextureRegion(new Texture(thunder_3));
+    private final TextureRegion thunder_4_tex = new TextureRegion(new Texture(thunder_4));
+    private final TextureRegion thunder_5_tex = new TextureRegion(new Texture(thunder_5));
+    private final TextureRegion thunder_6_tex = new TextureRegion(new Texture(thunder_6));
 
     private final TextureRegion tentacle_0_tex = new TextureRegion(new Texture(tentacle_0));
     private final TextureRegion tentacle_1_tex = new TextureRegion(new Texture(tentacle_1));
@@ -217,6 +233,9 @@ public class AssetManager {
 
     private final Animation<TextureRegion> tentacleAnimation = new Animation<>(0.1f,
         tentacle_0_tex, tentacle_1_tex, tentacle_2_tex, tentacle_3_tex);
+
+    private final Animation<TextureRegion> thunderAnimation = new Animation<>(0.05f,
+        thunder_0_tex, thunder_1_tex, thunder_2_tex, thunder_3_tex, thunder_4_tex, thunder_5_tex, thunder_6_tex);
 
     private final Animation<TextureRegion> eyebatAnimation = new Animation<>(0.1f,
         eyebat_0_tex, eyebat_1_tex, eyebat_2_tex);
@@ -341,7 +360,15 @@ public class AssetManager {
         return eyebatAnimation;
     }
 
+    public Animation<TextureRegion> getThunderAnimation() {
+        return thunderAnimation;
+    }
+
     public Animation<TextureRegion> getElderWalkingAnimation() {return elderWalkingAnimation;}
 
     public Animation<TextureRegion> getElderDashingAnimation() {return elderDashingAnimation;}
+
+    public String getStartingMusic() {
+        return "musics/sleeping.mp3";
+    }
 }

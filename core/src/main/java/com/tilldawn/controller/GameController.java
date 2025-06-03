@@ -16,7 +16,7 @@ public class GameController {
         this.repo = repo;
         this.weaponController = new WeaponController(repo.getCurrentUser().getPlayer().getWeapon());
         this.playerController = new PlayerController(repo.getCurrentUser().getPlayer(), weaponController);
-        this.enemiesController = new EnemiesController(repo);
+        this.enemiesController = new EnemiesController(repo, new ZoneController());
     }
 
     public void setView(GameView view) {

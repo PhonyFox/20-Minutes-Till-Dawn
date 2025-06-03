@@ -2,7 +2,9 @@ package com.tilldawn;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.tilldawn.controller.MusicController;
 import com.tilldawn.controller.SignupMenuController;
+import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Repository;
 import com.tilldawn.view.SignupMenuView;
 
@@ -16,6 +18,8 @@ public class Main extends Game {
     public void create() {
         main = this;
         batch = new SpriteBatch();
+        MusicController.getInstance().loadMusic(AssetManager.getAssetManager().getStartingMusic(), true);
+        MusicController.getInstance().play();
         getMain().setScreen(new SignupMenuView(new SignupMenuController(repository)));
     }
 

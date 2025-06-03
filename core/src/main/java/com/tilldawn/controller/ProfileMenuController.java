@@ -23,7 +23,8 @@ public class ProfileMenuController {
     }
 
     public boolean changePassword(String newPassword) {
-        if (newPassword.length() < 6) {
+
+        if (!isStrongPassword(newPassword)) {
             return false;
         }
 
@@ -49,5 +50,12 @@ public class ProfileMenuController {
 
     public void goToMainMenu() {
         Main.getMain().setScreen(new MainMenuView(new MainMenuController(repo)));
+    }
+
+    public boolean isStrongPassword(String password) {
+        return password.length() >= 8 &&
+            password.matches(".*[A-Z].*") &&
+            password.matches(".*[0-9].*") &&
+            password.matches(".*[@%$#&*()_].*");
     }
 }

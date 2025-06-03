@@ -22,7 +22,7 @@ public class WeaponController {
     private final Weapon weapon;
     private List<Bullet> bullets = new LinkedList<>();
 
-    private float bulletSpeed = 350;
+    private float bulletSpeed = 700;
     private float shootCooldown = 0.3f;
 
     public WeaponController(Weapon weapon) {
@@ -30,8 +30,12 @@ public class WeaponController {
     }
 
     public void update(float delta, Player player) {
-        if (System.currentTimeMillis() - weapon.getReloadingStartTime() > weapon.getReloadingTime()) {
+        if (weapon.isWhileReloading() && System.currentTimeMillis() - weapon.getReloadingStartTime() > weapon.getReloadingTime()) {
             weapon.setAmmo(weapon.getMagazineCapacity());
+            weapon.setWhileReloading(false);
+
+            System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
+            System.out.println("reloadingTime: " + weapon.getReloadingTime());
         }
 
         float mouseX = Gdx.input.getX();
@@ -121,9 +125,17 @@ public class WeaponController {
 
         weapon.setLastShootTime();
         weapon.setAmmo(weapon.getAmmo() - 1);
+
     }
 
     public void handleAutoShoot(Player player, List<Enemy> enemies) {
+        if (weapon.isWhileReloading() && System.currentTimeMillis() - weapon.getReloadingStartTime() > weapon.getReloadingTime()) {
+            weapon.setAmmo(weapon.getMagazineCapacity());
+            weapon.setWhileReloading(false);
+
+            System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
+            System.out.println("reloadingTime: " + weapon.getReloadingTime());
+        }
         if (enemies == null || enemies.isEmpty()) {
             return;
         }
