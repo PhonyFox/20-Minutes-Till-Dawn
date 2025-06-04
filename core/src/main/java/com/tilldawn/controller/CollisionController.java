@@ -9,7 +9,9 @@ import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.weapon.Bullet;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class CollisionController {
     private final GameController gameController;
@@ -21,6 +23,7 @@ public class CollisionController {
     }
 
     public void update() {
+        List<Enemy> enemiesToRemove = new ArrayList<>();
         Iterator<Enemy> Enemyiterator = gameController.getEnemiesController().getEnemies().iterator();
         while (Enemyiterator.hasNext()) {
             Enemy enemy = Enemyiterator.next();
@@ -36,9 +39,11 @@ public class CollisionController {
             }
             if (enemy.getCollisionRect().collidesWith(new CollisionRect(player.getX(), player.getY(), 18, 28))) {
                 if (!(enemy instanceof Elder)) {
-                    player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
                     player.decreaseHp(1);
-                    if (!(enemy instanceof Tree)) Enemyiterator.remove();
+                    if (!(enemy instanceof Tree)) {
+                        enemiesToRemove.add(enemy);
+                        player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
+                    }
                 }
             }
             Iterator<Bullet> playerBullet = gameController.getPlayerController().getController().getBullets().iterator();
@@ -49,13 +54,15 @@ public class CollisionController {
                     if (!(enemy instanceof Tree)) {
                         enemy.decreaseHP(1f);
                         if (enemy.isDead()) {
-                            Enemyiterator.remove();
+                            enemiesToRemove.add(enemy);
                             player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
                         }
                     }
                 }
             }
         }
+
+        gameController.getEnemiesController().getEnemies().removeAll(enemiesToRemove);
 
         Iterator<Seed> seedIterator = player.getSeeds().iterator();
         while (seedIterator.hasNext()) {
@@ -65,7 +72,7 @@ public class CollisionController {
                 player.increaseXp(3);
             }
         }
-
     }
+
 
 }

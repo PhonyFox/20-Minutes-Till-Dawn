@@ -29,7 +29,7 @@ public class Player extends Character {
     private final List<String> acquiredAbilities = new ArrayList<String>();
     private float stateTime = 0f;
     private boolean walking = false;
-    private boolean hasAutoAim = false;
+    private boolean hasAutoAim = true;
     private boolean hasSpeedy = false;
     private boolean hasDamager = false;
     private long speedyStartTime;
@@ -39,6 +39,8 @@ public class Player extends Character {
     private int xp = 0;
     private final List<Seed> seeds = new ArrayList<>();
     private long lastDamagedTime = 0;
+    private int currentLevel = 1;
+    private int expToFinishLevel = 20;
 
     public Player(User user) {
         this.user = user;
@@ -155,10 +157,17 @@ public class Player extends Character {
     public int getXp() { return xp; }
     public void setXp(int xp) { this.xp = xp; }
     public void increaseXp(int xp) {
+
         this.xp += xp;
+        if (this.xp >= expToFinishLevel) {
+            currentLevel++;
+            expToFinishLevel = currentLevel * 20;
+            this.xp = 0;
+        }
     }
     public void addSeed(Seed seed) {
         seeds.add(seed);
+        System.out.println("############\n#######3\n###########\n");
     }
     public List<Seed> getSeeds() {
         return seeds;
@@ -166,4 +175,10 @@ public class Player extends Character {
     public void removeSeed(Seed seed) {
         seeds.remove(seed);
     }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public int getExpToFinishLevel() { return expToFinishLevel; }
 }
