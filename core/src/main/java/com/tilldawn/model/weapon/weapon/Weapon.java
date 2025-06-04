@@ -62,7 +62,7 @@ public abstract class Weapon {
 
     public boolean canShoot() {
         long now = System.currentTimeMillis();
-        System.out.println(ammo);
+        //System.out.println(ammo);
         if (ammo <= 0 && !isWhileReloading) {
             isWhileReloading = true;
             setReloadingStartTime(System.currentTimeMillis());

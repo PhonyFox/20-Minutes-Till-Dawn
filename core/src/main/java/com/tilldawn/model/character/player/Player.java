@@ -27,19 +27,19 @@ public class Player extends Character {
     private final List<String> acquiredAbilities = new ArrayList<String>();
     private float stateTime = 0f;
     private boolean walking = false;
-    private boolean hasAutoAim = true;
+    private boolean hasAutoAim = false;
     private boolean hasSpeedy = false;
     private boolean hasDamager = false;
     private long speedyStartTime;
     private long damagerStartTime;
+    private int hp = 3;
 
     public Player(User user) {
         this.user = user;
         this.x = 0;
         this.y = 0;
-        collisionRect = new CollisionRect(x, y, 20, 20);
+        collisionRect = new CollisionRect(x, y, 16, 28);
     }
-
     public Hero getHero() {
         return hero;
     }
@@ -99,7 +99,13 @@ public class Player extends Character {
             idleAnimation.getKeyFrame(stateTime, true);
     }
 
-    public void setPosition(float x, float y) { this.x = x; this.y = y; }
+
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+//        collisionRect.setX(x);
+//        collisionRect.setY(y);
+    }
     public float getX() { return x; }
     public float getY() { return y; }
     public boolean isFacingRight() { return facingRight; }
@@ -117,4 +123,12 @@ public class Player extends Character {
     public void setSpeedyStartTime(long s) { speedyStartTime = s; }
     public long getDamagerStartTime() { return damagerStartTime; }
     public void setDamagerStartTime(long s) { damagerStartTime = s; }
+    public int getHp() { return hp; }
+    public void setHp(int hp) { this.hp = hp; }
+    public void advanceHp(int hp) {
+        this.hp += hp;
+    }
+    public void decreaseHp(int hp) {
+        this.hp -= hp;
+    }
 }

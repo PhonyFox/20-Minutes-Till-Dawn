@@ -11,6 +11,12 @@ public class AssetManager {
 
     private final String tree = "enemies/tree.png";
 
+    private final String heart_0 = "heart/0.png";
+    private final String heart_1 = "heart/1.png";
+    private final String heart_2 = "heart/2.png";
+
+    private final String heart_no = "heart/no.png";
+
     private final String thunder_0 = "thunder/0.png";
     private final String thunder_1 = "thunder/1.png";
     private final String thunder_2 = "thunder/2.png";
@@ -121,6 +127,12 @@ public class AssetManager {
     private final String ch4_walk5 = "walk/4/5.png";
 
     private final TextureRegion tree_tex = new TextureRegion(new Texture(tree));
+
+    private final TextureRegion heart_0_tex = new TextureRegion(new Texture(heart_0));
+    private final TextureRegion heart_1_tex = new TextureRegion(new Texture(heart_1));
+    private final TextureRegion heart_2_tex = new TextureRegion(new Texture(heart_2));
+
+    private final TextureRegion heart_no_tex = new TextureRegion(new Texture(heart_no));
 
     private final TextureRegion thunder_0_tex = new TextureRegion(new Texture(thunder_0));
     private final TextureRegion thunder_1_tex = new TextureRegion(new Texture(thunder_1));
@@ -236,6 +248,9 @@ public class AssetManager {
 
     private final Animation<TextureRegion> thunderAnimation = new Animation<>(0.05f,
         thunder_0_tex, thunder_1_tex, thunder_2_tex, thunder_3_tex, thunder_4_tex, thunder_5_tex, thunder_6_tex);
+
+    private final Animation<TextureRegion> heartAnimation = new Animation<>(0.1f,
+        heart_0_tex, heart_1_tex, heart_2_tex);
 
     private final Animation<TextureRegion> eyebatAnimation = new Animation<>(0.1f,
         eyebat_0_tex, eyebat_1_tex, eyebat_2_tex);
@@ -367,6 +382,12 @@ public class AssetManager {
     public Animation<TextureRegion> getElderWalkingAnimation() {return elderWalkingAnimation;}
 
     public Animation<TextureRegion> getElderDashingAnimation() {return elderDashingAnimation;}
+
+    public Animation<TextureRegion> getHeartAnimation() {return heartAnimation;}
+
+    public TextureRegion getHeartTexture() {
+        return heart_no_tex;
+    }
 
     public String getStartingMusic() {
         return "musics/sleeping.mp3";

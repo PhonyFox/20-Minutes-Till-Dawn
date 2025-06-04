@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.CollisionRect;
 import com.tilldawn.model.character.player.Player;
 
 public class Elder extends Enemy {
@@ -23,6 +24,7 @@ public class Elder extends Enemy {
         y = spawnY();
         position = new Vector2(x, y);
         lastDashingTime = System.currentTimeMillis();
+        collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
     }
 
     public TextureRegion getCurrentFrame() {
@@ -45,11 +47,13 @@ public class Elder extends Enemy {
             position.add(direction.scl(walkingSpeed * delta));
             x = position.x;
             y = position.y;
+            collisionRect.move(x, y);
         } else {
             if (dashingAnimation.getKeyFrameIndex(stateTime) >= 14) {
                 position.add(new Vector2(dashingDirection).scl(dashingSpeed * delta));
                 x = position.x;
                 y = position.y;
+                collisionRect.move(x, y);
             }
             if (dashingAnimation.getKeyFrameIndex(stateTime) >= 22) {
                 walking = true;

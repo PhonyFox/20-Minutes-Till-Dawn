@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.CollisionRect;
 import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.weapon.Bullet;
 
@@ -29,6 +30,7 @@ public class Eyebat extends Enemy {
         y = spawnY();
         position = new Vector2(x, y);
         lastShootTime = System.currentTimeMillis();
+        collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
     }
 
     public TextureRegion getCurrentFrame() {
@@ -42,6 +44,7 @@ public class Eyebat extends Enemy {
         position.add(direction.scl(speed * delta));
         x = position.x;
         y = position.y;
+        collisionRect.move(x, y);
         if (System.currentTimeMillis() - lastShootTime > 3000) {
             lastShootTime = System.currentTimeMillis();
             handleShoot(player);
@@ -71,7 +74,7 @@ public class Eyebat extends Enemy {
 
         while (iterator.hasNext()) {
             Bullet bullet = iterator.next();
-
+            //System.out.println(bullet.getCollisionRect().getX() + ", " + bullet.getCollisionRect().getY() + "for bullet");
 
             Vector2 movement = new Vector2(bullet.getDirection())
                 .scl(bullet.getSpeed() * delta);
@@ -82,6 +85,7 @@ public class Eyebat extends Enemy {
                 bullet.getSprite().getY() + movement.y
             );
 
+            bullet.getCollisionRect().move(bullet.getSprite().getX(), bullet.getSprite().getY());
 
             //System.out.println(bullet.getSprite().getX() - weapon.getX());
 
@@ -94,5 +98,9 @@ public class Eyebat extends Enemy {
 //                //iterator.remove();
 //            }
         }
+    }
+
+    public List<Bullet> getBullets() {
+        return bullets;
     }
 }

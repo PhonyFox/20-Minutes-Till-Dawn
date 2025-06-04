@@ -2,6 +2,7 @@ package com.tilldawn.model.weapon;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.tilldawn.model.CollisionRect;
 import com.tilldawn.model.character.enemy.BulletType;
 
 public class Bullet {
@@ -9,6 +10,7 @@ public class Bullet {
     private Sprite sprite;
     private float speed;
     private Vector2 direction;
+    private CollisionRect collisionRect;
 
     public Bullet(float x, float y, BulletType bulletType) {
         this.bulletType = bulletType;
@@ -16,6 +18,7 @@ public class Bullet {
         sprite.setPosition(x, y);
         direction = new Vector2(0, 0);
         speed = 0f;
+        collisionRect = new CollisionRect(x, y, 5, 5);
     }
 
     public Sprite getSprite() {
@@ -44,5 +47,9 @@ public class Bullet {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public CollisionRect getCollisionRect() {
+        return collisionRect;
     }
 }

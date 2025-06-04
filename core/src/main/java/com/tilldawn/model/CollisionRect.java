@@ -26,4 +26,12 @@ public class CollisionRect {
     public int getY(){
         return (int)y;
     }
+
+    public void setX(float x){
+        this.x = x;
+    }
+
+    public void setY(float y){
+        this.y = y;
+    }
 }

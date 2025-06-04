@@ -24,6 +24,8 @@ public class PlayerController implements InputProcessor {
     }
 
     public void update(float delta, List<Enemy> enemies) {
+//        System.out.println("width: " + player.getCurrentFrame().getRegionWidth());
+//        System.out.println("height: " + player.getCurrentFrame().getRegionHeight());
         if (System.currentTimeMillis() - player.getDamagerStartTime() > 10000) {
             player.setDamager(false);
         }
@@ -64,7 +66,8 @@ public class PlayerController implements InputProcessor {
             player.setPosition(player.getX(), player.getY() - currentSpeed * delta);
             moving = true;
         }
-
+//        player.getCollisionRect().setX(player.getX());
+//        player.getCollisionRect().setY(player.getY());
         player.setWalking(moving);
     }
 
@@ -112,6 +115,10 @@ public class PlayerController implements InputProcessor {
 //                (float) Math.toDegrees(player.getAimAngle())
 //            );
 //    }
+    }
+
+    public WeaponController getController() {
+        return controller;
     }
 
     @Override

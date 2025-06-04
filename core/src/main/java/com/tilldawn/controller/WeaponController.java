@@ -34,8 +34,8 @@ public class WeaponController {
             weapon.setAmmo(weapon.getMagazineCapacity());
             weapon.setWhileReloading(false);
 
-            System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
-            System.out.println("reloadingTime: " + weapon.getReloadingTime());
+            //System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
+            //System.out.println("reloadingTime: " + weapon.getReloadingTime());
         }
 
         float mouseX = Gdx.input.getX();
@@ -133,8 +133,8 @@ public class WeaponController {
             weapon.setAmmo(weapon.getMagazineCapacity());
             weapon.setWhileReloading(false);
 
-            System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
-            System.out.println("reloadingTime: " + weapon.getReloadingTime());
+            //System.out.println("delta: " + (System.currentTimeMillis() - weapon.getReloadingStartTime()));
+            //System.out.println("reloadingTime: " + weapon.getReloadingTime());
         }
         if (enemies == null || enemies.isEmpty()) {
             return;
@@ -205,6 +205,8 @@ public class WeaponController {
                 bullet.getSprite().getY() + movement.y
             );
 
+            bullet.getCollisionRect().move(bullet.getSprite().getX(), bullet.getSprite().getY());
+
 
             //System.out.println(bullet.getSprite().getX() - weapon.getX());
 
@@ -227,5 +229,9 @@ public class WeaponController {
 
         return x + width < 0 || x > Gdx.graphics.getWidth() ||
             y + height < 0 || y > Gdx.graphics.getHeight();
+    }
+
+    public List<Bullet> getBullets() {
+        return bullets;
     }
 }

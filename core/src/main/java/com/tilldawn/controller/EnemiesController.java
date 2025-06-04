@@ -44,18 +44,22 @@ public class EnemiesController implements InputProcessor {
             }
         }
 
-        if ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 15000L) {
-            if ((System.currentTimeMillis() - lastEyebatSpawnTime) > 10000) {
-                for (int i = 0; i < (4*((System.currentTimeMillis() - repo.getStartingTime()) / 1000) - repo.getCurrentUser().getDuration() * 15L + 30) / 30; i++) {
-                    makeEyebat();
-                    lastEyebatSpawnTime = System.currentTimeMillis();
-                }
-            }
-        }
+//        if ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 15000L) {
+//            if ((System.currentTimeMillis() - lastEyebatSpawnTime) > 10000) {
+//                for (int i = 0; i < (4*((System.currentTimeMillis() - repo.getStartingTime()) / 1000) - repo.getCurrentUser().getDuration() * 15L + 30) / 30; i++) {
+//                    makeEyebat();
+//                    lastEyebatSpawnTime = System.currentTimeMillis() * 2;
+//                    break;
+//                    //#
+//                }
+//            }
+//        }
+        //#
 
         if (!isElderSpawned && ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 500L)) {
             makeElder();
             isElderSpawned = true;
+            makeEyebat();
         }
 
         for (Enemy enemy : enemies) {
@@ -85,6 +89,10 @@ public class EnemiesController implements InputProcessor {
 
     private void handleMovement(float delta, Enemy enemy) {
         enemy.handleMovement(delta, repo.getCurrentUser().getPlayer());
+//        if (enemy instanceof Elder) {
+//            System.out.println("width: " + enemy.getCurrentFrame().getRegionWidth());
+//            System.out.println("height: " + enemy.getCurrentFrame().getRegionHeight());
+//        }
 
     }
 
@@ -101,6 +109,7 @@ public class EnemiesController implements InputProcessor {
             Tree tree = new Tree();
             tree.setX(Random.rand(Tree.getSpawnXStart(), Tree.getSpawnXEnd()));
             tree.setY(Random.rand(Tree.getSpawnYStart(), Tree.getSpawnYEnd()));
+            tree.setCollisionRect();
             enemies.add(tree);
         }
     }
