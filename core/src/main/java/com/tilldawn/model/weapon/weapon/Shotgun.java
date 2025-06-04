@@ -13,7 +13,6 @@ public class Shotgun extends Weapon {
     //@
     private int magazineCapacity;
     private int damage;
-    private int projectile;
 
     public Shotgun(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
@@ -35,9 +34,5 @@ public class Shotgun extends Weapon {
 
     public void setProjectile(int projectile) {
         this.projectile = projectile;
-    }
-
-    private int getProjectile() {
-        return projectile;
     }
 }

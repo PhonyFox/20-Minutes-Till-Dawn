@@ -8,6 +8,9 @@ import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Repository;
 import com.tilldawn.view.SignupMenuView;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
     private static Main main;
@@ -48,4 +51,5 @@ public class Main extends Game {
     public static void setBatch(SpriteBatch batch) {
         Main.batch = batch;
     }
+
 }

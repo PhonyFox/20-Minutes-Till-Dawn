@@ -17,4 +17,8 @@ public class Random {
     public static long rand(long min, long max) {
         return ThreadLocalRandom.current().nextLong(min, max);
     }
+
+    public static float rand() {
+        return ThreadLocalRandom.current().nextFloat(-0.5f, 0.5f);
+    }
 }

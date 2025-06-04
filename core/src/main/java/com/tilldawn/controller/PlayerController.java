@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.Seed;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.player.Player;
 
@@ -94,7 +95,9 @@ public class PlayerController implements InputProcessor {
         batch.draw(frame, player.getX(), player.getY(),
             frame.getRegionWidth() * AssetManager.SCALE, frame.getRegionHeight() * AssetManager.SCALE);
 
-
+        for (Seed seed : player.getSeeds()) {
+            batch.draw(seed.getRegion(), seed.getX(), seed.getY(), 15, 15);
+        }
 //        if (player.getWeapon() != null) {
 //            TextureRegion weaponRegion = player.getWeapon().getWeaponTexture();
 //

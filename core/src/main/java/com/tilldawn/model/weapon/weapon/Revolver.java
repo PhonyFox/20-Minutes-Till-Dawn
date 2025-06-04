@@ -13,11 +13,11 @@ public class Revolver extends Weapon {
     private final Sprite sprite = null;
     private int magazineCapacity;
     private int damage;
-    private int projectile;
 
     public Revolver(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
         ammo = magazineCapacity;
+        projectile = 1;
     }
 
     @Override
@@ -34,7 +34,4 @@ public class Revolver extends Weapon {
         this.projectile = projectile;
     }
 
-    private int getProjectile() {
-        return projectile;
-    }
 }

@@ -20,6 +20,7 @@ public class TentacleMonster extends Enemy {
         y = spawnY();
         position = new Vector2(x, y);
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
+        hp = 1f;
     }
 
 

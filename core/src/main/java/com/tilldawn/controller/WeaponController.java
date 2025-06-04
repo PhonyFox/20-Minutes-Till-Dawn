@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
+import com.tilldawn.model.Random;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
@@ -120,8 +121,16 @@ public class WeaponController {
         bullet.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
 //        bullet.getSprite().setPosition(startX, startY);
         bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
-
         bullets.add(bullet);
+
+        for (int i = 0; i < weapon.getProjectile() - 1; i++) {
+            Bullet bulletP = new Bullet(startX, startY, weapon.getBulletType());
+            bulletP.setDirection(new Vector2((float) Math.cos(angleRadians + Random.rand()), (float) Math.sin(angleRadians + Random.rand())));
+            bulletP.setSpeed(bulletSpeed);
+            bulletP.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
+            bulletP.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
+            bullets.add(bulletP);
+        }
 
         weapon.setLastShootTime();
         weapon.setAmmo(weapon.getAmmo() - 1);
@@ -183,6 +192,15 @@ public class WeaponController {
         bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
 
         bullets.add(bullet);
+
+        for (int i = 0; i < weapon.getProjectile() - 1; i++) {
+            Bullet bulletP = new Bullet(startX, startY, weapon.getBulletType());
+            bulletP.setDirection(new Vector2(direction.x + Random.rand(), direction.y + Random.rand()));
+            bulletP.setSpeed(bulletSpeed);
+            bulletP.getSprite().setRotation(player.getAimAngle() * MathUtils.radiansToDegrees);
+            bulletP.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
+            bullets.add(bulletP);
+        }
 
         weapon.setLastShootTime();
         weapon.setAmmo(weapon.getAmmo() - 1);

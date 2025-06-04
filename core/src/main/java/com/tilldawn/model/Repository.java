@@ -1,5 +1,8 @@
 package com.tilldawn.model;
 
+import com.tilldawn.controller.DatabaseHelper;
+import com.tilldawn.controller.DatabaseReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +10,20 @@ public class Repository {
     private List<User> users = new ArrayList<User>();
     private User currentUser;
     private long startingTime;
+    private DatabaseHelper databaseHelper;
+
+    public Repository() {
+        databaseHelper = new DatabaseHelper();
+        databaseHelper.connect();
+    }
 
     public boolean isUsernameTaken(String username) {
         return users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
+
     }
 
     public void addUser(User user) {
+        databaseHelper.saveUser(user.getUsername(), user.getPassword());
         users.add(user);
     }
 

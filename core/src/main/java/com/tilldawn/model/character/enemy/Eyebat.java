@@ -30,6 +30,7 @@ public class Eyebat extends Enemy {
         y = spawnY();
         position = new Vector2(x, y);
         lastShootTime = System.currentTimeMillis();
+        hp = 5f;
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
     }
 

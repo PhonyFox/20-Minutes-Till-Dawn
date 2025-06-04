@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.CollisionRect;
+import com.tilldawn.model.Seed;
 import com.tilldawn.model.User;
 import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
@@ -20,6 +21,7 @@ public class Player extends Character {
     private float aimAngle = 0f;
     private Animation<TextureRegion> walkingAnimation;
     private Animation<TextureRegion> idleAnimation;
+    private Animation<TextureRegion> heartAnimation;
     private int currentLevelNumber;
     private float currentLevelProgress;
     private int requiredExpToFinishLevel;
@@ -33,6 +35,10 @@ public class Player extends Character {
     private long speedyStartTime;
     private long damagerStartTime;
     private int hp = 3;
+    private int maxHp = 3;
+    private int xp = 0;
+    private final List<Seed> seeds = new ArrayList<>();
+    private long lastDamagedTime = 0;
 
     public Player(User user) {
         this.user = user;
@@ -48,6 +54,7 @@ public class Player extends Character {
         this.hero = hero;
         walkingAnimation = AssetManager.getAssetManager().getWalkFrames(hero.getHeroType().getHeroName());
         idleAnimation = AssetManager.getAssetManager().getIdleFrames(hero.getHeroType().getHeroName());
+        this.heartAnimation = AssetManager.getAssetManager().getHeartAnimation();
     }
 
     public float getAimAngle() {
@@ -99,6 +106,9 @@ public class Player extends Character {
             idleAnimation.getKeyFrame(stateTime, true);
     }
 
+    public TextureRegion getHeartFrame() {
+        return heartAnimation.getKeyFrame(stateTime, true);
+    }
 
     public void setPosition(float x, float y) {
         this.x = x;
@@ -129,6 +139,31 @@ public class Player extends Character {
         this.hp += hp;
     }
     public void decreaseHp(int hp) {
-        this.hp -= hp;
+        if (System.currentTimeMillis() - lastDamagedTime > 1000) {
+            this.hp -= hp;
+            lastDamagedTime = System.currentTimeMillis();
+        }
+    }
+    public int getMaxHp() { return maxHp; }
+    public void setMaxHp(int maxHp) { this.maxHp = maxHp; }
+    public void increaseMaxHp(int hp) {
+        this.maxHp += hp;
+    }
+    public void decreaseMaxHp(int hp) {
+        this.maxHp -= hp;
+    }
+    public int getXp() { return xp; }
+    public void setXp(int xp) { this.xp = xp; }
+    public void increaseXp(int xp) {
+        this.xp += xp;
+    }
+    public void addSeed(Seed seed) {
+        seeds.add(seed);
+    }
+    public List<Seed> getSeeds() {
+        return seeds;
+    }
+    public void removeSeed(Seed seed) {
+        seeds.remove(seed);
     }
 }

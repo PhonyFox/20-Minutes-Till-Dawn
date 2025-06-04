@@ -25,6 +25,7 @@ public class Elder extends Enemy {
         position = new Vector2(x, y);
         lastDashingTime = System.currentTimeMillis();
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
+        hp = 25f;
     }
 
     public TextureRegion getCurrentFrame() {
@@ -61,4 +62,5 @@ public class Elder extends Enemy {
             }
         }
     }
+
 }

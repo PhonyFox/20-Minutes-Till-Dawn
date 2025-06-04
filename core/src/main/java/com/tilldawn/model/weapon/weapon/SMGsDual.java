@@ -12,11 +12,11 @@ public class SMGsDual extends Weapon {
     //@
     private int magazineCapacity;
     private int damage;
-    private int projectile;
 
     public SMGsDual(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         super(magazineCapacity, shootingCooldown, reloadingTime);
         ammo = magazineCapacity;
+        projectile = 1;
     }
 
     @Override
@@ -31,9 +31,5 @@ public class SMGsDual extends Weapon {
 
     public void setProjectile(int projectile) {
         this.projectile = projectile;
-    }
-
-    private int getProjectile() {
-        return projectile;
     }
 }

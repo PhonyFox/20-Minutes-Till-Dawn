@@ -6,12 +6,14 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.GameController;
+import com.tilldawn.controller.ScreenController;
 import com.tilldawn.model.User;
 import com.tilldawn.model.character.player.Player;
 
@@ -21,6 +23,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     private final OrthographicCamera camera;
     private Player player;
     private final Texture mapTexture = new Texture(Gdx.files.internal("background.png"));
+    private ScreenController screenController;
 
 
     public GameView(GameController controller) {
@@ -28,6 +31,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         player = controller.getRepo().getCurrentUser().getPlayer();
+        this.screenController = new ScreenController(controller);
     }
 
     @Override
@@ -47,7 +51,12 @@ public class GameView extends ScreenAdapter implements InputProcessor {
         Main.getBatch().draw(mapTexture, 0, 0);
         controller.updateGame(delta);
         Main.getBatch().end();
-
+        Main.getBatch().setProjectionMatrix(new Matrix4().setToOrtho2D(
+            0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()
+        ));
+        Main.getBatch().begin();
+        screenController.update();
+        Main.getBatch().end();
         stage.act(Math.min(delta, 1 / 30f));
         stage.draw();
     }

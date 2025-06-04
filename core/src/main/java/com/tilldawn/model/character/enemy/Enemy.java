@@ -13,6 +13,7 @@ public abstract class Enemy extends Character {
     protected boolean facingRight = false;
     protected float stateTime = 0f;
     protected Vector2 position;
+    protected float hp;
 
     public Enemy() {
         this.x = this.y = 0.0f;
@@ -60,4 +61,16 @@ public abstract class Enemy extends Character {
     public void updateTime(float delta) { stateTime += delta; }
 
     public abstract void handleMovement(float delta, Player player);
+
+    public float getHP(float delta) {
+        return hp;
+    }
+
+    public void decreaseHP(float delta) {
+        hp -= delta;
+    }
+
+    public boolean isDead() {
+        return hp <= 0;
+    }
 }

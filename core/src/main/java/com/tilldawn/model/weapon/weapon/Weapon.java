@@ -17,6 +17,8 @@ public abstract class Weapon {
     protected BulletType bulletType;
     protected boolean isWhileReloading = false;
     protected long ReloadingStartTime;
+    protected float damage;
+    protected int projectile;
 
     public Weapon(int magazineCapacity, long shootingCooldown, long reloadingTime) {
         this.x = 0;
@@ -106,4 +108,15 @@ public abstract class Weapon {
         this.isWhileReloading = isWhileReloading;
     }
 
+    public float getDamage() {
+        return damage;
+    }
+
+    public void setDamage(float damage) {
+        this.damage = damage;
+    }
+
+    public int getProjectile() {
+        return projectile;
+    }
 }

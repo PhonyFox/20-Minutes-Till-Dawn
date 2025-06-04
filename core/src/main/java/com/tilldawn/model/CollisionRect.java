@@ -19,6 +19,10 @@ public class CollisionRect {
         return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
     }
 
+    public boolean collidesWith(float x, float y){
+        return (x < this.x + this.width && x < this.x) && (y < this.y + this.height && y < this.y);
+    }
+
     public int getX(){
         return (int)x;
     }

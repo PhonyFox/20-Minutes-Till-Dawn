@@ -1,9 +1,11 @@
 package com.tilldawn.controller;
 
 import com.tilldawn.model.CollisionRect;
+import com.tilldawn.model.Seed;
 import com.tilldawn.model.character.enemy.Elder;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Eyebat;
+import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.weapon.Bullet;
 
@@ -19,27 +21,24 @@ public class CollisionController {
     }
 
     public void update() {
-        Iterator<Enemy> iterator = gameController.getEnemiesController().getEnemies().iterator();
-        while (iterator.hasNext()) {
-            Enemy enemy = iterator.next();
+        Iterator<Enemy> Enemyiterator = gameController.getEnemiesController().getEnemies().iterator();
+        while (Enemyiterator.hasNext()) {
+            Enemy enemy = Enemyiterator.next();
             if (enemy instanceof Eyebat) {
                 Iterator<Bullet> bulletIterator = ((Eyebat) enemy).getBullets().iterator();
-                //System.out.println("Bullet collided: " + ((Eyebat) enemy).getBullets().size());
                 while (bulletIterator.hasNext()) {
-
                     Bullet bullet = bulletIterator.next();
-                    //System.out.println((player.getX() - bullet.getCollisionRect().getX()) + ", " + (player.getY() - bullet.getCollisionRect().getY())  + " for player");
                     if (bullet.getCollisionRect().collidesWith(new CollisionRect(player.getX() - 560, player.getY() - 560, 18, 28))) {
-                        //System.out.println("ho");
+                        player.decreaseHp(1);
                         bulletIterator.remove();
                     }
                 }
             }
             if (enemy.getCollisionRect().collidesWith(new CollisionRect(player.getX(), player.getY(), 18, 28))) {
                 if (!(enemy instanceof Elder)) {
-                    iterator.remove();
-                    //System.out.println(enemy.getCollisionRect().getX());
-                    //System.out.println(enemy.getCollisionRect().getY());
+                    player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
+                    player.decreaseHp(1);
+                    if (!(enemy instanceof Tree)) Enemyiterator.remove();
                 }
             }
             Iterator<Bullet> playerBullet = gameController.getPlayerController().getController().getBullets().iterator();
@@ -47,11 +46,25 @@ public class CollisionController {
                 Bullet bullet = playerBullet.next();
                 if (enemy.getCollisionRect().collidesWith(new CollisionRect(bullet.getCollisionRect().getX() + 560, bullet.getCollisionRect().getY() + 560, 5, 5))) {
                     playerBullet.remove();
-                    iterator.remove();
+                    if (!(enemy instanceof Tree)) {
+                        enemy.decreaseHP(1f);
+                        if (enemy.isDead()) {
+                            Enemyiterator.remove();
+                            player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
+                        }
+                    }
                 }
             }
         }
 
+        Iterator<Seed> seedIterator = player.getSeeds().iterator();
+        while (seedIterator.hasNext()) {
+            Seed seed = seedIterator.next();
+            if (new CollisionRect(player.getX() + 30, player.getY(), 36, 56).collidesWith(seed.getX(), seed.getY())) {
+                seedIterator.remove();
+                player.increaseXp(3);
+            }
+        }
 
     }
 

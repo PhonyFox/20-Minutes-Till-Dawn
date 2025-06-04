@@ -12,6 +12,7 @@ public class Bullet {
     private Vector2 direction;
     private CollisionRect collisionRect;
 
+
     public Bullet(float x, float y, BulletType bulletType) {
         this.bulletType = bulletType;
         sprite = new Sprite(bulletType.getTexture());
