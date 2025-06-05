@@ -241,4 +241,8 @@ public class Player extends Character {
     public void updateDamageTaken(float damageTaken) {
         damageTimer -= damageTaken;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

@@ -23,6 +23,8 @@ public class AssetManager {
     private final String levelup_7 = "levelup/7.png";
     private final String levelup_8 = "levelup/8.png";
 
+    private final String cursor = "cursor.png";
+
     private final String death_0 = "death/0.png";
     private final String death_1 = "death/1.png";
     private final String death_2 = "death/2.png";
@@ -146,6 +148,8 @@ public class AssetManager {
     private final TextureRegion tree_tex = new TextureRegion(new Texture(tree));
 
     private final TextureRegion black_tex = new TextureRegion(new Texture(black));
+
+    private final TextureRegion cursor_tex = new TextureRegion(new Texture(cursor));
 
     private final TextureRegion heart_0_tex = new TextureRegion(new Texture(heart_0));
     private final TextureRegion heart_1_tex = new TextureRegion(new Texture(heart_1));
@@ -409,6 +413,10 @@ public class AssetManager {
 
     public TextureRegion getBlackTexture() {
         return black_tex;
+    }
+
+    public TextureRegion getCursorTexture() {
+        return cursor_tex;
     }
 
     public Animation<TextureRegion> getTentacleAnimation() {

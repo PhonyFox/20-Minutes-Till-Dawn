@@ -15,7 +15,9 @@ import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Seed;
 import com.tilldawn.model.character.enemy.Enemy;
+import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
+import com.tilldawn.view.PauseMenuView;
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class PlayerController implements InputProcessor {
     }
 
     public void update(float delta, List<Enemy> enemies) {
+        checkStatus();
         if (player.getDamageTimer() > 0) {
             player.updateDamageTaken(delta);
         }
@@ -101,6 +104,11 @@ public class PlayerController implements InputProcessor {
 
         float playerWidth = 36;
         float playerHeight = 56;
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(gameController.getRepo(), gameController.getGameView()), gameController.getGameView()));
+            return;
+        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             player.toggleAutoAim();
@@ -213,6 +221,46 @@ public class PlayerController implements InputProcessor {
     public WeaponController getController() {
         return controller;
     }
+
+    public Enemy getClosestNonTreeEnemy(List<Enemy> enemies) {
+        if (enemies == null || enemies.isEmpty()) {
+            return null;
+        }
+
+        Enemy closestEnemy = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (Enemy enemy : enemies) {
+            if (enemy instanceof Tree) continue;
+
+            double dx = player.getX() - enemy.getX();
+            double dy = player.getY() - enemy.getY();
+            double distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
+    }
+
+    private void checkStatus() {
+        if (player.getHp() <= 0) {
+            player.getUser().getUserState().advanceKills(player.getNumberOfKills());
+            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) * player.getNumberOfKills());
+            player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
+            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000)), false, gameController));
+        }
+        if (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000) <= 0) {
+            player.getUser().getUserState().advanceKills(player.getNumberOfKills());
+            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) * player.getNumberOfKills());
+            player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
+            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), player.getUser().getDuration(), true, gameController));
+        }
+    }
+
 
 
     @Override

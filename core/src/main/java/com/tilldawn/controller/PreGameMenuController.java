@@ -67,6 +67,7 @@ public class PreGameMenuController {
 
     public void startGame() {
         repo.setStartingTime(System.currentTimeMillis());
+        GameController gameController = new GameController(repo);
         Main.getMain().setScreen(new GameView(new GameController(repo)));
     }
 }

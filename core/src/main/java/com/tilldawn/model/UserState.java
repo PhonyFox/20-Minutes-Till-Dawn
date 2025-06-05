@@ -16,4 +16,16 @@ public class UserState {
     public int getSurvivalTime() {
         return survivalTime;
     }
+
+    public void advanceKills(int kills) {
+        this.kills += kills;
+    }
+
+    public void advanceSurvivalTime(int survivalTime) {
+        this.survivalTime += survivalTime;
+    }
+
+    public void advanceScore(int score) {
+        this.score += score;
+    }
 }

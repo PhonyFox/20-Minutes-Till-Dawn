@@ -9,8 +9,11 @@ import com.tilldawn.model.enums.SecurityQuestionType;
 
 public class User {
     private final static int AVATAR_SIZE = 20;
+
     private String password;
+
     private String username;
+
     private boolean isGuest;
     private SecurityQuestionType securityQuestionType;
     private String securityAnswer;
@@ -22,7 +25,6 @@ public class User {
     private String avatarPath;
     private boolean hasSavedGame = false;
     private int duration;
-
 
     public String getUsername() {
         return username;
@@ -105,5 +107,9 @@ public class User {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public UserState getUserState() {
+        return userState;
     }
 }

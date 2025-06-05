@@ -17,9 +17,11 @@ public class PauseMenuView extends ScreenAdapter {
     private final PauseMenuController controller;
     private Stage stage;
     private Skin skin;
+    private final GameView gameView;
 
-    public PauseMenuView(PauseMenuController controller) {
+    public PauseMenuView(PauseMenuController controller, GameView gameView) {
         this.controller = controller;
+        this.gameView = gameView;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class PauseMenuView extends ScreenAdapter {
 
         resumeButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                controller.resumeGame();
             }
         });
 
@@ -95,11 +97,16 @@ public class PauseMenuView extends ScreenAdapter {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
+        stage.draw();
     }
 
     @Override
     public void dispose() {
         stage.dispose();
         skin.dispose();
+    }
+
+    public GameView getGameView() {
+        return gameView;
     }
 }

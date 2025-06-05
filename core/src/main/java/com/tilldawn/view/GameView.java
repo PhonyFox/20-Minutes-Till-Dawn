@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.GameController;
 import com.tilldawn.controller.ScreenController;
+import com.tilldawn.model.Assets;
 import com.tilldawn.model.User;
 import com.tilldawn.model.character.player.Player;
 
@@ -30,6 +32,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
 
     public GameView(GameController controller) {
         this.controller = controller;
+        controller.setView(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         player = controller.getRepo().getCurrentUser().getPlayer();
@@ -40,6 +43,8 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
+        Assets.loadCursor();
+        Gdx.graphics.setCursor(Assets.CUSTOM_CURSOR);;
     }
 
     @Override
@@ -79,6 +84,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     @Override
     public void dispose() {
         stage.dispose();
+
     }
 
 

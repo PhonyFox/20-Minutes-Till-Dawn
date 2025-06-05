@@ -1,15 +1,19 @@
 package com.tilldawn.controller;
 
+import com.tilldawn.Main;
 import com.tilldawn.model.Repository;
+import com.tilldawn.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PauseMenuController {
     private final Repository repo;
+    private final GameView gameView;
 
-    public PauseMenuController(Repository repo) {
+    public PauseMenuController(Repository repo, GameView gameView) {
         this.repo = repo;
+        this.gameView = gameView;
     }
 
     public String getCheatCodes() {
@@ -33,6 +37,7 @@ public class PauseMenuController {
     }
 
     public void resumeGame() {
-        //@
+        System.out.println("*************");
+        Main.getMain().setScreen(gameView);
     }
 }

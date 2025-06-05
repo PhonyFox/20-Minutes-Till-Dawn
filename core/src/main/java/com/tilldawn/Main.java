@@ -1,10 +1,12 @@
 package com.tilldawn;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tilldawn.controller.MusicController;
 import com.tilldawn.controller.SignupMenuController;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.Assets;
 import com.tilldawn.model.Repository;
 import com.tilldawn.view.SignupMenuView;
 
@@ -35,6 +37,12 @@ public class Main extends Game {
     public void dispose() {
         batch.dispose();
     }
+
+    @Override
+    public void resume() {
+        Gdx.graphics.setCursor(Assets.CUSTOM_CURSOR);
+    }
+
 
     public static Main getMain() {
         return main;

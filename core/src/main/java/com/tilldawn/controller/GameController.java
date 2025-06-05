@@ -10,8 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.tilldawn.Main;
+import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Repository;
+import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.view.GameView;
 
 import java.sql.Statement;
@@ -50,6 +53,7 @@ public class GameController {
     }
 
     public void updateGame(float delta) {
+        System.out.println("mm");
         if (waitingForAbilityChoice) {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             abilityStage.act(Gdx.graphics.getDeltaTime());
@@ -68,6 +72,12 @@ public class GameController {
         enemiesController.update(delta);
         collisionController.update();
         lightController.update();
+        if (repo.getCurrentUser().getPlayer().hasAutoAim()) {
+            Enemy closestEnemy = playerController.getClosestNonTreeEnemy(enemiesController.getEnemies());
+            if (closestEnemy != null) {
+                Main.getBatch().draw(AssetManager.getAssetManager().getCursorTexture(), closestEnemy.getX() + 10, closestEnemy.getY() + 10);
+            }
+        }
     }
 
     public PlayerController getPlayerController() {
@@ -199,5 +209,9 @@ public class GameController {
 
     public ZoneController getZoneController() {
         return zoneController;
+    }
+
+    public GameView getGameView() {
+        return view;
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
+import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Tree;
@@ -182,7 +183,6 @@ public class WeaponController {
         float startY = player.getY() + player.getCurrentFrame().getRegionWidth() / 2f;
 
         Vector2 direction = new Vector2(new Vector2(closestEnemy.getX(), closestEnemy.getY())).sub(new Vector2(startX, startY)).nor();
-
 
         Bullet bullet = new Bullet(startX, startY, weapon.getBulletType());
         bullet.setDirection(direction);

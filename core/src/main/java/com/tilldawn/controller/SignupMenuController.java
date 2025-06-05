@@ -2,8 +2,10 @@ package com.tilldawn.controller;
 
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
+import com.tilldawn.model.UserStorage;
 import com.tilldawn.model.enums.SecurityQuestionType;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class SignupMenuController {
@@ -36,6 +38,11 @@ public class SignupMenuController {
         String avatar = assignRandomAvatar();
         User user = new User(username, password, questionType, answer, avatar);
         repo.addUser(user);
+        try {
+            UserStorage.getInstance().saveUser(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "User successfully registered!";
     }
 
