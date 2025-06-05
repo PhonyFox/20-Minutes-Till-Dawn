@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.DeadBody;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.character.enemy.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EnemiesController implements InputProcessor {
@@ -23,6 +25,7 @@ public class EnemiesController implements InputProcessor {
     private boolean isElderSpawned = false;
     private boolean isElderDead = false;
     private final ZoneController zoneController;
+    private final List<DeadBody> deadBodies = new ArrayList<>();
     //private TextureRegion textureRegion;
     //private Animation<TextureRegion> zoneAnimation;
 
@@ -34,6 +37,15 @@ public class EnemiesController implements InputProcessor {
     }
 
     public void update(float delta) {
+        Iterator<DeadBody> iterator = deadBodies.iterator();
+        while (iterator.hasNext()) {
+            DeadBody deadBody = iterator.next();
+            deadBody.update(delta);
+            if (deadBody.isDone()) {
+                iterator.remove();
+            }
+        }
+
 //        if (isElderSpawned && !isElderDead) {
 //            handleZone();
 //        }
@@ -56,7 +68,7 @@ public class EnemiesController implements InputProcessor {
 //        }
         //#
 
-        if (!isElderSpawned && ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 500L)) {
+        if (!isElderSpawned && ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 30000L)) {
             makeElder();
             isElderSpawned = true;
             makeEyebat();
@@ -84,6 +96,12 @@ public class EnemiesController implements InputProcessor {
 
         batch.draw(frame, enemy.getX(), enemy.getY(),
             frame.getRegionWidth() * AssetManager.SCALE, frame.getRegionHeight() * AssetManager.SCALE);
+
+        for (DeadBody deadBody : deadBodies) {
+            Enemy deadEnemy = deadBody.getEnemy();
+            batch.draw(deadBody.getDeadBodyTexture(), deadEnemy.getX(), deadEnemy.getY(),
+                deadBody.getDeadBodyTexture().getRegionWidth() * AssetManager.SCALE, deadBody.getDeadBodyTexture().getRegionHeight() * AssetManager.SCALE);
+        }
 
     }
 
@@ -130,10 +148,15 @@ public class EnemiesController implements InputProcessor {
         enemies.add(new Elder());
     }
 
+    public void killElder() {
+        zoneController.resetZone();
+        isElderDead = true;
+    }
 
-//    private TextureRegion getCurrentZoneFrame() {
-//
-//    }
+    public void addDeadBody(DeadBody deadBody) {
+        deadBodies.add(deadBody);
+    }
+
 
     @Override
     public boolean keyDown(int i) {

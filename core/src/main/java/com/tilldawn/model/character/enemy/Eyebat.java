@@ -26,8 +26,9 @@ public class Eyebat extends Enemy {
     public Eyebat() {
         super();
         walkingAnimation = AssetManager.getAssetManager().getEyebatAnimation();
-        x = spawnX();
-        y = spawnY();
+//        x = spawnX();
+//        y = spawnY();
+        spawnFromWall();
         position = new Vector2(x, y);
         lastShootTime = System.currentTimeMillis();
         hp = 5f;
@@ -103,5 +104,9 @@ public class Eyebat extends Enemy {
 
     public List<Bullet> getBullets() {
         return bullets;
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        return walkingAnimation;
     }
 }

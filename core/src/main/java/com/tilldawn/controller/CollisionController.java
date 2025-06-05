@@ -1,6 +1,8 @@
 package com.tilldawn.controller;
 
+import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.model.CollisionRect;
+import com.tilldawn.model.DeadBody;
 import com.tilldawn.model.Seed;
 import com.tilldawn.model.character.enemy.Elder;
 import com.tilldawn.model.character.enemy.Enemy;
@@ -42,6 +44,8 @@ public class CollisionController {
                     player.decreaseHp(1);
                     if (!(enemy instanceof Tree)) {
                         enemiesToRemove.add(enemy);
+                        player.advanceNumberOfKills();
+                        gameController.getEnemiesController().addDeadBody(new DeadBody(enemy, enemy.getX(), enemy.getY()));
                         player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
                     }
                 }
@@ -53,13 +57,25 @@ public class CollisionController {
                     playerBullet.remove();
                     if (!(enemy instanceof Tree)) {
                         enemy.decreaseHP(player.hasDamager() ? 1.25f : 1f);
+
+                        Vector2 bulletDirection = bullet.getDirection(); //
+                        Vector2 knockbackDirection = new Vector2(bulletDirection).nor().scl(30f);
+                        enemy.setX(enemy.getX() + knockbackDirection.x);
+                        enemy.setY(enemy.getY() + knockbackDirection.y);
+
                         if (enemy.isDead()) {
                             enemiesToRemove.add(enemy);
+                            gameController.getEnemiesController().addDeadBody(new DeadBody(enemy, enemy.getX(), enemy.getY()));
+                            player.advanceNumberOfKills();
                             player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));
+                            if (enemy instanceof Elder) {
+                                gameController.getEnemiesController().killElder();
+                            }
                         }
                     }
                 }
             }
+
         }
 
         gameController.getEnemiesController().getEnemies().removeAll(enemiesToRemove);

@@ -43,6 +43,9 @@ public class Player extends Character {
     private int expToFinishLevel = 20;
     private boolean isWaitedToChooseAbility = false;
     private Animation<TextureRegion> levelUpAnimation;
+    private float speed = 100f;
+    private int numberOfKills = 0;
+    private float damageTimer = 0f;
 
 
     public Player(User user) {
@@ -61,6 +64,9 @@ public class Player extends Character {
         idleAnimation = AssetManager.getAssetManager().getIdleFrames(hero.getHeroType().getHeroName());
         levelUpAnimation = AssetManager.getAssetManager().getLevelUpAnimation();
         this.heartAnimation = AssetManager.getAssetManager().getHeartAnimation();
+        this.maxHp = hero.getHeroType().getHP();
+        hp = maxHp;
+        speed = hero.getHeroType().getSpeed() * 100;
     }
 
     public float getAimAngle() {
@@ -139,6 +145,9 @@ public class Player extends Character {
     public void updateTime(float delta) { stateTime += delta; }
     public float getStateTime() { return stateTime; }
     public boolean hasAutoAim() { return hasAutoAim; }
+    public void toggleAutoAim() {
+        hasAutoAim = !hasAutoAim;
+    }
     public boolean hasSpeedy() { return hasSpeedy; }
     public boolean hasDamager() { return hasDamager; }
     public void setSpeedy(boolean s) { hasSpeedy = s; }
@@ -156,6 +165,7 @@ public class Player extends Character {
         if (System.currentTimeMillis() - lastDamagedTime > 1000) {
             this.hp -= hp;
             lastDamagedTime = System.currentTimeMillis();
+            damageTimer = 1f;
         }
     }
     public int getMaxHp() { return maxHp; }
@@ -182,7 +192,7 @@ public class Player extends Character {
     }
     public void addSeed(Seed seed) {
         seeds.add(seed);
-        System.out.println("############\n#######3\n###########\n");
+        //System.out.println("############\n#######3\n###########\n");
     }
     public List<Seed> getSeeds() {
         return seeds;
@@ -210,5 +220,25 @@ public class Player extends Character {
 
     public void resetStateTime() {
         stateTime = 0f;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public int getNumberOfKills() {
+        return numberOfKills;
+    }
+
+    public void advanceNumberOfKills() {
+        numberOfKills++;
+    }
+
+    public float getDamageTimer() {
+        return damageTimer;
+    }
+
+    public void updateDamageTaken(float damageTaken) {
+        damageTimer -= damageTaken;
     }
 }

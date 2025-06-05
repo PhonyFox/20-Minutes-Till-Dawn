@@ -2,10 +2,7 @@ package com.tilldawn.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -43,10 +40,6 @@ public class ScreenController {
 
     public void update() {
         float progress = player.getXp() / (float) player.getExpToFinishLevel() * 100;
-        System.out.println("\nProgress: " + progress);
-        System.out.println("XP: " + player.getXp());
-        System.out.println("Exp to finish: " + player.getExpToFinishLevel());
-        System.out.println("level: " + player.getCurrentLevel());
 
         xpBar.setValue(progress);
 
@@ -78,7 +71,41 @@ public class ScreenController {
         float timerX = Gdx.graphics.getWidth() - 330;
         float timerY = Gdx.graphics.getHeight() -10;
 
+        String killsText = "Kills: " + player.getNumberOfKills();
+        GlyphLayout layout = new GlyphLayout(font, killsText);
+
+        float killsX = Gdx.graphics.getWidth() - layout.width - 30;
+        float killsY = 50;
+
+        String magazineText = "Magazine: " + player.getWeapon().getMagazineCapacity() + "/" + player.getWeapon().getAmmo();
+        GlyphLayout layout2 = new GlyphLayout(font, magazineText);
+
+        float magazineX = Gdx.graphics.getWidth() - layout2.width - 30;
+        float magazineY = 50;
+
+
+        String levelNumberText = "Level: " + player.getCurrentLevel();
+        GlyphLayout layout3 = new GlyphLayout(font, levelNumberText);
+
+        float levelNumberX = Gdx.graphics.getWidth() / 2f;
+        float levelNumberY = Gdx.graphics.getHeight() - 80;
+
+
+        float originalScale = font.getData().scaleX;
+
+
+        font.getData().setScale(0.4f);
+
+        font.draw(batch, killsText, killsX + 400, killsY);
+        font.draw(batch, magazineText, magazineX + 450, magazineY);
+        font.draw(batch, levelNumberText, levelNumberX, levelNumberY);
+
+
+
+        font.getData().setScale(originalScale);
         font.draw(batch, timeText, timerX, timerY);
+
+
         uiStage.draw();
     }
 

@@ -16,7 +16,7 @@ public class DatabaseReader {
             while (rs.next()) {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                System.out.println("User: " + username + ", Pass: " + password);
+                //System.out.println("User: " + username + ", Pass: " + password);
             }
 
             rs.close();

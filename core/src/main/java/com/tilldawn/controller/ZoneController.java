@@ -24,7 +24,7 @@ public class ZoneController {
 
     public void update(float delta) {
         stateTime += delta;
-        float shrinkSpeed = 100f;
+        float shrinkSpeed = 20f;
         float shrinkStep = shrinkSpeed * delta;
         if (width > 20 && height > 20) {
             width -= shrinkStep;
@@ -41,5 +41,28 @@ public class ZoneController {
 
     private void render(SpriteBatch batch) {
         batch.draw(getCurrentFrame(), x, y, width, height);
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void resetZone() {
+        x = 0;
+        y = 0;
+        width = 3776;
+        height = 2688;
     }
 }

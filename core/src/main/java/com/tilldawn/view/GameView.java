@@ -2,6 +2,7 @@ package com.tilldawn.view;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -44,7 +45,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     @Override
     public void render(float delta) {
         if (controller.isWaitingForAbilityChoice()) {
-            System.out.println("Waiting for ability choice");
+            //System.out.println("Waiting for ability choice");
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             controller.getAbilityStage().act();
@@ -83,6 +84,10 @@ public class GameView extends ScreenAdapter implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.SPACE) {
+            System.out.println("SPACE pressed!");
+            return true;
+        }
         return false;
     }
 

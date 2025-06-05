@@ -1,5 +1,6 @@
 package com.tilldawn.model.character.enemy;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.CollisionRect;
@@ -41,5 +42,9 @@ public class Tree extends Enemy {
     public void handleMovement(float delta, Player player) {}
     public void setCollisionRect() {
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth() * 2, getCurrentFrame().getRegionHeight() * 2);
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        return null;
     }
 }

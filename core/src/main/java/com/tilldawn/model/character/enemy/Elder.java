@@ -20,8 +20,9 @@ public class Elder extends Enemy {
         super();
         walkingAnimation = AssetManager.getAssetManager().getElderWalkingAnimation();
         dashingAnimation = AssetManager.getAssetManager().getElderDashingAnimation();
-        x = spawnX();
-        y = spawnY();
+//        x = spawnX();
+//        y = spawnY();
+        spawnFromWall();
         position = new Vector2(x, y);
         lastDashingTime = System.currentTimeMillis();
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
@@ -32,6 +33,7 @@ public class Elder extends Enemy {
         return walking ? walkingAnimation.getKeyFrame(stateTime, true) :
             dashingAnimation.getKeyFrame(stateTime, true);
     }
+
 
     @Override
     public void handleMovement(float delta, Player player) {
@@ -61,6 +63,10 @@ public class Elder extends Enemy {
                 stateTime = 0f;
             }
         }
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        return walkingAnimation;
     }
 
 }

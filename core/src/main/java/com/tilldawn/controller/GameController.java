@@ -30,14 +30,19 @@ public class GameController {
     private Stage abilityStage;
     private Window abilityWindow;
     private Skin skin;
+    private ZoneController zoneController;
+    private LightController lightController;
+
 
 
     public GameController(Repository repo) {
         this.repo = repo;
         this.weaponController = new WeaponController(repo.getCurrentUser().getPlayer().getWeapon());
         this.playerController = new PlayerController(repo.getCurrentUser().getPlayer(), weaponController, this);
-        this.enemiesController = new EnemiesController(repo, new ZoneController());
+        this.zoneController = new ZoneController();
+        this.enemiesController = new EnemiesController(repo, zoneController);
         this.collisionController = new CollisionController(this);
+        this.lightController = new LightController(repo.getCurrentUser().getPlayer());
     }
 
     public void setView(GameView view) {
@@ -49,7 +54,7 @@ public class GameController {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             abilityStage.act(Gdx.graphics.getDeltaTime());
             abilityStage.draw();
-            System.out.println("in controller");
+            //System.out.println("in controller");
 
             if (abilityChosen) {
                 waitingForAbilityChoice = false;
@@ -62,6 +67,7 @@ public class GameController {
         playerController.update(delta, enemiesController.getEnemies());
         enemiesController.update(delta);
         collisionController.update();
+        lightController.update();
     }
 
     public PlayerController getPlayerController() {
@@ -191,4 +197,7 @@ public class GameController {
         return waitingForAbilityChoice;
     }
 
+    public ZoneController getZoneController() {
+        return zoneController;
+    }
 }

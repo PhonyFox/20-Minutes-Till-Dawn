@@ -16,8 +16,9 @@ public class TentacleMonster extends Enemy {
     public TentacleMonster() {
         super();
         walkingAnimation = AssetManager.getAssetManager().getTentacleAnimation();
-        x = spawnX();
-        y = spawnY();
+//        x = spawnX();
+//        y = spawnY();
+        spawnFromWall();
         position = new Vector2(x, y);
         collisionRect = new CollisionRect(x, y, getCurrentFrame().getRegionWidth(), getCurrentFrame().getRegionHeight());
         hp = 1f;
@@ -37,5 +38,9 @@ public class TentacleMonster extends Enemy {
         x = position.x;
         y = position.y;
         collisionRect.move(x, y);
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        return walkingAnimation;
     }
 }
