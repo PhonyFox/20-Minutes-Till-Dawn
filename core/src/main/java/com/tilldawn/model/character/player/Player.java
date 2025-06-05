@@ -41,6 +41,9 @@ public class Player extends Character {
     private long lastDamagedTime = 0;
     private int currentLevel = 1;
     private int expToFinishLevel = 20;
+    private boolean isWaitedToChooseAbility = false;
+    private Animation<TextureRegion> levelUpAnimation;
+
 
     public Player(User user) {
         this.user = user;
@@ -56,6 +59,7 @@ public class Player extends Character {
         this.hero = hero;
         walkingAnimation = AssetManager.getAssetManager().getWalkFrames(hero.getHeroType().getHeroName());
         idleAnimation = AssetManager.getAssetManager().getIdleFrames(hero.getHeroType().getHeroName());
+        levelUpAnimation = AssetManager.getAssetManager().getLevelUpAnimation();
         this.heartAnimation = AssetManager.getAssetManager().getHeartAnimation();
     }
 
@@ -108,6 +112,14 @@ public class Player extends Character {
             idleAnimation.getKeyFrame(stateTime, true);
     }
 
+    public TextureRegion getLevelUpFrame() {
+        return levelUpAnimation.getKeyFrame(stateTime, true);
+    }
+
+    public int getLevelUpFrameIndex() {
+        return levelUpAnimation.getKeyFrameIndex(stateTime);
+    }
+
     public TextureRegion getHeartFrame() {
         return heartAnimation.getKeyFrame(stateTime, true);
     }
@@ -156,14 +168,17 @@ public class Player extends Character {
     }
     public int getXp() { return xp; }
     public void setXp(int xp) { this.xp = xp; }
+    public void increaseLevelNumber() {
+        currentLevel++;
+        expToFinishLevel = currentLevel * 20;
+    }
     public void increaseXp(int xp) {
-
         this.xp += xp;
-        if (this.xp >= expToFinishLevel) {
-            currentLevel++;
-            expToFinishLevel = currentLevel * 20;
-            this.xp = 0;
-        }
+//        if (this.xp >= expToFinishLevel) {
+//            currentLevel++;
+//            expToFinishLevel = currentLevel * 20;
+//            this.xp = 0;
+//        }
     }
     public void addSeed(Seed seed) {
         seeds.add(seed);
@@ -181,4 +196,19 @@ public class Player extends Character {
     }
 
     public int getExpToFinishLevel() { return expToFinishLevel; }
+    public void increaseMaxHP() {
+        maxHp++;
+    }
+
+    public boolean isWaitedToChooseAbility() {
+        return isWaitedToChooseAbility;
+    }
+
+    public void setWaitedToChooseAbility(boolean waitedToChooseAbility) {
+        isWaitedToChooseAbility = waitedToChooseAbility;
+    }
+
+    public void resetStateTime() {
+        stateTime = 0f;
+    }
 }

@@ -52,7 +52,7 @@ public class CollisionController {
                 if (enemy.getCollisionRect().collidesWith(new CollisionRect(bullet.getCollisionRect().getX() + 560, bullet.getCollisionRect().getY() + 560, 5, 5))) {
                     playerBullet.remove();
                     if (!(enemy instanceof Tree)) {
-                        enemy.decreaseHP(1f);
+                        enemy.decreaseHP(player.hasDamager() ? 1.25f : 1f);
                         if (enemy.isDead()) {
                             enemiesToRemove.add(enemy);
                             player.addSeed(new Seed(enemy.getCollisionRect().getX(), enemy.getCollisionRect().getY()));

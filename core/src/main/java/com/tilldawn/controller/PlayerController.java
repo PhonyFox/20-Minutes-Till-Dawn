@@ -3,11 +3,16 @@ package com.tilldawn.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.Random;
 import com.tilldawn.model.Seed;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.player.Player;
@@ -18,15 +23,50 @@ public class PlayerController implements InputProcessor {
     private final Player player;
     private float speed = 200f;
     private final WeaponController controller;
+    private final GameController gameController;
+    private boolean isLevelupStarted = false;
+    private boolean isLevelupAnimationDone = false;
+    private boolean isAbilityWindowShown = false;
+    private float levelUpAnimationElapsed = 0f;
 
-    public PlayerController(Player player, WeaponController controller) {
+
+
+    public PlayerController(Player player, WeaponController controller, GameController gameController) {
         this.player = player;
         this.controller = controller;
+        this.gameController = gameController;
     }
 
     public void update(float delta, List<Enemy> enemies) {
-//        System.out.println("width: " + player.getCurrentFrame().getRegionWidth());
-//        System.out.println("height: " + player.getCurrentFrame().getRegionHeight());
+
+        if (player.getXp() > player.getExpToFinishLevel()) {
+            if (!isLevelupStarted && !isLevelupAnimationDone) {
+                isLevelupStarted = true;
+                levelUpAnimationElapsed = 0f;
+            }
+        }
+
+        if (isLevelupStarted && !isLevelupAnimationDone) {
+            levelUpAnimationElapsed += delta;
+
+            if (levelUpAnimationElapsed >= 2f) {
+                isLevelupAnimationDone = true;
+                isLevelupStarted = false;
+            }
+        }
+
+        if (isLevelupAnimationDone && !isAbilityWindowShown) {
+            gameController.showAbilityWindow();
+            isAbilityWindowShown = true;
+        }
+
+        if (isAbilityWindowShown
+            && player.getXp() <= player.getExpToFinishLevel()) {
+            isAbilityWindowShown = false;
+            isLevelupAnimationDone = false;
+        }
+
+
         if (System.currentTimeMillis() - player.getDamagerStartTime() > 10000) {
             player.setDamager(false);
         }
@@ -67,8 +107,6 @@ public class PlayerController implements InputProcessor {
             player.setPosition(player.getX(), player.getY() - currentSpeed * delta);
             moving = true;
         }
-//        player.getCollisionRect().setX(player.getX());
-//        player.getCollisionRect().setY(player.getY());
         player.setWalking(moving);
     }
 
@@ -78,7 +116,6 @@ public class PlayerController implements InputProcessor {
 
         float dx = mouseX - 986;
         float dy = mouseY - 589;
-        //System.out.println(player.getX() + "   " + mouseX + "     " + mouseY + "      " + player.getY());
         float angle = (float)Math.atan2(dy, dx);
         player.setAimAngle(angle);
     }
@@ -98,31 +135,17 @@ public class PlayerController implements InputProcessor {
         for (Seed seed : player.getSeeds()) {
             batch.draw(seed.getRegion(), seed.getX(), seed.getY(), 15, 15);
         }
-//        if (player.getWeapon() != null) {
-//            TextureRegion weaponRegion = player.getWeapon().getWeaponTexture();
-//
-//
-//            float originX = weaponRegion.getRegionWidth() / 2f;
-//            float originY = weaponRegion.getRegionHeight() / 2f;
-//
-//            float weaponX = player.getX() + 32;
-//            float weaponY = player.getY() + 32;
-//
-//            batch.draw(
-//                weaponRegion,
-//                weaponX, weaponY,
-//                originX, originY,
-//                weaponRegion.getRegionWidth(),
-//                weaponRegion.getRegionHeight(),
-//                1f, 1f,
-//                (float) Math.toDegrees(player.getAimAngle())
-//            );
-//    }
+
+        if (isLevelupStarted) {
+            batch.draw(player.getLevelUpFrame(), player.getX(), player.getY());
+        }
+
     }
 
     public WeaponController getController() {
         return controller;
     }
+
 
     @Override
     public boolean keyDown(int i) {
@@ -141,7 +164,6 @@ public class PlayerController implements InputProcessor {
 
     @Override
     public boolean touchDown(int i, int i1, int i2, int i3) {
-        //controller.handleWeaponShoot(i, i1);
         return false;
     }
 
@@ -162,7 +184,6 @@ public class PlayerController implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int i, int i1) {
-        //System.out.println("d");
         controller.handleWeaponRotation(i, i1);
         return false;
     }

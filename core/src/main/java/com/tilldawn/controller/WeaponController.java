@@ -252,4 +252,8 @@ public class WeaponController {
     public List<Bullet> getBullets() {
         return bullets;
     }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
 }

@@ -4,6 +4,7 @@ package com.tilldawn.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
@@ -42,6 +43,14 @@ public class GameView extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
+        if (controller.isWaitingForAbilityChoice()) {
+            System.out.println("Waiting for ability choice");
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            controller.getAbilityStage().act();
+            controller.getAbilityStage().draw();
+            return;
+        }
         ScreenUtils.clear(0.15f, 0.15f, 0.15f, 1);
         camera.position.set(player.getX() + player.getCollisionRect().getX()/2f,
             player.getY() + player.getCollisionRect().getY()/2f, 0);

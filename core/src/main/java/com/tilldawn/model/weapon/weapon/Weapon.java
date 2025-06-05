@@ -119,4 +119,16 @@ public abstract class Weapon {
     public int getProjectile() {
         return projectile;
     }
+
+    public void increaseProjectile() {
+        projectile++;
+    }
+
+    public void decreaseProjectile() {
+        projectile--;
+    }
+
+    public void setAmmo() {
+        ammo += 5;
+    }
 }

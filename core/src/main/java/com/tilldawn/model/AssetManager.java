@@ -11,6 +11,16 @@ public class AssetManager {
 
     private final String tree = "enemies/tree.png";
 
+    private final String levelup_0 = "levelup/0.png";
+    private final String levelup_1 = "levelup/1.png";
+    private final String levelup_2 = "levelup/2.png";
+    private final String levelup_3 = "levelup/3.png";
+    private final String levelup_4 = "levelup/4.png";
+    private final String levelup_5 = "levelup/5.png";
+    private final String levelup_6 = "levelup/6.png";
+    private final String levelup_7 = "levelup/7.png";
+    private final String levelup_8 = "levelup/8.png";
+
     private final String heart_0 = "heart/0.png";
     private final String heart_1 = "heart/1.png";
     private final String heart_2 = "heart/2.png";
@@ -132,6 +142,16 @@ public class AssetManager {
     private final TextureRegion heart_1_tex = new TextureRegion(new Texture(heart_1));
     private final TextureRegion heart_2_tex = new TextureRegion(new Texture(heart_2));
 
+    private final TextureRegion levelup_0_tex = new TextureRegion(new Texture(levelup_0));
+    private final TextureRegion levelup_1_tex = new TextureRegion(new Texture(levelup_1));
+    private final TextureRegion levelup_2_tex = new TextureRegion(new Texture(levelup_2));
+    private final TextureRegion levelup_3_tex = new TextureRegion(new Texture(levelup_3));
+    private final TextureRegion levelup_4_tex = new TextureRegion(new Texture(levelup_4));
+    private final TextureRegion levelup_5_tex = new TextureRegion(new Texture(levelup_5));
+    private final TextureRegion levelup_6_tex = new TextureRegion(new Texture(levelup_6));
+    private final TextureRegion levelup_7_tex = new TextureRegion(new Texture(levelup_7));
+    private final TextureRegion levelup_8_tex = new TextureRegion(new Texture(levelup_8));
+
     private final TextureRegion heart_no_tex = new TextureRegion(new Texture(heart_no));
 
     private final TextureRegion thunder_0_tex = new TextureRegion(new Texture(thunder_0));
@@ -248,6 +268,9 @@ public class AssetManager {
 
     private final Animation<TextureRegion> thunderAnimation = new Animation<>(0.05f,
         thunder_0_tex, thunder_1_tex, thunder_2_tex, thunder_3_tex, thunder_4_tex, thunder_5_tex, thunder_6_tex);
+
+    private final Animation<TextureRegion> levelUpAnimation = new Animation<>(0.2f,
+        levelup_0_tex, levelup_1_tex, levelup_2_tex, levelup_3_tex, levelup_4_tex, levelup_5_tex, levelup_6_tex, levelup_7_tex, levelup_8_tex);
 
     private final Animation<TextureRegion> heartAnimation = new Animation<>(0.1f,
         heart_0_tex, heart_1_tex, heart_2_tex);
@@ -384,6 +407,8 @@ public class AssetManager {
     public Animation<TextureRegion> getElderDashingAnimation() {return elderDashingAnimation;}
 
     public Animation<TextureRegion> getHeartAnimation() {return heartAnimation;}
+
+    public Animation<TextureRegion> getLevelUpAnimation() {return levelUpAnimation;}
 
     public TextureRegion getHeartTexture() {
         return heart_no_tex;
