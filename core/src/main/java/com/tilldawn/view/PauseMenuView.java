@@ -56,13 +56,31 @@ public class PauseMenuView extends ScreenAdapter {
 
         cheatButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                String cheatsInfo =
+                    "🎮 Cheat Codes:\n\n" +
+                        "1️⃣  NUM_1:\n" +
+                        "   ⏱️ Subtracts 1 minute from the game timer.\n\n" +
+                        "2️⃣  NUM_2:\n" +
+                        "   ⭐ Instantly levels up the player by giving extra XP.\n\n" +
+                        "3️⃣  NUM_3:\n" +
+                        "   ❤️ Heals the player by 1 HP (only if not at full health).\n\n" +
+                        "4️⃣  NUM_4:\n" +
+                        "   🕓 Sets the game timer to match the user’s duration progress.\n\n" +
+                        "5️⃣  NUM_5:\n" +
+                        "   💯 Fully heals the player to max HP.";
+                showDialog("Cheat Codes", cheatsInfo);
             }
         });
 
         abilitiesButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                String abilitiesInfo =
+                    "🩸 VITALITY:\n  Increases max HP by 1 point permanently.\n\n" +
+                        "💥 DAMAGER:\n  Boosts weapon damage by 25% for 10 seconds.\n\n" +
+                        "🎯 PROCREASE:\n  Adds 1 extra projectile to your weapon.\n\n" +
+                        "🔫 AMOCREASE:\n  Increases max ammo by 5.\n\n" +
+                        "⚡ SPEEDY:\n  Doubles player movement speed for 10 seconds.";
+                showDialog("Abilities", abilitiesInfo);
             }
         });
 
@@ -86,9 +104,10 @@ public class PauseMenuView extends ScreenAdapter {
     }
 
     private void showDialog(String title, String message) {
-        Dialog dialog = new Dialog(message, skin);
+        Dialog dialog = new Dialog(title + "\n" + message, skin);
         dialog.text(message);
         dialog.button("OK");
+        dialog.setSize(400, 700);
         dialog.show(stage);
     }
 

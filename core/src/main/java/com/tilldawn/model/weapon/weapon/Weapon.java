@@ -2,7 +2,9 @@ package com.tilldawn.model.weapon.weapon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.tilldawn.model.User;
 import com.tilldawn.model.character.enemy.BulletType;
+import com.tilldawn.model.character.player.Player;
 
 public abstract class Weapon {
     protected int ammo = 100;
@@ -19,14 +21,16 @@ public abstract class Weapon {
     protected long ReloadingStartTime;
     protected float damage;
     protected int projectile;
+    protected User user;
 
-    public Weapon(int magazineCapacity, long shootingCooldown, long reloadingTime) {
+    public Weapon(int magazineCapacity, long shootingCooldown, long reloadingTime, User user) {
         this.x = 0;
         this.y = 0;
         this.aimAngle = 0;
         this.magazineCapacity = magazineCapacity;
         this.reloadingTime = reloadingTime;
         this.shootingCooldown = shootingCooldown;
+        this.user = user;
     }
 
     public float getX() {
@@ -66,8 +70,10 @@ public abstract class Weapon {
         long now = System.currentTimeMillis();
         //System.out.println(ammo);
         if (ammo <= 0 && !isWhileReloading) {
-            isWhileReloading = true;
-            setReloadingStartTime(System.currentTimeMillis());
+            if (hasAutoReload()) {
+                isWhileReloading = true;
+                setReloadingStartTime(System.currentTimeMillis());
+            }
         }
         if (isWhileReloading()) return false;
         return ammo > 0 && (now - lastShootTime) >= shootingCooldown;
@@ -130,5 +136,9 @@ public abstract class Weapon {
 
     public void setAmmo() {
         ammo += 5;
+    }
+
+    private boolean hasAutoReload() {
+        return user.getUserSetting().isAutoReload();
     }
 }

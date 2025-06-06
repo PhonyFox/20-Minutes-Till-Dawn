@@ -14,6 +14,7 @@ import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Repository;
+import com.tilldawn.model.ShaderManager;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.view.GameView;
 
@@ -53,7 +54,9 @@ public class GameController {
     }
 
     public void updateGame(float delta) {
-        System.out.println("mm");
+        if (repo.getCurrentUser().getUserSetting().isGrayscale()) {
+            Main.getBatch().setShader(ShaderManager.getGrayscaleShader());
+        }
         if (waitingForAbilityChoice) {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             abilityStage.act(Gdx.graphics.getDeltaTime());
@@ -78,6 +81,8 @@ public class GameController {
                 Main.getBatch().draw(AssetManager.getAssetManager().getCursorTexture(), closestEnemy.getX() + 10, closestEnemy.getY() + 10);
             }
         }
+
+        Main.getBatch().setShader(null);
     }
 
     public PlayerController getPlayerController() {

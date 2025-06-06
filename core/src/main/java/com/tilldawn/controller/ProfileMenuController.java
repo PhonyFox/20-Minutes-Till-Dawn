@@ -4,6 +4,7 @@ import com.tilldawn.Main;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
 import com.tilldawn.view.MainMenuView;
+import com.tilldawn.view.SignupMenuView;
 
 public class ProfileMenuController {
     private final User currentUser;
@@ -38,6 +39,7 @@ public class ProfileMenuController {
 
     public void deleteAccount() {
         repo.deleteUser(repo.getCurrentUser().getUsername());
+        Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(repo)));
     }
 
     public User getCurrentUser() {

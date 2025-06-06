@@ -50,7 +50,6 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     @Override
     public void render(float delta) {
         if (controller.isWaitingForAbilityChoice()) {
-            //System.out.println("Waiting for ability choice");
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             controller.getAbilityStage().act();

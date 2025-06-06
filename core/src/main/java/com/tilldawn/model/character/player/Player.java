@@ -3,10 +3,7 @@ package com.tilldawn.model.character.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.tilldawn.model.AssetManager;
-import com.tilldawn.model.CollisionRect;
-import com.tilldawn.model.Seed;
-import com.tilldawn.model.User;
+import com.tilldawn.model.*;
 import com.tilldawn.model.ability.TimedAbility;
 import com.tilldawn.model.character.Character;
 import com.tilldawn.model.weapon.weapon.Weapon;
@@ -164,6 +161,7 @@ public class Player extends Character {
     public void decreaseHp(int hp) {
         if (System.currentTimeMillis() - lastDamagedTime > 1000) {
             this.hp -= hp;
+            Sfx.ow();
             lastDamagedTime = System.currentTimeMillis();
             damageTimer = 1f;
         }
@@ -245,4 +243,5 @@ public class Player extends Character {
     public User getUser() {
         return user;
     }
+
 }

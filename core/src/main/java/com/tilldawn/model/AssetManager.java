@@ -448,4 +448,28 @@ public class AssetManager {
     public String getStartingMusic() {
         return "musics/sleeping.mp3";
     }
+
+    public String getFirstMusic() {
+        return "musics/0.mp3";
+    }
+
+    public String getSecondMusic() {
+        return "musics/1.mp3";
+    }
+
+    public String getThirdMusic() {
+        return "musics/3.mp3";
+    }
+
+    public String getShootingSound() {
+        return "musics/shoot.mp3";
+    }
+
+    public String getOwSound() {
+        return "musics/ow.mp3";
+    }
+
+    public String getLevelUpSound() {
+        return "musics/levelUp.mp3";
+    }
 }

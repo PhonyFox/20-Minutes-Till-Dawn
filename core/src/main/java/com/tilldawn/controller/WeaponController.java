@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
+import com.tilldawn.model.Sfx;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
@@ -123,6 +124,7 @@ public class WeaponController {
 //        bullet.getSprite().setPosition(startX, startY);
         bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
         bullets.add(bullet);
+        Sfx.shoot();
 
         for (int i = 0; i < weapon.getProjectile() - 1; i++) {
             Bullet bulletP = new Bullet(startX, startY, weapon.getBulletType());
@@ -192,6 +194,7 @@ public class WeaponController {
         bullet.getSprite().setPosition(startX - bullet.getSprite().getWidth() / 2f, startY - bullet.getSprite().getHeight() / 2f);
 
         bullets.add(bullet);
+        Sfx.shoot();
 
         for (int i = 0; i < weapon.getProjectile() - 1; i++) {
             Bullet bulletP = new Bullet(startX, startY, weapon.getBulletType());

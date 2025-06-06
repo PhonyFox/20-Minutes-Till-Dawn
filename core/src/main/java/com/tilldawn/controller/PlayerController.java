@@ -14,6 +14,7 @@ import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Random;
 import com.tilldawn.model.Seed;
+import com.tilldawn.model.Sfx;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
@@ -50,6 +51,7 @@ public class PlayerController implements InputProcessor {
         if (player.getXp() > player.getExpToFinishLevel()) {
             if (!isLevelupStarted && !isLevelupAnimationDone) {
                 isLevelupStarted = true;
+                Sfx.levelUp();
                 levelUpAnimationElapsed = 0f;
             }
         }
@@ -112,6 +114,13 @@ public class PlayerController implements InputProcessor {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             player.toggleAutoAim();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            if (!player.getWeapon().isWhileReloading()) {
+                player.getWeapon().setWhileReloading(true);
+                player.getWeapon().setReloadingStartTime(System.currentTimeMillis());
+            }
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
@@ -249,13 +258,13 @@ public class PlayerController implements InputProcessor {
     private void checkStatus() {
         if (player.getHp() <= 0) {
             player.getUser().getUserState().advanceKills(player.getNumberOfKills());
-            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) * player.getNumberOfKills());
+            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000 * player.getNumberOfKills());
             player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
             Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000)), false, gameController));
         }
         if (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000) <= 0) {
             player.getUser().getUserState().advanceKills(player.getNumberOfKills());
-            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) * player.getNumberOfKills());
+            player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000 * player.getNumberOfKills());
             player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
             Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), player.getUser().getDuration(), true, gameController));
         }

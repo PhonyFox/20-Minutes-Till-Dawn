@@ -67,7 +67,7 @@ public class MainMenuView extends ScreenAdapter {
 
         profileButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                controller.goToProfile();
+                if (!controller.getRepo().isGuest()) controller.goToProfile();
             }
         });
 

@@ -37,6 +37,7 @@ public class User {
         this.securityQuestionType = securityQuestionType;
         this.securityAnswer = securityAnswer;
         this.avatarPath = avatar;
+        this.userSetting = new UserSetting();
     }
 
     public String getPassword() {

@@ -1,9 +1,11 @@
 package com.tilldawn.controller;
 
+import com.tilldawn.Main;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
 import com.tilldawn.model.UserStorage;
 import com.tilldawn.model.enums.SecurityQuestionType;
+import com.tilldawn.view.MainMenuView;
 
 import java.io.IOException;
 import java.util.Random;
@@ -58,8 +60,16 @@ public class SignupMenuController {
         return avatars[new Random().nextInt(avatars.length)];
     }
 
-    public User guestLogin() {
-        return new User("Guest", "", null, "", "guest_avatar.png");
+    public void guestLogin() {
+        User user = new User("Guest", "Aa@#1111", SecurityQuestionType.PET_NAME, "meow meow nigga", "avatars/a1.png");
+        repo.setGuest(true);
+        if (!repo.isUsernameTaken("Guest")) {
+            repo.addUser(user);
+            repo.setCurrentUser(user);
+        } else {
+            repo.setCurrentUser(repo.getUser("Guest"));
+        }
+        Main.getMain().setScreen(new MainMenuView(new MainMenuController(repo)));
     }
 
     public Repository getRepo() {

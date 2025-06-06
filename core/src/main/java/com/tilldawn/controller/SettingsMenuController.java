@@ -1,7 +1,9 @@
 package com.tilldawn.controller;
 
 import com.tilldawn.Main;
+import com.tilldawn.model.AssetManager;
 import com.tilldawn.model.Repository;
+import com.tilldawn.model.Sfx;
 import com.tilldawn.model.User;
 import com.tilldawn.view.GameView;
 import com.tilldawn.view.MainMenuView;
@@ -17,6 +19,7 @@ public class SettingsMenuController {
 
     public void setMusicVolume(float musicVolume) {
         currentUser.getUserSetting().setMusicVolume(musicVolume);
+        MusicController.getInstance().setVolume(musicVolume);
     }
 
     public float getMusicVolume() {
@@ -25,6 +28,7 @@ public class SettingsMenuController {
 
     public void toggleSFX() {
         currentUser.getUserSetting().toggleSFX();
+        Sfx.toggleSfx();
     }
 
     public boolean isSfxEnable() {
@@ -33,6 +37,24 @@ public class SettingsMenuController {
 
     public void setCurrentMusic(String currentMusic) {
         currentUser.getUserSetting().setCurrentMusic(currentMusic);
+        switch (currentMusic.trim().toLowerCase()) {
+            case "default":
+                MusicController.getInstance().loadMusic(AssetManager.getAssetManager().getFirstMusic(), true);
+                MusicController.getInstance().play();
+                break;
+            case "battle":
+                MusicController.getInstance().loadMusic(AssetManager.getAssetManager().getSecondMusic(), true);
+                MusicController.getInstance().play();
+                break;
+            case "calm":
+                MusicController.getInstance().loadMusic(AssetManager.getAssetManager().getThirdMusic(), true);
+                MusicController.getInstance().play();
+                break;
+            case "menu":
+                MusicController.getInstance().loadMusic(AssetManager.getAssetManager().getStartingMusic(), true);
+                MusicController.getInstance().play();
+                break;
+        }
     }
 
     public String getCurrentMusic() {
@@ -60,6 +82,6 @@ public class SettingsMenuController {
     }
 
     public void goToMainMenu() {
-        Main.getMain().setScreen(new GameView(new GameController(repo)));
+        Main.getMain().setScreen(new MainMenuView(new MainMenuController(repo)));
     }
 }

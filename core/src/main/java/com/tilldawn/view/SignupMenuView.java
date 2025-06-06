@@ -79,8 +79,7 @@ public class SignupMenuView extends ScreenAdapter {
 
         guestButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                User guest = controller.guestLogin();
-                //@ move to game screen with guest
+                controller.guestLogin();
             }
         });
     }

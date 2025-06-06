@@ -11,6 +11,7 @@ public class Repository {
     private User currentUser;
     private long startingTime;
     private DatabaseHelper databaseHelper;
+    private boolean isGuest = false;
 
     public Repository() {
         databaseHelper = new DatabaseHelper();
@@ -65,5 +66,13 @@ public class Repository {
 
     public long getStartingTime() {
         return startingTime;
+    }
+
+    public boolean isGuest() {
+        return isGuest;
+    }
+
+    public void setGuest(boolean guest) {
+        isGuest = guest;
     }
 }
