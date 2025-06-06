@@ -90,7 +90,7 @@ public class GameView extends ScreenAdapter implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.SPACE) {
-            System.out.println("SPACE pressed!");
+            //System.out.println("SPACE pressed!");
             return true;
         }
         return false;

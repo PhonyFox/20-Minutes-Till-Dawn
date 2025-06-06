@@ -40,4 +40,8 @@ public class PauseMenuController {
         System.out.println("*************");
         Main.getMain().setScreen(gameView);
     }
+
+    public Repository getRepo() {
+        return repo;
+    }
 }

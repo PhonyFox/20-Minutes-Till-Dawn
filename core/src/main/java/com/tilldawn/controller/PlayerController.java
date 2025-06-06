@@ -11,10 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.tilldawn.Main;
-import com.tilldawn.model.AssetManager;
-import com.tilldawn.model.Random;
-import com.tilldawn.model.Seed;
-import com.tilldawn.model.Sfx;
+import com.tilldawn.model.*;
 import com.tilldawn.model.character.enemy.Enemy;
 import com.tilldawn.model.character.enemy.Tree;
 import com.tilldawn.model.character.player.Player;
@@ -112,40 +109,40 @@ public class PlayerController implements InputProcessor {
             return;
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("jump"))) {
             player.toggleAutoAim();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("reload"))) {
             if (!player.getWeapon().isWhileReloading()) {
                 player.getWeapon().setWhileReloading(true);
                 player.getWeapon().setReloadingStartTime(System.currentTimeMillis());
             }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("cheat1"))) {
             gameController.getRepo().setStartingTime(gameController.getRepo().getStartingTime() - 60000);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("cheat2"))) {
             player.increaseXp(player.getExpToFinishLevel() + 1);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("cheat3"))) {
             if (player.getHp() < player.getMaxHp()) {
                 player.setHp(player.getHp() + 1);
             }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("cheat4"))) {
             gameController.getRepo().setStartingTime(System.currentTimeMillis() - gameController.getRepo().getCurrentUser().getDuration() * 30000L);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
+        if (Gdx.input.isKeyJustPressed(KeyBindingsManager.getKeyBinding("cheat5"))) {
             player.setHp(player.getMaxHp());
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(KeyBindingsManager.getKeyBinding("left"))) {
             float nextX = player.getX() - currentSpeed * delta;
             if (nextX >= zoneX) {
                 player.setPosition(nextX, player.getY());
@@ -155,7 +152,7 @@ public class PlayerController implements InputProcessor {
                 player.decreaseHp(1);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(KeyBindingsManager.getKeyBinding("right"))) {
             float nextX = player.getX() + currentSpeed * delta;
             if (nextX + playerWidth <= zoneX + zoneWidth) {
                 player.setPosition(nextX, player.getY());
@@ -165,7 +162,7 @@ public class PlayerController implements InputProcessor {
                 player.decreaseHp(1);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyPressed(KeyBindingsManager.getKeyBinding("up"))) {
             float nextY = player.getY() + currentSpeed * delta;
             if (nextY + playerHeight <= zoneY + zoneHeight) {
                 player.setPosition(player.getX(), nextY);
@@ -174,7 +171,7 @@ public class PlayerController implements InputProcessor {
                 player.decreaseHp(1);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(KeyBindingsManager.getKeyBinding("down"))) {
             float nextY = player.getY() - currentSpeed * delta;
             if (nextY >= zoneY) {
                 player.setPosition(player.getX(), nextY);
@@ -260,13 +257,13 @@ public class PlayerController implements InputProcessor {
             player.getUser().getUserState().advanceKills(player.getNumberOfKills());
             player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000 * player.getNumberOfKills());
             player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
-            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000)), false, gameController));
+            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000)), false, gameController.getRepo()));
         }
         if (gameController.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000) <= 0) {
             player.getUser().getUserState().advanceKills(player.getNumberOfKills());
             player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()) / 1000 * player.getNumberOfKills());
             player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - gameController.getRepo().getStartingTime()));
-            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), player.getUser().getDuration(), true, gameController));
+            Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), player.getUser().getDuration(), true, gameController.getRepo()));
         }
     }
 

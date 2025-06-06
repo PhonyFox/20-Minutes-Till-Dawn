@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.controller.HintMenuController;
 import com.tilldawn.controller.PreGameMenuController;
+import com.tilldawn.model.GamaText;
 
 public class HintMenuView extends ScreenAdapter {
     private Stage stage;
@@ -34,10 +35,10 @@ public class HintMenuView extends ScreenAdapter {
         table.setFillParent(true);
         stage.addActor(table);
 
-        TextButton heroHintsButton = new TextButton("Hero Hints", skin);
-        TextButton abilityHintsButton = new TextButton("Ability Hints", skin);
-        TextButton cheatButton = new TextButton("Cheats", skin);
-        TextButton keyBindingButton = new TextButton("Key Binding", skin);
+        TextButton heroHintsButton = new TextButton(GamaText.HINT_HERO.get(), skin);
+        TextButton abilityHintsButton = new TextButton(GamaText.HINT_ABILITIES.get(), skin);
+        TextButton cheatButton = new TextButton(GamaText.MENU_CHEATS.get(), skin);
+        TextButton keyBindingButton = new TextButton(GamaText.LABEL_KEYBINDING.get(), skin);
 
         table.add(heroHintsButton);
         table.add(abilityHintsButton);
@@ -52,25 +53,25 @@ public class HintMenuView extends ScreenAdapter {
 
         abilityHintsButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                showTextDialog("Abilities", controller.getAbilityDescription());
+                showTextDialog(GamaText.LABEL_ABILITIES.get(), controller.getAbilityDescription());
             }
         });
 
         cheatButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                showTextDialog("Cheat Codes", controller.getCheatCodes());
+                showTextDialog(GamaText.LABEL_CHEATS.get(), controller.getCheatCodes());
             }
         });
 
         keyBindingButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                showTextDialog("Key Binding", controller.getKeyBindings());
+                showTextDialog(GamaText.MENU_KEY_BINDING.get(), controller.getKeyBindings());
             }
         });
     }
 
     private void showHeroDialog() {
-        Dialog heroListDialog = new Dialog("Hero Hints", skin);
+        Dialog heroListDialog = new Dialog(GamaText.HINT_HERO.get(), skin);
         Table content = heroListDialog.getContentTable();
         for (String hero : controller.getHeroNames()) {
             TextButton heroButton = new TextButton(hero, skin);
@@ -82,14 +83,14 @@ public class HintMenuView extends ScreenAdapter {
             });
             content.add(heroButton).pad(5).row();
         }
-        heroListDialog.button("Close", false);
+        heroListDialog.button(GamaText.BUTTON_CLOSE.get(), false);
         heroListDialog.show(stage);
     }
 
     private void showTextDialog(String title, String description) {
         Dialog dialog = new Dialog(title, skin);
         dialog.text(description);
-        dialog.button("OK", false);
+        dialog.button(GamaText.MENU_OK.get(), false);
         dialog.show(stage);
     }
 

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.model.AssetManager;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.character.player.Player;
 
 public class ScreenController {
@@ -71,7 +72,7 @@ public class ScreenController {
         float timerX = Gdx.graphics.getWidth() - 330;
         float timerY = Gdx.graphics.getHeight() -10;
 
-        String killsText = "Kills: " + player.getNumberOfKills();
+        String killsText = GamaText.KILLS_LABEL.get() + player.getNumberOfKills();
         GlyphLayout layout = new GlyphLayout(font, killsText);
 
         float killsX = Gdx.graphics.getWidth() - layout.width - 30;

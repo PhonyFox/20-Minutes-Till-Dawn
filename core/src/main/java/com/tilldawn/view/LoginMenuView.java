@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.LoginMenuController;
 import com.tilldawn.controller.MainMenuController;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.Repository;
 
 public class LoginMenuView extends ScreenAdapter {
@@ -39,11 +40,11 @@ public class LoginMenuView extends ScreenAdapter {
 
         Label messageLabel = new Label("", skin);
 
-        TextButton loginButton = new TextButton("Login", skin);
-        TextButton resetButton = new TextButton("Forgot password", skin);
+        TextButton loginButton = new TextButton(GamaText.BUTTON_LOGIN.get(), skin);
+        TextButton resetButton = new TextButton(GamaText.LINK_FORGOT_PASSWORD.get(), skin);
 
-        table.add("Username:").left(); table.add(usernameField).width(780).row();
-        table.add("Password:").left(); table.add(passwordField).width(780).row();
+        table.add(GamaText.RESET_USERNAME.get()).left(); table.add(usernameField).width(780).row();
+        table.add(GamaText.RESET_PASSWORD.get()).left(); table.add(passwordField).width(780).row();
         table.add(loginButton).colspan(2).padTop(10).row();
         table.add(resetButton).colspan(2).padTop(10).row();
         table.add(messageLabel).colspan(2).padTop(10).row();
@@ -96,10 +97,10 @@ public class LoginMenuView extends ScreenAdapter {
         dialogTable.pad(10);
         dialogTable.defaults().pad(5);
 
-        dialogTable.add("Username:").left(); dialogTable.add(username).row();
-        dialogTable.add("Security Q:").left(); dialogTable.add(questionBox).row();
-        dialogTable.add("Answer:").left(); dialogTable.add(answer).row();
-        dialogTable.add("New Password:").left(); dialogTable.add(newPassword).row();
+        dialogTable.add(GamaText.RESET_USERNAME.get()).left(); dialogTable.add(username).row();
+        dialogTable.add(GamaText.RESET_SECURITY_Q.get()).left(); dialogTable.add(questionBox).row();
+        dialogTable.add(GamaText.RESET_ANSWER.get()).left(); dialogTable.add(answer).row();
+        dialogTable.add(GamaText.INPUT_NEW_PASSWORD.get()).left(); dialogTable.add(newPassword).row();
         dialogTable.add(resetButton).colspan(2).padTop(10).row();
         dialogTable.add(resultLabel).colspan(2).padTop(10).row();
 

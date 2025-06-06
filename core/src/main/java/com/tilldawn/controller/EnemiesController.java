@@ -56,16 +56,16 @@ public class EnemiesController implements InputProcessor {
             }
         }
 
-//        if ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 15000L) {
-//            if ((System.currentTimeMillis() - lastEyebatSpawnTime) > 10000) {
-//                for (int i = 0; i < (4*((System.currentTimeMillis() - repo.getStartingTime()) / 1000) - repo.getCurrentUser().getDuration() * 15L + 30) / 30; i++) {
-//                    makeEyebat();
-//                    lastEyebatSpawnTime = System.currentTimeMillis() * 2;
-//                    break;
-//                    //#
-//                }
-//            }
-//        }
+        if ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 15000L) {
+            if ((System.currentTimeMillis() - lastEyebatSpawnTime) > 10000) {
+                for (int i = 0; i < (4*((System.currentTimeMillis() - repo.getStartingTime()) / 1000) - repo.getCurrentUser().getDuration() * 15L + 30) / 30; i++) {
+                    makeEyebat();
+                    lastEyebatSpawnTime = System.currentTimeMillis() * 2;
+                    break;
+                    //#
+                }
+            }
+        }
         //#
 
         if (!isElderSpawned && ((System.currentTimeMillis() - repo.getStartingTime()) > repo.getCurrentUser().getDuration() * 30000L)) {

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.controller.ScoreboardMenuController;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.User;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class ScoreboardMenuView extends ScreenAdapter {
     private void createUI(ScoreboardMenuController.SortOption sortOption) {
         rootTable.clear();
 
-        Label title = new Label("🏆 Scoreboard", skin, "title");
+        Label title = new Label("🏆 " + GamaText.SCOREBOARD_TITLE.get(), skin, "title");
         title.setAlignment(Align.center);
         rootTable.add(title).colspan(4).pad(20).row();
 
@@ -45,11 +46,11 @@ public class ScoreboardMenuView extends ScreenAdapter {
         List<User> topUsers = controller.getTopUsers(sortOption);
         User currentUser = controller.getRepo().getCurrentUser();
 
-        scoreboardTable.add("Rank").pad(5);
-        scoreboardTable.add("Username").pad(5);
-        scoreboardTable.add("Score").pad(5);
-        scoreboardTable.add("Kills").pad(5);
-        scoreboardTable.add("Survival Time").pad(5);
+        scoreboardTable.add(GamaText.SCOREBOARD_RANK.get()).pad(5);
+        scoreboardTable.add(GamaText.SCOREBOARD_USERNAME.get()).pad(5);
+        scoreboardTable.add(GamaText.SCOREBOARD_SCORE.get()).pad(5);
+        scoreboardTable.add(GamaText.SCOREBOARD_KILLS.get()).pad(5);
+        scoreboardTable.add(GamaText.SCOREBOARD_TIME.get()).pad(5);
         scoreboardTable.row();
 
         int rank = 1;
@@ -78,14 +79,14 @@ public class ScoreboardMenuView extends ScreenAdapter {
         rootTable.add(scrollPane).colspan(4).padBottom(20).row();
 
         Table sortTable = new Table();
-        addSortButton(sortTable, "Sort by Score", ScoreboardMenuController.SortOption.SCORE);
-        addSortButton(sortTable, "Sort by Username", ScoreboardMenuController.SortOption.USERNAME);
-        addSortButton(sortTable, "Sort by Kills", ScoreboardMenuController.SortOption.KILLS);
-        addSortButton(sortTable, "Sort by Survival Time", ScoreboardMenuController.SortOption.SURVIVAL_TIME);
+        addSortButton(sortTable, GamaText.SCOREBOARD_SORT_SCORE.get(), ScoreboardMenuController.SortOption.SCORE);
+        addSortButton(sortTable, GamaText.SCOREBOARD_SORT_USERNAME.get(), ScoreboardMenuController.SortOption.USERNAME);
+        addSortButton(sortTable, GamaText.SCOREBOARD_SORT_KILLS.get(), ScoreboardMenuController.SortOption.KILLS);
+        addSortButton(sortTable, GamaText.SCOREBOARD_SORT_TIME.get(), ScoreboardMenuController.SortOption.SURVIVAL_TIME);
 
         rootTable.add(sortTable).colspan(4).padBottom(10).row();
 
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton backButton = new TextButton(GamaText.BUTTON_BACK.get(), skin);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

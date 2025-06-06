@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.controller.MainMenuController;
+import com.tilldawn.model.GamaText;
 
 public class MainMenuView extends ScreenAdapter {
     private Stage stage;
@@ -29,17 +30,17 @@ public class MainMenuView extends ScreenAdapter {
         table.setFillParent(true);
         stage.addActor(table);
 
-        Label usernameLabel = new Label("Username:" + controller.getRepo().getCurrentUser().getUsername(), skin);
-        Label scoreLabel = new Label("Score:" + controller.getRepo().getCurrentUser().getScore(), skin);
+        Label usernameLabel = new Label(GamaText.RESET_USERNAME.get() + controller.getRepo().getCurrentUser().getUsername(), skin);
+        Label scoreLabel = new Label(GamaText.SCORE_LABEL.get() + controller.getRepo().getCurrentUser().getScore(), skin);
         Image avatarImage = controller.getRepo().getCurrentUser().getAvatarImage();
 
-        TextButton continueButton = new TextButton("Continue", skin);
-        TextButton settingsButton = new TextButton("Settings", skin);
-        TextButton profileButton = new TextButton("Profile", skin);
-        TextButton gamePreButton = new TextButton("Game Pre", skin);
+        TextButton continueButton = new TextButton(GamaText.MENU_CONTINUE.get(), skin);
+        TextButton settingsButton = new TextButton(GamaText.MENU_SETTINGS.get(), skin);
+        TextButton profileButton = new TextButton(GamaText.MENU_PROFILE.get(), skin);
+        TextButton gamePreButton = new TextButton(GamaText.MENU_GAMEPRO.get(), skin);
         TextButton scoreboardButton = new TextButton("Score", skin);
         TextButton hintsButton = new TextButton("Hints", skin);
-        TextButton logoutButton = new TextButton("Logout", skin);
+        TextButton logoutButton = new TextButton(GamaText.BUTTON_LOGOUT.get(), skin);
 
         table.add(avatarImage).size(128).colspan(2).padBottom(10).row();
         table.add(usernameLabel).colspan(2).row();

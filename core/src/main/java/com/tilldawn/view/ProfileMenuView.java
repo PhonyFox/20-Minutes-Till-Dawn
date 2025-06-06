@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.ProfileMenuController;
 import com.tilldawn.controller.SignupMenuController;
+import com.tilldawn.model.FileChooserUtil;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.User;
 
 
@@ -37,37 +39,37 @@ public class ProfileMenuView extends ScreenAdapter {
 
         User user = controller.getCurrentUser();
 
-        Label usernameLabel = new Label("Username", skin);
+        Label usernameLabel = new Label(GamaText.INPUT_USERNAME.get(), skin);
         TextField usernameField = new TextField(user.getUsername(), skin);
-        TextButton changeUsernameButton = new TextButton("Change", skin);
+        TextButton changeUsernameButton = new TextButton(GamaText.BUTTON_CHANGE.get(), skin);
         changeUsernameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if (!controller.changeUsername(usernameField.getText())) {
-                    messageLabel.setText("Username already taken!");
+                    messageLabel.setText(GamaText.MSG_USERNAME_TAKEN.get());
                 } else {
-                    messageLabel.setText("Username updated!");
+                    messageLabel.setText(GamaText.MSG_USERNAME_UPDATED.get());
                 }
             }
         });
 
-        Label passwordLabel = new Label("New Password", skin);
+        Label passwordLabel = new Label(GamaText.RESET_NEW_PASSWORD.get(), skin);
         TextField passwordField = new TextField("", skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
-        TextButton changePasswordButton = new TextButton("Change", skin);
+        TextButton changePasswordButton = new TextButton(GamaText.BUTTON_CHANGE.get(), skin);
         changePasswordButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if (!controller.changePassword(passwordField.getText())) {
-                    messageLabel.setText("Password too weak!");
+                    messageLabel.setText(GamaText.MSG_PASSWORD_WEAK.get());
                 } else {
-                    messageLabel.setText("Password changed!");
+                    messageLabel.setText(GamaText.MSG_PASSWORD_CHANGED.get());
                 }
             }
         });
 
-        TextButton deleteButton = new TextButton("Delete Account", skin);
+        TextButton deleteButton = new TextButton(GamaText.BUTTON_DELETE_ACCOUNT.get(), skin);
         deleteButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -79,13 +81,14 @@ public class ProfileMenuView extends ScreenAdapter {
 
         Label avatarLabel = new Label("Avatar", skin);
         SelectBox<String> avatarSelect = new SelectBox<>(skin);
-        avatarSelect.setItems("avatars/a1.png", "avatars/a2.png", "avatars/a3.png");
-        TextButton chooseAvatarButton = new TextButton("Choose Avatar", skin);
+        avatarSelect.setItems("avatars/a1.png", "avatars/a2.png", "avatars/a3.png", "From Local Files");
+        TextButton chooseAvatarButton = new TextButton(GamaText.BUTTON_CHOOSE_AVATAR.get(), skin);
         chooseAvatarButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                controller.changeAvatar(avatarSelect.getSelected());
-                messageLabel.setText("Avatar changed!");
+                if (!avatarSelect.getSelected().equalsIgnoreCase("from local files")) controller.changeAvatar(avatarSelect.getSelected());
+                else FileChooserUtil.openImageFileChooser();
+                messageLabel.setText(GamaText.MSG_AVATAR_CHANGED.get());
             }
         });
 
@@ -93,7 +96,7 @@ public class ProfileMenuView extends ScreenAdapter {
 
         messageLabel = new Label("", skin);
 
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton backButton = new TextButton(GamaText.BUTTON_BACK.get(), skin);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {

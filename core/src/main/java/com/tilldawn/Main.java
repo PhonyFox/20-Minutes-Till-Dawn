@@ -14,6 +14,7 @@ import com.tilldawn.model.User;
 import com.tilldawn.model.enums.SecurityQuestionType;
 import com.tilldawn.view.SignupMenuView;
 
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +24,9 @@ public class Main extends Game {
     private static SpriteBatch batch;
     private final Repository repository = new Repository();
     private ShaderProgram grayscaleShader;
-
+    private boolean hasDraggedAvatar = false;
+    private String draggedAvatar = "";
+    private boolean isGerman = false;
     @Override
     public void create() {
         main = this;
@@ -64,6 +67,34 @@ public class Main extends Game {
 
     public static void setBatch(SpriteBatch batch) {
         Main.batch = batch;
+    }
+
+    public void setHasDraggedAvatar(boolean hasDraggedAvatar) {
+        this.hasDraggedAvatar = hasDraggedAvatar;
+    }
+
+    public boolean isHasDraggedAvatar() {
+        return hasDraggedAvatar;
+    }
+
+    public String getDraggedAvatar() {
+        return draggedAvatar;
+    }
+
+    public void setDraggedAvatar(String draggedAvatar) {
+        this.draggedAvatar = draggedAvatar;
+    }
+
+    public Repository getRepository() {
+        return repository;
+    }
+
+    public void setIsGermany(boolean isGerman) {
+        this.isGerman = isGerman;
+    }
+
+    public boolean getIsGerman() {
+        return isGerman;
     }
 
 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Main;
 import com.tilldawn.controller.LoginMenuController;
 import com.tilldawn.controller.SignupMenuController;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.User;
 
 public class SignupMenuView extends ScreenAdapter {
@@ -47,11 +48,11 @@ public class SignupMenuView extends ScreenAdapter {
 
         Label messageLabel = new Label("", skin);
 
-        TextButton registerButton = new TextButton("Register", skin);
-        TextButton guestButton = new TextButton("Guest", skin);
+        TextButton registerButton = new TextButton(GamaText.BUTTON_REGISTER.get(), skin);
+        TextButton guestButton = new TextButton(GamaText.BUTTON_GUEST.get(), skin);
 
-        table.add("Username:").left(); table.add(usernameField).width(780).row();
-        table.add("Password:").left(); table.add(passwordField).width(780).row();
+        table.add(GamaText.RESET_USERNAME.get()).left(); table.add(usernameField).width(780).row();
+        table.add(GamaText.RESET_PASSWORD.get()).left(); table.add(passwordField).width(780).row();
         table.add("Security Q:").left(); table.add(questionBox).width(780).row();
         table.add("Answer:").left(); table.add(answerField).width(780).row();
         table.add(registerButton).colspan(2).padTop(10).row();

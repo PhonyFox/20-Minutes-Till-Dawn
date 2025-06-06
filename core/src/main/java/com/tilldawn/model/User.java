@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tilldawn.Main;
 import com.tilldawn.model.character.player.Player;
 import com.tilldawn.model.enums.SecurityQuestionType;
 
@@ -38,6 +39,7 @@ public class User {
         this.securityAnswer = securityAnswer;
         this.avatarPath = avatar;
         this.userSetting = new UserSetting();
+        if (Main.getMain().isHasDraggedAvatar()) this.avatarPath = Main.getMain().getDraggedAvatar();
     }
 
     public String getPassword() {

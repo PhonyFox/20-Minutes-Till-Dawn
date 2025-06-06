@@ -1,6 +1,7 @@
 package com.tilldawn.controller;
 
 import com.tilldawn.Main;
+import com.tilldawn.model.GamaText;
 import com.tilldawn.model.Repository;
 import com.tilldawn.model.User;
 import com.tilldawn.model.UserStorage;
@@ -19,7 +20,7 @@ public class SignupMenuController {
 
     public String register(String username, String password, String question, String answer) {
         if (repo.isUsernameTaken(username)) {
-            return "Username already taken!";
+            return GamaText.MSG_USERNAME_TAKEN.get();
         }
 
         if (!isStrongPassword(password)) {
@@ -34,8 +35,9 @@ public class SignupMenuController {
             questionType = SecurityQuestionType.FAVORITE_COLOR;
         } else if (question.startsWith("What city were you born")) {
             questionType = SecurityQuestionType.BORN_CITY;
-        } else questionType = null;
+        } else return "Choose a Security Question!";
 
+        if (answer.isEmpty()) return "Answer the Security Question!";
 
         String avatar = assignRandomAvatar();
         User user = new User(username, password, questionType, answer, avatar);

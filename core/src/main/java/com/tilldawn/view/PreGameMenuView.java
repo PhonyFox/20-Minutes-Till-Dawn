@@ -12,6 +12,7 @@ import com.tilldawn.Main;
 import com.tilldawn.controller.GameController;
 import com.tilldawn.controller.MainMenuController;
 import com.tilldawn.controller.PreGameMenuController;
+import com.tilldawn.model.GamaText;
 
 
 public class PreGameMenuView extends ScreenAdapter {
@@ -34,7 +35,7 @@ public class PreGameMenuView extends ScreenAdapter {
         stage.addActor(table);
         table.setFillParent(true);
 
-        Label heroLabel = new Label("Select Hero:", skin);
+        Label heroLabel = new Label(GamaText.MENU_SELECT_HERO.get(), skin);
         SelectBox<String> heroSelect = new SelectBox<>(skin);
         heroSelect.setItems("Shana", "Diamond", "Scarlet", "Lilith", "Dasher");
         heroSelect.addListener(new ChangeListener() {
@@ -44,7 +45,7 @@ public class PreGameMenuView extends ScreenAdapter {
             }
         });
 
-        Label weaponLabel = new Label("Select Weapon:", skin);
+        Label weaponLabel = new Label(GamaText.MENU_SELECT_WEAPON.get(), skin);
         SelectBox<String> weaponSelect = new SelectBox<>(skin);
         weaponSelect.setItems("Shotgun", "SMGs Dual", "Revolver");
         weaponSelect.addListener(new ChangeListener() {
@@ -54,7 +55,7 @@ public class PreGameMenuView extends ScreenAdapter {
             }
         });
 
-        Label durationLabel = new Label("Select Duration:", skin);
+        Label durationLabel = new Label(GamaText.MENU_SELECT_DURATION.get(), skin);
         SelectBox<String> durationSelect = new SelectBox<>(skin);
         durationSelect.setItems("2", "5", "10", "20");
         durationSelect.addListener(new ChangeListener() {
@@ -64,23 +65,23 @@ public class PreGameMenuView extends ScreenAdapter {
             }
         });
 
-        TextButton startButton = new TextButton("Start Game", skin);
+        TextButton startButton = new TextButton(GamaText.BUTTON_START_GAME.get(), skin);
         startButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (controller.isReadyToStart()) {
-                    statusLabel.setText("Starting game with hero: " + heroSelect.getSelected()
+                    statusLabel.setText(GamaText.BUTTON_START_GAME.get() + heroSelect.getSelected()
                     + ", weapon: " + weaponSelect.getSelected()
                     + ", duration: " + durationSelect.getSelected()
                     );
                     controller.startGame();
                 } else {
-                    statusLabel.setText("Please select all options");
+                    statusLabel.setText(GamaText.MSG_SELECT_ALL.get());
                 }
             }
         });
 
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton backButton = new TextButton(GamaText.BUTTON_BACK.get(), skin);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

@@ -11,7 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.tilldawn.Main;
+import com.tilldawn.controller.EndGameScreen;
 import com.tilldawn.controller.PauseMenuController;
+import com.tilldawn.model.GamaText;
+import com.tilldawn.model.character.player.Player;
 
 public class PauseMenuView extends ScreenAdapter {
     private final PauseMenuController controller;
@@ -34,12 +38,12 @@ public class PauseMenuView extends ScreenAdapter {
         table.setFillParent(true);
         stage.addActor(table);
 
-        TextButton resumeButton = new TextButton("Resume", skin);
-        TextButton cheatButton = new TextButton("Cheat Codes", skin);
-        TextButton abilitiesButton = new TextButton("Abilities", skin);
-        TextButton grayscaleButton = new TextButton("Toggle Grayscale", skin);
-        TextButton giveUpButton = new TextButton("Give Up", skin);
-        TextButton saveExitButton = new TextButton("Save & Exit", skin);
+        TextButton resumeButton = new TextButton(GamaText.BUTTON_RESUME.get(), skin);
+        TextButton cheatButton = new TextButton(GamaText.BUTTON_CHEATS.get(), skin);
+        TextButton abilitiesButton = new TextButton(GamaText.LABEL_ABILITIES.get(), skin);
+        TextButton grayscaleButton = new TextButton(GamaText.TOGGLE_GRAYSCALE.get(), skin);
+        TextButton giveUpButton = new TextButton(GamaText.BUTTON_GIVEUP.get(), skin);
+        TextButton saveExitButton = new TextButton(GamaText.BUTTON_SAVE_EXIT.get(), skin);
 
         table.add(resumeButton).pad(10).row();
         table.add(cheatButton).pad(10).row();
@@ -59,28 +63,28 @@ public class PauseMenuView extends ScreenAdapter {
                 String cheatsInfo =
                     "🎮 Cheat Codes:\n\n" +
                         "1️⃣  NUM_1:\n" +
-                        "   ⏱️ Subtracts 1 minute from the game timer.\n\n" +
+                        GamaText.CHEAT_MINUS_ONE_MINUTE.get() +
                         "2️⃣  NUM_2:\n" +
-                        "   ⭐ Instantly levels up the player by giving extra XP.\n\n" +
+                        GamaText.CHEAT_INSTANT_XP.get() +
                         "3️⃣  NUM_3:\n" +
-                        "   ❤️ Heals the player by 1 HP (only if not at full health).\n\n" +
+                        GamaText.CHEAT_HEAL_ONE.get() +
                         "4️⃣  NUM_4:\n" +
-                        "   🕓 Sets the game timer to match the user’s duration progress.\n\n" +
+                        GamaText.CHEAT_MATCH_DURATION +
                         "5️⃣  NUM_5:\n" +
-                        "   💯 Fully heals the player to max HP.";
-                showDialog("Cheat Codes", cheatsInfo);
+                        GamaText.CHEAT_FULL_HEAL.get();
+                showDialog(GamaText.BUTTON_CHEATS.get(), cheatsInfo);
             }
         });
 
         abilitiesButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 String abilitiesInfo =
-                    "🩸 VITALITY:\n  Increases max HP by 1 point permanently.\n\n" +
-                        "💥 DAMAGER:\n  Boosts weapon damage by 25% for 10 seconds.\n\n" +
-                        "🎯 PROCREASE:\n  Adds 1 extra projectile to your weapon.\n\n" +
-                        "🔫 AMOCREASE:\n  Increases max ammo by 5.\n\n" +
-                        "⚡ SPEEDY:\n  Doubles player movement speed for 10 seconds.";
-                showDialog("Abilities", abilitiesInfo);
+                    GamaText.POWER_VITALITY.get() +
+                        GamaText.POWER_DAMAGER.get() +
+                        GamaText.POWER_PROCREASE.get() +
+                        GamaText.POWER_AMOCREATE.get() +
+                        GamaText.POWER_SPEEDY.get();
+                showDialog(GamaText.LABEL_ABILITIES.get(), abilitiesInfo);
             }
         });
 
@@ -92,7 +96,11 @@ public class PauseMenuView extends ScreenAdapter {
 
         giveUpButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                //@
+                Player player = controller.getRepo().getCurrentUser().getPlayer();
+                player.getUser().getUserState().advanceKills(player.getNumberOfKills());
+                player.getUser().getUserState().advanceScore((int)(System.currentTimeMillis() - controller.getRepo().getStartingTime()) / 1000 * player.getNumberOfKills());
+                player.getUser().getUserState().advanceSurvivalTime((int)(System.currentTimeMillis() - controller.getRepo().getStartingTime()));
+                Main.getMain().setScreen(new EndGameScreen(player.getUser(), player.getNumberOfKills(), (controller.getRepo().getCurrentUser().getDuration() * 60 - (int)((System.currentTimeMillis() - controller.getRepo().getStartingTime()) / 1000)), false, controller.getRepo()));
             }
         });
 
@@ -106,7 +114,7 @@ public class PauseMenuView extends ScreenAdapter {
     private void showDialog(String title, String message) {
         Dialog dialog = new Dialog(title + "\n" + message, skin);
         dialog.text(message);
-        dialog.button("OK");
+        dialog.button(GamaText.MENU_OK.get());
         dialog.setSize(400, 700);
         dialog.show(stage);
     }
